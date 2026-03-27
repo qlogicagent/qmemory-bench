@@ -1,0 +1,3303 @@
+{
+  "name": "multimodal",
+  "description": "多模态精准检索 standard — 6维度×150题×100会话（12核心+88噪声）",
+  "version": "2.0",
+  "source": "QMemory Team (custom)",
+  "design_notes": "5x expansion: 80+ noise sessions simulating design industry noise (similar creative projects, other people's artwork, unrelated daily chat). Tests whether memory system can find the RIGHT design asset among massive similar data.",
+  "sessions": [
+    {
+      "id": "sess_xiyouji_v1",
+      "metadata": {
+        "timestamp": "2024-03-10T10:00:00Z",
+        "type": "core",
+        "modality": "image",
+        "project": "西游记动画"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "开始做西游记动画了，先画了孙悟空的角色设计第一版"
+        },
+        {
+          "role": "assistant",
+          "content": "太好了，发来看看吧。"
+        },
+        {
+          "role": "user",
+          "content": "[设计图] 孙悟空角色设计V1：身高比例偏Q版（头身比1:4），穿虎皮裙，金箍棒较短只到腰部高度，配色偏暗（深棕+暗金），面部表情比较凶，眼睛是红色的，背景是简单的白底"
+        },
+        {
+          "role": "assistant",
+          "content": "Q版比例很可爱，不过金箍棒比例可能需要调整，配色偏暗了些。"
+        },
+        {
+          "role": "user",
+          "content": "[设计图] 这是筋斗云的概念图：V1版本是传统白色祥云造型，边缘有金色光晕，云朵偏写实风格"
+        },
+        {
+          "role": "assistant",
+          "content": "写实风筋斗云和Q版人物可能风格不太统一，后面可以再调一下。"
+        }
+      ]
+    },
+    {
+      "id": "sess_xiyouji_v2",
+      "metadata": {
+        "timestamp": "2024-06-15T14:00:00Z",
+        "type": "core",
+        "modality": "image",
+        "project": "西游记动画"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "孙悟空的设计改了第二版，修了好多问题"
+        },
+        {
+          "role": "assistant",
+          "content": "看看改了哪些地方。"
+        },
+        {
+          "role": "user",
+          "content": "[设计图] 孙悟空角色设计V2：改为正常头身比1:6，虎皮裙改成战甲风格，金箍棒加长到与身等高，配色改为明亮暖色（亮金+正红），表情改为自信微笑，眼睛改为金色，增加了披风细节，背景改为淡黄色渐变"
+        },
+        {
+          "role": "assistant",
+          "content": "这版好多了，比例协调了，配色也更有活力，金色眼睛很有神。"
+        },
+        {
+          "role": "user",
+          "content": "[设计图] 筋斗云V2改成了卡通风格，更圆润蓬松，颜色从白色改成了淡粉色渐变，增加了星星点缀和彩虹尾迹"
+        },
+        {
+          "role": "assistant",
+          "content": "卡通风格的筋斗云和人物更搭了，淡粉色很梦幻。"
+        },
+        {
+          "role": "user",
+          "content": "导演说V2整体方向对了，但是希望增加一些中国风元素，比如祥云纹和水墨效果"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，可以在下一版融入这些元素。"
+        }
+      ]
+    },
+    {
+      "id": "sess_xiyouji_v3_final",
+      "metadata": {
+        "timestamp": "2024-09-20T10:00:00Z",
+        "type": "core",
+        "modality": "image",
+        "project": "西游记动画"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "孙悟空最终定稿了！终于过了"
+        },
+        {
+          "role": "assistant",
+          "content": "恭喜！让我看看最终版。"
+        },
+        {
+          "role": "user",
+          "content": "[设计图] 孙悟空最终定稿V3：保持V2的1:6头身比和战甲，在肩甲和腰带上加了祥云纹浮雕，金箍棒改为可伸缩设计（收起状态是耳后的小针），整体增加水墨笔触的描边效果，背景是水墨风的花果山瀑布"
+        },
+        {
+          "role": "assistant",
+          "content": "水墨效果的花果山背景很有意境，祥云纹细节也很精致。"
+        },
+        {
+          "role": "user",
+          "content": "[设计图] 唐僧角色设计定稿：温和书生形象，白色袈裟配金边，手持九环锡杖，戴五佛冠，眉目清秀，背景同样是水墨风格"
+        },
+        {
+          "role": "assistant",
+          "content": "唐僧的温和气质和水墨背景很搭，和孙悟空的风格统一了。"
+        },
+        {
+          "role": "user",
+          "content": "导演特别喜欢这版，说金箍棒可伸缩的设计在后面的动画里会很有表现力"
+        },
+        {
+          "role": "assistant",
+          "content": "确实，变化的道具在动画里会增加很多看点。"
+        }
+      ]
+    },
+    {
+      "id": "sess_xiyouji_scene",
+      "metadata": {
+        "timestamp": "2024-10-05T11:00:00Z",
+        "type": "core",
+        "modality": "image",
+        "project": "西游记动画"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "场景设计也出了一批"
+        },
+        {
+          "role": "assistant",
+          "content": "看看场景怎么样。"
+        },
+        {
+          "role": "user",
+          "content": "[场景设计图] 火焰山场景：以敦煌壁画色调为基础，绛红色的山体上有流动的岩浆纹理，天空是暗橘红色，地面有龟裂效果，远处有芭蕉洞的轮廓"
+        },
+        {
+          "role": "assistant",
+          "content": "敦煌色调是个好选择，和整体的中国风很搭。"
+        },
+        {
+          "role": "user",
+          "content": "[场景设计图] 花果山场景：水帘洞外景，大量的翠绿色植被，瀑布从巨石间倾泻而下，水雾中有彩虹，猴群在树间跳跃。采用了泼墨山水的画法"
+        },
+        {
+          "role": "assistant",
+          "content": "泼墨手法的花果山太美了，和角色设计的水墨风完全一致。"
+        },
+        {
+          "role": "user",
+          "content": "这两个场景参考了我们去敦煌采风时拍的素材"
+        },
+        {
+          "role": "assistant",
+          "content": "实地采风的素材确实能让场景更有生命力。"
+        }
+      ]
+    },
+    {
+      "id": "sess_nezha_design",
+      "metadata": {
+        "timestamp": "2024-07-20T09:00:00Z",
+        "type": "core",
+        "modality": "image",
+        "project": "哪吒动画"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "另一个项目哪吒动画也开始了，先做角色设计"
+        },
+        {
+          "role": "assistant",
+          "content": "好的，发来看看。"
+        },
+        {
+          "role": "user",
+          "content": "[设计图] 哪吒角色设计：叛逆少年形象，黑色烟熏妆，混天绑改为朋克风红色飘带，脚踩风火轮是机械朋克风格带齿轮，乾坤圈改为手环造型，配色以黑红为主"
+        },
+        {
+          "role": "assistant",
+          "content": "朋克风哪吒很有现代感，和传统形象差别很大，很有辨识度。"
+        },
+        {
+          "role": "user",
+          "content": "[设计图] 太乙真人角色设计：胖乎乎的慈祥老人，穿夏威夷花衬衫，戴墨镜，手持iPad（替代仙家法宝），坐在改装的猪上"
+        },
+        {
+          "role": "assistant",
+          "content": "哈哈太乙真人的形象太搞笑了，iPad替代法宝这个创意很好。"
+        },
+        {
+          "role": "user",
+          "content": "这个项目和西游记是同时进行的，但风格完全不一样，哪吒走潮酷路线"
+        },
+        {
+          "role": "assistant",
+          "content": "两个项目分开不同风格是好的，各有特色。"
+        }
+      ]
+    },
+    {
+      "id": "sess_dunhuang_trip1",
+      "metadata": {
+        "timestamp": "2024-05-01T08:00:00Z",
+        "type": "core",
+        "modality": "image",
+        "project": "采风"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "到敦煌了，拍了好多参考素材"
+        },
+        {
+          "role": "assistant",
+          "content": "敦煌的壁画色彩很有参考价值。"
+        },
+        {
+          "role": "user",
+          "content": "[照片] 莫高窟第45窟的菩萨壁画特写，色彩以石绿和朱砂红为主，有明显的矿物颜料颗粒感"
+        },
+        {
+          "role": "assistant",
+          "content": "矿物颜料的质感在动画中可以做为材质参考。"
+        },
+        {
+          "role": "user",
+          "content": "[照片] 鸣沙山/月牙泉全景，日落时分，沙丘呈金色，月牙泉倒映着天光"
+        },
+        {
+          "role": "assistant",
+          "content": "这个光影效果太适合做火焰山的日落场景了。"
+        },
+        {
+          "role": "user",
+          "content": "[照片] 玉门关遗址外景，黄土夯筑的方形城堡残垣，周围是无尽的戈壁，天际线上有骆驼队的剪影"
+        },
+        {
+          "role": "assistant",
+          "content": "玉门关的苍凉感可以用在取经路上的过渡场景。"
+        },
+        {
+          "role": "user",
+          "content": "这次拍的素材主要用于火焰山和取经路上的场景参考，色调和光影参考价值很高"
+        },
+        {
+          "role": "assistant",
+          "content": "确实，这些照片的色彩和光影都能直接指导场景设计。"
+        }
+      ]
+    },
+    {
+      "id": "sess_dunhuang_trip2",
+      "metadata": {
+        "timestamp": "2025-01-10T09:00:00Z",
+        "type": "core",
+        "modality": "image",
+        "project": "采风"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "又去了一次敦煌，补拍一些素材"
+        },
+        {
+          "role": "assistant",
+          "content": "冬天的敦煌感觉又不一样吧。"
+        },
+        {
+          "role": "user",
+          "content": "[照片] 莫高窟第320窟的飞天壁画细节，飘带的动态曲线非常优美，色彩偏冷调（石青+白粉），和上次45窟的暖调完全不同"
+        },
+        {
+          "role": "assistant",
+          "content": "冷暖色调的对比可以用在不同场景的氛围区分上。"
+        },
+        {
+          "role": "user",
+          "content": "[照片] 冬天的鸣沙山，沙丘上覆盖薄雪，呈现银白和浅金的交错，月牙泉结了薄冰"
+        },
+        {
+          "role": "assistant",
+          "content": "雪中鸣沙山太美了，这种调子可以用在寒冰地狱或者雪山场景。"
+        },
+        {
+          "role": "user",
+          "content": "这次主要补拍冷色调的素材，上次五月去的时候光线太暖了，缺少阴冷场景的参考"
+        },
+        {
+          "role": "assistant",
+          "content": "暖冷两套素材配合使用就很全面了。"
+        }
+      ]
+    },
+    {
+      "id": "sess_app_ui_v1",
+      "metadata": {
+        "timestamp": "2024-04-15T15:00:00Z",
+        "type": "core",
+        "modality": "image",
+        "project": "内部工具"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "做了一个动画制作进度管理的内部 App，先看看 V1 的 UI"
+        },
+        {
+          "role": "assistant",
+          "content": "好的，发来看看设计。"
+        },
+        {
+          "role": "user",
+          "content": "[UI截图] App V1：深色主题，左侧是项目列表栏（显示西游记、哪吒等项目），主区域是甘特图式进度条，右侧是任务详情面板。顶部有团队头像行和通知铃铛。整体风格类似Jira"
+        },
+        {
+          "role": "assistant",
+          "content": "Jira风格的布局很实用，甘特图适合动画制作这种多阶段的项目。"
+        },
+        {
+          "role": "user",
+          "content": "组里的同事反映深色主题看久了累，而且甘特图不方便看同一个角色在不同集的进度"
+        },
+        {
+          "role": "assistant",
+          "content": "可以考虑加个浅色主题切换，甘特图可以增加按角色筛选的功能。"
+        }
+      ]
+    },
+    {
+      "id": "sess_app_ui_v2",
+      "metadata": {
+        "timestamp": "2024-08-20T14:00:00Z",
+        "type": "core",
+        "modality": "image",
+        "project": "内部工具"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "App UI 改到第二版了"
+        },
+        {
+          "role": "assistant",
+          "content": "看看改了什么。"
+        },
+        {
+          "role": "user",
+          "content": "[UI截图] App V2：改为浅色主题（白底+蓝灰色调），去掉了甘特图改为看板视图（类似Trello），每个卡片是一个镜头任务，卡片上有缩略图预览，增加了按角色/按集数/按制作阶段三种筛选维度，右下角新增AI助手入口"
+        },
+        {
+          "role": "assistant",
+          "content": "看板视图确实更直观，缩略图预览很实用，能一眼看到画面进度。"
+        },
+        {
+          "role": "user",
+          "content": "大家普遍觉得V2好用多了，但是希望卡片缩略图能支持点击放大预览"
+        },
+        {
+          "role": "assistant",
+          "content": "点击放大是个必要功能，可以加个lightbox效果。"
+        }
+      ]
+    },
+    {
+      "id": "sess_contracts_audio",
+      "metadata": {
+        "timestamp": "2024-05-25T10:00:00Z",
+        "type": "core",
+        "modality": "mixed",
+        "project": "业务"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "帮我记一下这几份合同和会议内容"
+        },
+        {
+          "role": "assistant",
+          "content": "好的，发过来吧。"
+        },
+        {
+          "role": "user",
+          "content": "[文档: 动画外包合同_A公司.pdf] 与杭州A动画公司签订的西游记第5-8集动画外包合同，金额120万，工期2024年6月至2024年12月，分三期付款（30%+40%+30%），质量标准需达到24帧/秒，分辨率4K"
+        },
+        {
+          "role": "assistant",
+          "content": "120万做4集4K动画，单集30万的价格适中。"
+        },
+        {
+          "role": "user",
+          "content": "[文档: 音乐授权合同_B公司.pdf] 与B音乐工作室签订的西游记原创配乐合同，金额35万，包含主题曲1首+背景音乐15首+音效包，授权期限3年独占"
+        },
+        {
+          "role": "assistant",
+          "content": "35万含主题曲和15首背景音乐，性价比挺高的。"
+        },
+        {
+          "role": "user",
+          "content": "[语音转写] 今天和A公司的项目经理老陈开了电话会，他说第5集的原画已经完成80%，预计下周能交初稿，但调色师病了可能延迟一周。第6集还在分镜阶段"
+        },
+        {
+          "role": "assistant",
+          "content": "第5集进度还行，调色延迟一周问题不大。第6集需要关注分镜进度。"
+        },
+        {
+          "role": "user",
+          "content": "[语音转写] 导演组内部评审会录音：导演王明说火焰山场景的色调要参考敦煌五月拍的那批暖色调照片，不要用冬天补拍的冷色调。芭蕉洞内部安排李倩负责，要有洞穴的潮湿感"
+        },
+        {
+          "role": "assistant",
+          "content": "记住了，火焰山用暖色调素材，芭蕉洞由李倩负责，要体现潮湿感。"
+        }
+      ]
+    },
+    {
+      "id": "sess_delivery_ep1",
+      "metadata": {
+        "timestamp": "2024-12-20T16:00:00Z",
+        "type": "core",
+        "modality": "mixed",
+        "project": "西游记动画"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "西游记第一集终于交付了！"
+        },
+        {
+          "role": "assistant",
+          "content": "恭喜！大工程啊。"
+        },
+        {
+          "role": "user",
+          "content": "[成片截图] 第一集开场镜头：花果山全景，清晨薄雾中猴群嬉戏，孙悟空站在水帘洞口的巨石上眺望远方，整个画面是泼墨山水加数字动画的融合风格"
+        },
+        {
+          "role": "assistant",
+          "content": "开场就是花果山全景真的很有气势，水墨风和数字动画融合得很好看。"
+        },
+        {
+          "role": "user",
+          "content": "[文档: 第一集交付发票.pdf] 杭州A公司开具的第一集制作服务费发票，金额30万（首期付款），发票号：ZP2024122001，日期：2024年12月20日"
+        },
+        {
+          "role": "assistant",
+          "content": "30万首期付款已开票，记得留好发票。"
+        },
+        {
+          "role": "user",
+          "content": "[语音转写] 播放了成片给投资人看，投资人张总说很满意，特别喜欢水墨和3D结合的效果，问能不能第二季做三国题材，他追加投资"
+        },
+        {
+          "role": "assistant",
+          "content": "投资人张总反馈很正面，三国题材是个好方向。"
+        }
+      ]
+    },
+    {
+      "id": "sess_storyboard",
+      "metadata": {
+        "timestamp": "2024-11-05T10:00:00Z",
+        "type": "core",
+        "modality": "image",
+        "project": "西游记动画"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "第三集三打白骨精的分镜画好了"
+        },
+        {
+          "role": "assistant",
+          "content": "三打白骨精是经典桥段，分镜一定很有看点。"
+        },
+        {
+          "role": "user",
+          "content": "[分镜稿] 第三集核心场景分镜：白骨精三次变身的对比图——第一次变为村姑（手提竹篮，内藏毒果），第二次变为老妇（拄着龙头拐杖），第三次变为老翁（骑瘦驴，背上有骷髅暗纹）。每次变身孙悟空都用火眼金睛透视，画面分为表象层和真相层"
+        },
+        {
+          "role": "assistant",
+          "content": "表象层和真相层的双层分镜处理很巧妙，火眼金睛的透视效果一定很有表现力。"
+        },
+        {
+          "role": "user",
+          "content": "这段分镜是我画得最满意的部分，每次变身的对比都精心设计过"
+        },
+        {
+          "role": "assistant",
+          "content": "三次递进的设计加上双层呈现，观众一定能感受到紧张感。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_wukong_game",
+      "metadata": {
+        "timestamp": "2024-08-25T20:00:00Z",
+        "type": "noise",
+        "modality": "image"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "黑神话悟空终于出了，截了几张图"
+        },
+        {
+          "role": "assistant",
+          "content": "游戏画面很震撼吧。"
+        },
+        {
+          "role": "user",
+          "content": "[游戏截图] 黑神话悟空的孙悟空形象：写实暗黑风格，穿黑色锁子甲，金箍棒粗壮如铁柱，面部有疤痕，战斗场景背景是废墟寺庙"
+        },
+        {
+          "role": "assistant",
+          "content": "黑神话的暗黑写实风确实震撼，和动画片的风格完全不同路线。"
+        },
+        {
+          "role": "user",
+          "content": "[游戏截图] 黑神话里的花果山也很壮观，写实风的热带雨林加巨型瀑布"
+        },
+        {
+          "role": "assistant",
+          "content": "写实花果山和你们动画里泼墨风的花果山各有千秋。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_sanguo_old",
+      "metadata": {
+        "timestamp": "2023-12-10T14:00:00Z",
+        "type": "noise",
+        "modality": "image"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "翻到了前年做三国项目的一些老图"
+        },
+        {
+          "role": "assistant",
+          "content": "三国项目的设计图吗？"
+        },
+        {
+          "role": "user",
+          "content": "[设计图] 三国项目的关羽角色设计：传统戏曲脸谱风，红脸长髯，青龙偃月刀很夸张地大，穿绿色战袍，整体是国潮插画风格"
+        },
+        {
+          "role": "assistant",
+          "content": "国潮风格的关羽很有特色，和戏曲结合是个好思路。"
+        },
+        {
+          "role": "user",
+          "content": "这个项目后来因为资金问题停了，但设计稿留着以后可能还用"
+        },
+        {
+          "role": "assistant",
+          "content": "设计稿留好，说不定以后有机会重启。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_art_class",
+      "metadata": {
+        "timestamp": "2024-04-20T19:00:00Z",
+        "type": "noise",
+        "modality": "image"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "上周末参加了一个水墨人物画的培训班"
+        },
+        {
+          "role": "assistant",
+          "content": "培训班画了什么？"
+        },
+        {
+          "role": "user",
+          "content": "[习作] 水墨培训班作品：用传统水墨画了一个齐天大圣的形象，纯黑白水墨，寥寥几笔勾勒出腾云驾雾的姿态，走的是大写意路线"
+        },
+        {
+          "role": "assistant",
+          "content": "大写意的齐天大圣很有气韵生动的感觉，和工笔的感觉完全不同。"
+        },
+        {
+          "role": "user",
+          "content": "老师说我的笔力不够，线条还需要更果断些"
+        },
+        {
+          "role": "assistant",
+          "content": "水墨画的线条确实需要很多练习，多临帖多练就好了。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_friend_dunhuang",
+      "metadata": {
+        "timestamp": "2024-05-05T12:00:00Z",
+        "type": "noise",
+        "modality": "image"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事小刘也去了敦煌，发了几张照片给我"
+        },
+        {
+          "role": "assistant",
+          "content": "你们前后脚去的呀。"
+        },
+        {
+          "role": "user",
+          "content": "[朋友照片] 小刘拍的莫高窟第57窟美人菩萨，角度是正面全身像，和第45窟比色彩更鲜艳，保存更好"
+        },
+        {
+          "role": "assistant",
+          "content": "第57窟确实是保存最好的洞窟之一。"
+        },
+        {
+          "role": "user",
+          "content": "[朋友照片] 小刘在鸣沙山骑骆驼的自拍，正午，光线很硬，沙子发白"
+        },
+        {
+          "role": "assistant",
+          "content": "正午日光太强了，拍素材还是早晚光线更好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_other_app",
+      "metadata": {
+        "timestamp": "2024-09-15T11:00:00Z",
+        "type": "noise",
+        "modality": "image"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "朋友公司做的一个影视制作管理App，参考了解一下"
+        },
+        {
+          "role": "assistant",
+          "content": "同行的产品可以借鉴。"
+        },
+        {
+          "role": "user",
+          "content": "[UI截图] 友商App截图：也是浅色主题看板风格，但用的是时间轴横向排列而非卡片，每个任务节点是圆形气泡，支持拖拽调整工期"
+        },
+        {
+          "role": "assistant",
+          "content": "时间轴加气泡的设计挺新颖的，拖拽调整工期在实际使用中应该很方便。"
+        },
+        {
+          "role": "user",
+          "content": "他们的缩略图预览做得比我们好，支持在线播放视频片段"
+        },
+        {
+          "role": "assistant",
+          "content": "在线播放是个好功能，你们V3可以加上。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_rent_contract",
+      "metadata": {
+        "timestamp": "2024-06-01T10:00:00Z",
+        "type": "noise",
+        "modality": "document"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "续租了房子，更新一下合同信息"
+        },
+        {
+          "role": "assistant",
+          "content": "好的。"
+        },
+        {
+          "role": "user",
+          "content": "[文档: 租房合同.pdf] 北京朝阳区望京SOHO附近，月租金7200元，租期2024年6月至2025年5月，押一付三，房东李杰"
+        },
+        {
+          "role": "assistant",
+          "content": "望京SOHO附近交通方便，7200的价格还可以。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_nezha_movie",
+      "metadata": {
+        "timestamp": "2024-07-28T21:00:00Z",
+        "type": "noise",
+        "modality": "mixed"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天去看了哪吒之魔童闹海，聊聊观后感"
+        },
+        {
+          "role": "assistant",
+          "content": "看完怎么样？"
+        },
+        {
+          "role": "user",
+          "content": "电影里哪吒的形象和我们项目里设计得差别挺大的，电影是丑萌路线，我们走的朋克路线"
+        },
+        {
+          "role": "assistant",
+          "content": "风格差异化是好事，你们的朋克哪吒辨识度很高。"
+        },
+        {
+          "role": "user",
+          "content": "[电影票照片] 北京五棵松万达IMAX厅，哪吒之魔童闹海，2024年7月28日19:30场"
+        },
+        {
+          "role": "assistant",
+          "content": "IMAX厅看动画效果确实好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily",
+      "metadata": {
+        "timestamp": "2024-11-20T12:00:00Z",
+        "type": "noise",
+        "modality": "text"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "中午吃了一碗兰州拉面，大份的，加了个鸡蛋"
+        },
+        {
+          "role": "assistant",
+          "content": "兰州拉面经济实惠。"
+        },
+        {
+          "role": "user",
+          "content": "下午3点要开周会，准备一下上周的工作汇报"
+        },
+        {
+          "role": "assistant",
+          "content": "需要我帮你整理汇报要点吗？"
+        },
+        {
+          "role": "user",
+          "content": "不用了，主要汇报第三集分镜的进度和第一集上色返修的问题"
+        },
+        {
+          "role": "assistant",
+          "content": "好的，上色返修的问题开会时重点说一下。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_000",
+      "metadata": {
+        "timestamp": "2024-01-01T00:00:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看到一个独立动画团队做的水墨风短片，画面很美"
+        },
+        {
+          "role": "assistant",
+          "content": "水墨动画近几年确实有复兴趋势。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_001",
+      "metadata": {
+        "timestamp": "2024-01-07T11:06:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "B站上有个UP主分享了Q版三国角色设计教程"
+        },
+        {
+          "role": "assistant",
+          "content": "Q版角色设计确实受欢迎。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_002",
+      "metadata": {
+        "timestamp": "2024-01-13T22:12:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事分享了他在美术培训班画的国画作品"
+        },
+        {
+          "role": "assistant",
+          "content": "国画功底不错。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_003",
+      "metadata": {
+        "timestamp": "2024-01-20T09:18:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看了CGWORLD上一篇关于日本动画制作流程的文章"
+        },
+        {
+          "role": "assistant",
+          "content": "日本动画制作确实有很多值得学习的地方。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_004",
+      "metadata": {
+        "timestamp": "2024-01-26T20:24:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "朋友推荐了一个3D角色建模的Blender教程"
+        },
+        {
+          "role": "assistant",
+          "content": "Blender现在功能越来越强大了。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_005",
+      "metadata": {
+        "timestamp": "2024-02-02T07:30:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "微博上有人发了张敦煌莫高窟的壁画高清照"
+        },
+        {
+          "role": "assistant",
+          "content": "敦煌壁画确实震撼。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_006",
+      "metadata": {
+        "timestamp": "2024-02-08T18:36:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看了个关于武侠动画角色设计的采访"
+        },
+        {
+          "role": "assistant",
+          "content": "武侠题材在动画领域也有很大空间。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_007",
+      "metadata": {
+        "timestamp": "2024-02-15T05:42:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "Steam上出了个新的水墨风游戏"
+        },
+        {
+          "role": "assistant",
+          "content": "水墨风在游戏领域也越来越流行。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_008",
+      "metadata": {
+        "timestamp": "2024-02-21T16:48:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事分享了他给女儿画的卡通画"
+        },
+        {
+          "role": "assistant",
+          "content": "画得很可爱。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_009",
+      "metadata": {
+        "timestamp": "2024-02-28T03:54:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看到一个UI设计师分享的深色主题App设计作品集"
+        },
+        {
+          "role": "assistant",
+          "content": "深色主题确实很有质感。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_010",
+      "metadata": {
+        "timestamp": "2024-03-05T15:00:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "Pinterest上收藏了一些中国风配色灵感图"
+        },
+        {
+          "role": "assistant",
+          "content": "配色参考很重要。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_011",
+      "metadata": {
+        "timestamp": "2024-03-12T02:06:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "某动画公司发布了最新的角色设计招聘需求"
+        },
+        {
+          "role": "assistant",
+          "content": "角色设计师确实挺缺的。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_012",
+      "metadata": {
+        "timestamp": "2024-03-18T13:12:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "朋友分享了一段他公司做的科幻短片花絮"
+        },
+        {
+          "role": "assistant",
+          "content": "科幻动画制作成本比较高。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_013",
+      "metadata": {
+        "timestamp": "2024-03-25T00:18:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看了个关于迪士尼角色设计流程的纪录片"
+        },
+        {
+          "role": "assistant",
+          "content": "迪士尼的设计流程确实成熟。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_014",
+      "metadata": {
+        "timestamp": "2024-03-31T11:24:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "有人在小红书分享了自己做的手绘动画"
+        },
+        {
+          "role": "assistant",
+          "content": "手绘动画很有创意。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_015",
+      "metadata": {
+        "timestamp": "2024-04-06T22:30:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看到一个开源的动画项目管理工具"
+        },
+        {
+          "role": "assistant",
+          "content": "开源工具对小团队很友好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_016",
+      "metadata": {
+        "timestamp": "2024-04-13T09:36:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事的朋友圈发了张去敦煌旅游的照片"
+        },
+        {
+          "role": "assistant",
+          "content": "敦煌确实值得一去。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_017",
+      "metadata": {
+        "timestamp": "2024-04-19T20:42:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "B站看了个视频讲解如何用Stable Diffusion辅助动画设计"
+        },
+        {
+          "role": "assistant",
+          "content": "AI辅助设计是趋势。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_018",
+      "metadata": {
+        "timestamp": "2024-04-26T07:48:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "公司年会上播放了一段内部制作的宣传动画"
+        },
+        {
+          "role": "assistant",
+          "content": "内部宣传也在用动画了。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_019",
+      "metadata": {
+        "timestamp": "2024-05-02T18:54:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看了个关于中国古代甲胄设计考证的帖子"
+        },
+        {
+          "role": "assistant",
+          "content": "甲胄设计需要历史考证。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_020",
+      "metadata": {
+        "timestamp": "2024-05-09T06:00:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "朋友做了个简单的iOS App原型"
+        },
+        {
+          "role": "assistant",
+          "content": "原型设计是产品开发的第一步。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_021",
+      "metadata": {
+        "timestamp": "2024-05-15T17:06:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看了篇文章讲Figma vs Sketch的差异"
+        },
+        {
+          "role": "assistant",
+          "content": "设计工具选择看团队习惯。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_022",
+      "metadata": {
+        "timestamp": "2024-05-22T04:12:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事分享了他做的一个小动画demo"
+        },
+        {
+          "role": "assistant",
+          "content": "自己做demo练手很好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_023",
+      "metadata": {
+        "timestamp": "2024-05-28T15:18:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "YouTube上看了个关于像素风动画制作的教程"
+        },
+        {
+          "role": "assistant",
+          "content": "像素风也有其独特魅力。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_024",
+      "metadata": {
+        "timestamp": "2024-06-04T02:24:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "某大厂的设计系统最近开源了"
+        },
+        {
+          "role": "assistant",
+          "content": "开源设计系统对行业有帮助。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_025",
+      "metadata": {
+        "timestamp": "2024-06-10T13:30:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看了个关于如何给动画角色配音的教程"
+        },
+        {
+          "role": "assistant",
+          "content": "配音也是动画制作的重要环节。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_026",
+      "metadata": {
+        "timestamp": "2024-06-17T00:36:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事在做一个儿童教育类的交互动画"
+        },
+        {
+          "role": "assistant",
+          "content": "教育动画市场空间大。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_027",
+      "metadata": {
+        "timestamp": "2024-06-23T11:42:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "ArtStation上有人发了一组非常漂亮的角色概念设计"
+        },
+        {
+          "role": "assistant",
+          "content": "概念设计水平越来越高了。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_028",
+      "metadata": {
+        "timestamp": "2024-06-29T22:48:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看了篇关于中国风插画市场趋势的分析报告"
+        },
+        {
+          "role": "assistant",
+          "content": "中国风市场确实在增长。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_design_029",
+      "metadata": {
+        "timestamp": "2024-07-06T09:54:00Z",
+        "type": "noise",
+        "topic": "design-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "朋友推荐了一个免费的UI素材网站"
+        },
+        {
+          "role": "assistant",
+          "content": "免费素材对独立开发者很有帮助。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mm_work_000",
+      "metadata": {
+        "timestamp": "2024-07-12T21:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事接了个外包项目做logo设计，5000块"
+        },
+        {
+          "role": "assistant",
+          "content": "小项目也是收入。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mm_work_001",
+      "metadata": {
+        "timestamp": "2024-07-19T08:06:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "隔壁团队在做一个VR游戏的角色设计"
+        },
+        {
+          "role": "assistant",
+          "content": "VR角色设计和2D差异很大。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mm_work_002",
+      "metadata": {
+        "timestamp": "2024-07-25T19:12:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "朋友的公司最近签了个200万的广告动画合同"
+        },
+        {
+          "role": "assistant",
+          "content": "广告动画利润率不错。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mm_work_003",
+      "metadata": {
+        "timestamp": "2024-08-01T06:18:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "听说某动画工作室最近资金链断了"
+        },
+        {
+          "role": "assistant",
+          "content": "动画行业资金压力确实大。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mm_work_004",
+      "metadata": {
+        "timestamp": "2024-08-07T17:24:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事的甲方改了八次需求"
+        },
+        {
+          "role": "assistant",
+          "content": "甲方修改是常态。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mm_work_005",
+      "metadata": {
+        "timestamp": "2024-08-14T04:30:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看到招聘信息要招水墨风的角色设计师月薪2-3万"
+        },
+        {
+          "role": "assistant",
+          "content": "水墨风设计师确实稀缺。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mm_work_006",
+      "metadata": {
+        "timestamp": "2024-08-20T15:36:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "朋友的团队一集动画做了三个月还没做完"
+        },
+        {
+          "role": "assistant",
+          "content": "动画制作周期确实长。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mm_work_007",
+      "metadata": {
+        "timestamp": "2024-08-27T02:42:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "某平台的动画项目众筹失败了"
+        },
+        {
+          "role": "assistant",
+          "content": "众筹动画项目风险大。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mm_work_008",
+      "metadata": {
+        "timestamp": "2024-09-02T13:48:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "隔壁公司的项目经理跳槽了导致项目延期"
+        },
+        {
+          "role": "assistant",
+          "content": "关键人员离职确实影响大。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mm_work_009",
+      "metadata": {
+        "timestamp": "2024-09-09T00:54:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "听说有个外包团队交付质量很差被退稿了"
+        },
+        {
+          "role": "assistant",
+          "content": "外包质量把控很重要。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_100",
+      "metadata": {
+        "timestamp": "2024-02-01T00:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "考虑换辆车，看了问界M9"
+        },
+        {
+          "role": "assistant",
+          "content": "问界M9空间很大。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_101",
+      "metadata": {
+        "timestamp": "2024-02-12T09:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "最近在追《庆余年3》"
+        },
+        {
+          "role": "assistant",
+          "content": "庆余年系列确实好看。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_102",
+      "metadata": {
+        "timestamp": "2024-02-23T18:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "去了趟博物馆，看的敦煌展"
+        },
+        {
+          "role": "assistant",
+          "content": "敦煌文化确实震撼。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_103",
+      "metadata": {
+        "timestamp": "2024-03-06T03:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "办公室咖啡机坏了，自己带咖啡"
+        },
+        {
+          "role": "assistant",
+          "content": "自带手冲咖啡也不错。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_104",
+      "metadata": {
+        "timestamp": "2024-03-17T12:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "小区后门开了家新的面馆"
+        },
+        {
+          "role": "assistant",
+          "content": "试过了吗？味道怎么样？"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_105",
+      "metadata": {
+        "timestamp": "2024-03-28T21:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天好热啊，不想上班"
+        },
+        {
+          "role": "assistant",
+          "content": "夏天确实难熬，注意防暑。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_106",
+      "metadata": {
+        "timestamp": "2024-04-09T06:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "外卖点了个轻食沙拉，减肥中"
+        },
+        {
+          "role": "assistant",
+          "content": "注意营养均衡。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_107",
+      "metadata": {
+        "timestamp": "2024-04-20T15:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "双十一剁手了好多东西"
+        },
+        {
+          "role": "assistant",
+          "content": "双十一确实容易冲动消费。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_108",
+      "metadata": {
+        "timestamp": "2024-05-02T00:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "昨天看了个综艺好搞笑"
+        },
+        {
+          "role": "assistant",
+          "content": "是什么综艺？"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_109",
+      "metadata": {
+        "timestamp": "2024-05-13T09:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "健身房新办了张年卡"
+        },
+        {
+          "role": "assistant",
+          "content": "坚持运动是好事。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_110",
+      "metadata": {
+        "timestamp": "2024-05-24T18:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "周末去了宜家，买了个书架"
+        },
+        {
+          "role": "assistant",
+          "content": "宜家的家具性价比不错。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_111",
+      "metadata": {
+        "timestamp": "2024-06-05T03:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "最近在学做饭，试了红烧肉"
+        },
+        {
+          "role": "assistant",
+          "content": "自己做饭健康又省钱。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_112",
+      "metadata": {
+        "timestamp": "2024-06-16T12:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "被蚊子咬了好几个包"
+        },
+        {
+          "role": "assistant",
+          "content": "可以用花露水。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_113",
+      "metadata": {
+        "timestamp": "2024-06-27T21:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "空调坏了热死了"
+        },
+        {
+          "role": "assistant",
+          "content": "赶紧找物业报修。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_114",
+      "metadata": {
+        "timestamp": "2024-07-09T06:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事过生日，AA制请吃饭"
+        },
+        {
+          "role": "assistant",
+          "content": "团队聚餐感情好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_115",
+      "metadata": {
+        "timestamp": "2024-07-20T15:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "新买的耳机降噪效果不错"
+        },
+        {
+          "role": "assistant",
+          "content": "降噪耳机工作时很有用。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_116",
+      "metadata": {
+        "timestamp": "2024-08-01T00:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "周末带猫去打疫苗了"
+        },
+        {
+          "role": "assistant",
+          "content": "宠物健康很重要。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_117",
+      "metadata": {
+        "timestamp": "2024-08-12T09:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看了场脱口秀，笑死了"
+        },
+        {
+          "role": "assistant",
+          "content": "现场看脱口秀确实比线上好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_118",
+      "metadata": {
+        "timestamp": "2024-08-23T18:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "手机屏幕摔碎了，心疼"
+        },
+        {
+          "role": "assistant",
+          "content": "贴个钢化膜比较好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_119",
+      "metadata": {
+        "timestamp": "2024-09-04T03:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天地铁晚点了，上班迟到"
+        },
+        {
+          "role": "assistant",
+          "content": "可以考虑早出门几分钟。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_120",
+      "metadata": {
+        "timestamp": "2024-09-15T12:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事推荐了本书《纳瓦尔宝典》"
+        },
+        {
+          "role": "assistant",
+          "content": "这本书口碑不错。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_121",
+      "metadata": {
+        "timestamp": "2024-09-26T21:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "买了个机器人扫地机"
+        },
+        {
+          "role": "assistant",
+          "content": "扫地机解放双手。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_122",
+      "metadata": {
+        "timestamp": "2024-10-08T06:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "下雨了没带伞，淋成落汤鸡"
+        },
+        {
+          "role": "assistant",
+          "content": "可以在办公室备一把伞。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_123",
+      "metadata": {
+        "timestamp": "2024-10-19T15:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "试驾了小米SU7，感觉不错"
+        },
+        {
+          "role": "assistant",
+          "content": "国产电车进步很大。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_124",
+      "metadata": {
+        "timestamp": "2024-10-31T00:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "把Macbook升级到了M4 Pro"
+        },
+        {
+          "role": "assistant",
+          "content": "M4 Pro性能确实强。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_125",
+      "metadata": {
+        "timestamp": "2024-11-11T09:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天的外卖迟了四十分钟，冷了"
+        },
+        {
+          "role": "assistant",
+          "content": "可以给差评。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_126",
+      "metadata": {
+        "timestamp": "2024-11-22T18:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "去了个剧本杀，恐怖主题的"
+        },
+        {
+          "role": "assistant",
+          "content": "恐怖主题确实刺激。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_127",
+      "metadata": {
+        "timestamp": "2024-12-04T03:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "最近迷上了钓鱼，很解压"
+        },
+        {
+          "role": "assistant",
+          "content": "钓鱼确实修身养性。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_128",
+      "metadata": {
+        "timestamp": "2024-12-15T12:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "新配了副眼镜，蔡司镜片"
+        },
+        {
+          "role": "assistant",
+          "content": "蔡司镜片确实清晰。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_129",
+      "metadata": {
+        "timestamp": "2024-12-26T21:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天做了个PPT被老板打回来了"
+        },
+        {
+          "role": "assistant",
+          "content": "多改几版就好了。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_130",
+      "metadata": {
+        "timestamp": "2025-01-07T06:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "周末去采摘草莓了"
+        },
+        {
+          "role": "assistant",
+          "content": "现在正好是草莓季。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_131",
+      "metadata": {
+        "timestamp": "2025-01-18T15:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事结婚随了600份子钱"
+        },
+        {
+          "role": "assistant",
+          "content": "现在份子钱确实不便宜。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_132",
+      "metadata": {
+        "timestamp": "2025-01-30T00:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "健身练背的时候拉伤了"
+        },
+        {
+          "role": "assistant",
+          "content": "运动要注意热身。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_133",
+      "metadata": {
+        "timestamp": "2025-02-10T09:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "买了个投影仪在家看电影"
+        },
+        {
+          "role": "assistant",
+          "content": "投影仪体验确实好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_134",
+      "metadata": {
+        "timestamp": "2025-02-21T18:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "公司搬了新工位，离窗户近"
+        },
+        {
+          "role": "assistant",
+          "content": "靠窗采光好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_135",
+      "metadata": {
+        "timestamp": "2025-03-05T03:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "考虑换辆车，看了问界M9"
+        },
+        {
+          "role": "assistant",
+          "content": "问界M9空间很大。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_136",
+      "metadata": {
+        "timestamp": "2025-03-16T12:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "最近在追《庆余年3》"
+        },
+        {
+          "role": "assistant",
+          "content": "庆余年系列确实好看。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_137",
+      "metadata": {
+        "timestamp": "2025-03-27T21:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "去了趟博物馆，看的敦煌展"
+        },
+        {
+          "role": "assistant",
+          "content": "敦煌文化确实震撼。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_138",
+      "metadata": {
+        "timestamp": "2025-04-08T06:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "办公室咖啡机坏了，自己带咖啡"
+        },
+        {
+          "role": "assistant",
+          "content": "自带手冲咖啡也不错。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_139",
+      "metadata": {
+        "timestamp": "2025-04-19T15:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "小区后门开了家新的面馆"
+        },
+        {
+          "role": "assistant",
+          "content": "试过了吗？味道怎么样？"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_basic_1",
+      "query": "我的哪吒动画项目里，哪吒是什么形象风格？",
+      "expected": "叛逆少年形象，朋克风格，黑色烟熏妆，混天绑改为朋克风红色飘带，风火轮是机械朋克风格带齿轮，乾坤圈改为手环，配色黑红为主",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_2",
+      "query": "西游记动画里唐僧的角色设计是什么样的？",
+      "expected": "温和书生形象，白色袈裟配金边，手持九环锡杖，戴五佛冠，眉目清秀，水墨风格背景",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_3",
+      "query": "我做的那个进度管理App第二版有什么改进？",
+      "expected": "改为浅色主题（白底+蓝灰色调），甘特图改为看板视图（类似Trello），每个卡片有缩略图预览，增加了按角色/按集数/按制作阶段三种筛选，新增AI助手入口",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_4",
+      "query": "火焰山的场景设计是什么色调风格？",
+      "expected": "以敦煌壁画色调为基础，绛红色山体有流动岩浆纹理，暗橘红色天空，地面龟裂，远处有芭蕉洞轮廓",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_1",
+      "query": "我们动画项目里孙悟空和那个游戏里的孙悟空有什么区别？",
+      "expected": "动画项目的孙悟空最终版是水墨中国风，1:6头身比战甲+祥云纹+水墨描边，金色眼睛自信微笑。黑神话悟空是写实暗黑风，黑色锁子甲，面部有疤痕，场景是废墟寺庙",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分同名角色在不同上下文中的精确设计差异"
+      }
+    },
+    {
+      "id": "q_precision_2",
+      "query": "我拍的莫高窟壁画照片和同事小刘拍的有什么不同？",
+      "expected": "用户拍的是第45窟菩萨壁画（石绿+朱砂红色调，有矿物颜料颗粒感）和第320窟飞天壁画（石青+白粉冷调）。小刘拍的是第57窟美人菩萨（正面全身像，色彩更鲜艳保存更好）",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分不同人拍摄的相似题材照片"
+      }
+    },
+    {
+      "id": "q_precision_3",
+      "query": "孙悟空V1和V3定稿相比，金箍棒的设计有哪些变化？",
+      "expected": "V1金箍棒较短只到腰部高度。V2加长到与身等高。V3改为可伸缩设计，收起状态是耳后的小针。导演特别喜欢V3的可伸缩设计",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "精确追踪同一设计元素在多版本迭代中的变化"
+      }
+    },
+    {
+      "id": "q_precision_4",
+      "query": "我们的App和友商的那个影视管理App有什么不同？",
+      "expected": "我们的App V2是看板视图用卡片展示，有缩略图预览和三种筛选维度。友商App用时间轴横向排列+圆形气泡节点+拖拽调整工期，且支持在线播放视频片段",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分两个相似类型产品的具体差异"
+      }
+    },
+    {
+      "id": "q_precision_5",
+      "query": "西游记动画里花果山场景用的是什么画法？成片第一集开头也有花果山吗？",
+      "expected": "场景设计中花果山采用泼墨山水画法，翠绿植被加瀑布。第一集开场就是花果山全景镜头，清晨薄雾中猴群嬉戏，孙悟空站在水帘洞口巨石上，是泼墨山水加数字动画的融合风格",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "同一场景在设计稿和成片中的对应关系"
+      }
+    },
+    {
+      "id": "q_noise_1",
+      "query": "我画的那个齐天大圣是什么风格？",
+      "expected": "培训班的水墨习作：纯黑白水墨大写意风格，寥寥几笔勾勒腾云驾雾姿态。注意这不是动画项目的孙悟空设计。老师评价笔力不够，线条需要更果断",
+      "category": "mm-noise-resist",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分培训班习作vs动画项目设计图，同为猴王形象"
+      }
+    },
+    {
+      "id": "q_noise_2",
+      "query": "哪吒动画项目的角色和电影院看的哪吒有什么不同？",
+      "expected": "项目里的哪吒是朋克风（黑色烟熏妆、朋克飘带、机械风火轮），电影《哪吒之魔童闹海》是丑萌路线。两者风格差异化明显",
+      "category": "mm-noise-resist",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分同名IP在自有项目vs外部电影中的不同形象"
+      }
+    },
+    {
+      "id": "q_noise_3",
+      "query": "我拍的鸣沙山照片是什么样的？不是别人拍的",
+      "expected": "用户拍了两次：第一次2024年5月日落时分，沙丘呈金色，月牙泉倒映天光。第二次2025年1月冬天，沙丘覆薄雪呈银白浅金交错，月牙泉结薄冰。小刘拍的是正午光线很硬沙子发白的版本",
+      "category": "mm-noise-resist",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "排除朋友拍的相同地点照片，只返回用户自己拍的"
+      }
+    },
+    {
+      "id": "q_noise_4",
+      "query": "关于火焰山的场景，导演说用哪次采风的照片做参考？",
+      "expected": "导演王明在评审会上说火焰山场景要用敦煌五月拍的暖色调照片（第一次采风），明确不要用冬天补拍的冷色调",
+      "category": "mm-noise-resist",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "需关联导演指令+正确识别两次采风的色调差异"
+      }
+    },
+    {
+      "id": "q_noise_5",
+      "query": "那个被停掉的老项目是什么？和现在的项目什么关系？",
+      "expected": "前年做的三国项目因资金问题停了，关羽角色设计是国潮戏曲脸谱风。这是独立项目和现在的西游记/哪吒无关，但设计稿留着以后可能重启。投资人张总提议第二季做三国题材",
+      "category": "mm-noise-resist",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分已停项目vs进行中项目，关联投资人的三国提议"
+      }
+    },
+    {
+      "id": "q_abstract_1",
+      "query": "去年那个猴子动画里主角最新版本的设计图长什么样？",
+      "expected": "孙悟空最终定稿V3：1:6头身比战甲，肩甲腰带有祥云纹浮雕，金箍棒可伸缩（收起是耳后小针），水墨笔触描边，背景是水墨风花果山瀑布",
+      "category": "mm-abstract-query",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "用'猴子动画'指代西游记，用'最新版本'指代V3定稿"
+      }
+    },
+    {
+      "id": "q_abstract_2",
+      "query": "我在沙漠那边拍的日落照片是哪个场景的参考？",
+      "expected": "2024年5月在鸣沙山拍的日落照片（沙丘呈金色，月牙泉倒映天光），主要用于火焰山和取经路上的场景参考",
+      "category": "mm-abstract-query",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "用'沙漠''日落照片'间接描述鸣沙山采风照"
+      }
+    },
+    {
+      "id": "q_abstract_3",
+      "query": "那个有反派三次变装的分镜画了什么内容？",
+      "expected": "第三集三打白骨精的核心分镜：白骨精三次变身——村姑（手提竹篮内藏毒果）、老妇（拄龙头拐杖）、老翁（骑瘦驴背上有骷髅暗纹），每次变身分为表象层和真相层通过火眼金睛透视呈现",
+      "category": "mm-abstract-query",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "用'反派三次变装'指代白骨精三次变身"
+      }
+    },
+    {
+      "id": "q_abstract_4",
+      "query": "那个潮一点的少年英雄动画项目进展如何？",
+      "expected": "哪吒动画项目（朋克风格），目前角色设计已完成（哪吒+太乙真人），和西游记项目同时进行中",
+      "category": "mm-abstract-query",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "用'潮一点的少年英雄'指代朋克风哪吒"
+      }
+    },
+    {
+      "id": "q_abstract_5",
+      "query": "帮我找找和老师傅有关的那个佛壁画的采风资料",
+      "expected": "可能指两个：2024年5月拍的莫高窟第45窟菩萨壁画（石绿+朱砂红，矿物颜料颗粒感），或2025年1月拍的第320窟飞天壁画（石青+白粉冷调）。两次都是在莫高窟拍摄的壁画参考素材",
+      "category": "mm-abstract-query",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "用'老师傅''佛壁画'模糊指代莫高窟壁画照片"
+      }
+    },
+    {
+      "id": "q_temporal_1",
+      "query": "去年上半年和今年年初分别去敦煌拍了什么不同的素材？",
+      "expected": "2024年5月（去年上半年）拍的是暖色调素材：第45窟菩萨壁画、鸣沙山日落金色沙丘、玉门关遗址。2025年1月（今年年初）拍的是冷色调补充素材：第320窟飞天壁画冷调、冬天鸣沙山覆雪银白色",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分两次敦煌采风的不同时间和色调目的"
+      }
+    },
+    {
+      "id": "q_temporal_2",
+      "query": "孙悟空的设计从最初到定稿，配色是怎么一步步变化的？",
+      "expected": "V1（2024年3月）：深棕+暗金配色偏暗。V2（2024年6月）：改为亮金+正红明亮暖色。V3（2024年9月）：保持V2暖色基调，增加水墨笔触描边和祥云纹浮雕。三版配色从暗到明再到融合水墨",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "按时间线追踪同一角色的设计迭代"
+      }
+    },
+    {
+      "id": "q_temporal_3",
+      "query": "那个App的UI经历了几个版本？各自什么时候做的，分别用了什么主题风格？",
+      "expected": "两个版本。V1（2024年4月）：深色主题Jira风格甘特图。V2（2024年8月）：浅色主题Trello风看板视图。V2改进了：浅色主题、缩略图预览、三种筛选维度、AI助手入口",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "按时间线追踪产品UI的迭代历史"
+      }
+    },
+    {
+      "id": "q_temporal_4",
+      "query": "从开始到交付第一集一共花了多长时间？中间有哪些关键节点？",
+      "expected": "2024年3月开始设计到2024年12月交付，约9个月。关键节点：3月V1角色设计→5月敦煌采风→6月V2设计+外包合同→7月哪吒项目并行启动→9月V3定稿→10月场景设计→11月第三集分镜→12月第一集交付",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "跨多个会话整合完整时间线"
+      }
+    },
+    {
+      "id": "q_cross_1",
+      "query": "和杭州那家外包公司合作的情况整体怎么样？涉及哪些文件和沟通？",
+      "expected": "杭州A动画公司：签了西游记5-8集外包合同120万，24帧4K标准。项目经理老陈反馈第5集原画完成80%但调色师病了延迟一周，第6集在分镜阶段。第一集交付时开了30万首期发票（ZP2024122001）",
+      "category": "mm-cross-ref",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "整合合同文档+语音沟通+发票，构建完整合作关系"
+      }
+    },
+    {
+      "id": "q_cross_2",
+      "query": "敦煌采风的素材具体被用在了哪些地方？",
+      "expected": "火焰山场景以敦煌壁画色调为基础（导演指定用五月暖色调），花果山场景也在采风后确定了泼墨山水风格。玉门关素材用于取经路过渡场景参考。冬天第二次采风的冷色调补充了阴冷场景素材",
+      "category": "mm-cross-ref",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "将采风照片与场景设计+导演指令进行跨会话关联"
+      }
+    },
+    {
+      "id": "q_cross_3",
+      "query": "投资人对项目有什么反馈？后续可能有什么计划？",
+      "expected": "投资人张总看了第一集成片很满意，特别喜欢水墨和3D结合的效果，问能不能第二季做三国题材并追加投资。之前三国项目因资金停了但设计稿有保留",
+      "category": "mm-cross-ref",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "关联投资人反馈+已停三国项目，推理可能的项目延续"
+      }
+    },
+    {
+      "id": "q_cross_4",
+      "query": "芭蕉洞场景是谁负责的？导演对材质有什么要求？在哪个场景设计图里和火焰山一起出现的？",
+      "expected": "芭蕉洞由李倩负责，导演要求有洞穴的潮湿感。火焰山场景设计图远处有芭蕉洞的轮廓。这两个信息分别来自评审会语音记录和场景设计图",
+      "category": "mm-cross-ref",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "将语音会议指令与场景设计图进行跨模态关联"
+      }
+    },
+    {
+      "id": "q_basic_5",
+      "query": "唐僧的定稿设计长什么样？整体是什么风格？",
+      "expected": "温和书生形象，白色袈裟配金边，手持九环锡杖，戴五佛冠，眉目清秀，水墨风格背景。与孙悟空V3定稿同一时期完成（2024年9月），风格统一",
+      "category": "mm-basic-recall",
+      "difficulty": "standard",
+      "metadata": {
+        "tests": "从角色定稿会话中直接提取唐僧描述"
+      }
+    },
+    {
+      "id": "q_temporal_5",
+      "query": "筋斗云的设计改了几版？每一版的造型和颜色是什么？",
+      "expected": "两版。V1（2024年3月）：传统白色祥云造型，边缘金色光晕，写实风格。V2（2024年6月）：卡通风格，更圆润蓬松，颜色从白色改为淡粉色渐变，增加星星点缀和彩虹尾迹",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "追踪道具在不同版本间的视觉变化"
+      }
+    },
+    {
+      "id": "q_cross_5",
+      "query": "项目里有多少个不同的角色需要设计？分别是谁负责的？哪些已经定稿了？",
+      "expected": "至少5个角色：孙悟空（用户自己设计，V3已定稿）、唐僧（已定稿）、哪吒（并行项目启动设计）。场景由具体负责人分工：芭蕉洞李倩、火焰山导演指定暖色调。外包A公司负责5-8集原画",
+      "category": "mm-cross-ref",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "跨所有会话整合人员分工与项目进度全貌"
+      }
+    },
+    {
+      "id": "q_basic_31",
+      "query": "筋斗云V1版本是什么造型？",
+      "expected": "传统白色祥云造型，边缘金色光晕，云朵偏写实风格",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_32",
+      "query": "孙悟空V1版本的头身比是多少？",
+      "expected": "Q版比例，头身比1:4",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_33",
+      "query": "孙悟空V2版的眼睛是什么颜色？",
+      "expected": "金色（V1是红色改过来的）",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_34",
+      "query": "导演对V2版有什么额外要求？",
+      "expected": "增加中国风元素，比如祥云纹和水墨效果",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_35",
+      "query": "第三集分镜是什么时间做的？有什么特点？",
+      "expected": "2024年11月左右做的分镜，是动画正式生产阶段的产物",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_36",
+      "query": "外包合同的具体标准是什么？",
+      "expected": "24帧4K标准",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_37",
+      "query": "项目经理老陈反馈了什么问题？",
+      "expected": "第5集原画完成80%但调色师病了延迟一周，第6集在分镜阶段",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_38",
+      "query": "发票号是什么？金额多少？",
+      "expected": "ZP2024122001，30万首期",
+      "category": "mm-basic-recall",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_basic_39",
+      "query": "花果山场景的风格是什么？",
+      "expected": "泼墨山水风格",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_40",
+      "query": "金箍棒在V3定稿中有什么特殊设计？",
+      "expected": "可伸缩设计，收起状态是耳后的小针",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_41",
+      "query": "孙悟空有几个设计版本？",
+      "expected": "三个：V1(Q版偏暗)→V2(正常比例明亮)→V3(水墨风定稿)",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_42",
+      "query": "V3版的描边是什么风格？",
+      "expected": "水墨笔触的描边效果",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_43",
+      "query": "V1版金箍棒有什么问题？",
+      "expected": "比较短只到腰部高度，到V2才加长到与身等高",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_44",
+      "query": "哪些角色已经定稿了？",
+      "expected": "孙悟空V3和唐僧已定稿",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_45",
+      "query": "投资人张总对哪个效果特别满意？",
+      "expected": "水墨和3D结合的效果",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_46",
+      "query": "敦煌采风一共去了几次？",
+      "expected": "两次：第一次暖色调（五月），第二次冬天冷色调",
+      "category": "mm-basic-recall",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_basic_47",
+      "query": "连环画小书是什么主题的？",
+      "expected": "西游记连环画",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_48",
+      "query": "App的V1版本参考了什么工具？",
+      "expected": "Jira风格的甘特图",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_49",
+      "query": "App的V2版本有什么新功能？",
+      "expected": "缩略图预览、颜色/角色/制作阶段三种筛选、AI助手入口",
+      "category": "mm-basic-recall",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_basic_50",
+      "query": "第一集交付是什么时候？",
+      "expected": "2024年12月",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_31",
+      "query": "V1和V3的配色有什么不同？",
+      "expected": "V1深棕+暗金偏暗→V3保持V2暖色(亮金+正红)加水墨描边",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_precision_32",
+      "query": "筋斗云两个版本最大的区别？",
+      "expected": "V1写实白色祥云→V2卡通淡粉色渐变+星星彩虹尾迹",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_precision_33",
+      "query": "孙悟空的眼睛颜色经历了什么变化？",
+      "expected": "V1红色→V2金色→V3保持金色",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_precision_34",
+      "query": "两次敦煌采风拍的素材有什么不同？",
+      "expected": "第一次暖色调（壁画色调），第二次冬天冷色调",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_precision_35",
+      "query": "金箍棒设计经历了几次变化？",
+      "expected": "V1短到腰部→V2与身等高→V3可伸缩(收起是耳后小针)",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_precision_36",
+      "query": "V2和V3的主要区别在哪？",
+      "expected": "V2是明亮暖色战甲风。V3在V2基础上加了祥云纹浮雕+水墨描边+可伸缩金箍棒+花果山瀑布背景",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_precision_37",
+      "query": "App两版的主题色有什么变化？",
+      "expected": "V1深色主题(Jira风甘特图)→V2浅色主题(Trello风看板)",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_precision_38",
+      "query": "导演指定火焰山场景用什么色调？",
+      "expected": "五月暖色调（来自敦煌采风的壁画色调）",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_precision_39",
+      "query": "头身比从V1到V2怎么变的？",
+      "expected": "从1:4(Q版)变到1:6(正常比例)",
+      "category": "mm-precision-retrieve",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_40",
+      "query": "两版筋斗云设计最核心的变化？",
+      "expected": "风格从写实变成卡通，颜色从白色变成淡粉色渐变",
+      "category": "mm-precision-retrieve",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_41",
+      "query": "V1版的背景和V3版对比？",
+      "expected": "V1简单白底→V3水墨风花果山瀑布",
+      "category": "mm-precision-retrieve",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_42",
+      "query": "唐僧的袈裟是什么颜色搭配？",
+      "expected": "白色袈裟配金边",
+      "category": "mm-precision-retrieve",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_43",
+      "query": "花果山瀑布场景出现在哪个版本？",
+      "expected": "V3定稿版本的背景",
+      "category": "mm-precision-retrieve",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_44",
+      "query": "孙悟空表情从V1到V2变了吗？",
+      "expected": "V1比较凶→V2自信微笑",
+      "category": "mm-precision-retrieve",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_45",
+      "query": "V2版新增了什么角色配件？",
+      "expected": "披风细节",
+      "category": "mm-precision-retrieve",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_46",
+      "query": "孙悟空V2的背景色是什么？",
+      "expected": "淡黄色渐变",
+      "category": "mm-precision-retrieve",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_47",
+      "query": "芭蕉洞和花果山谁的色调更暖？",
+      "expected": "花果山/火焰山用暖色调（壁画色），芭蕉洞要求有潮湿感可能偏冷",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_precision_48",
+      "query": "如果要找孙悟空最新的设计图应该找哪个版本？",
+      "expected": "V3定稿版，有祥云纹浮雕+水墨描边+可伸缩金箍棒",
+      "category": "mm-precision-retrieve",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_precision_49",
+      "query": "两个App版本分别适合什么样的团队？",
+      "expected": "V1(Jira甘特图)适合瀑布流管理，V2(Trello看板+AI)适合敏捷迭代",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_precision_50",
+      "query": "连环画风格和水墨风格有什么区别？",
+      "expected": "连环画是传统黑白线描叙事风格，V3的水墨是国画笔触与现代CG的融合",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_31",
+      "query": "孙悟空的设计图和黑神话悟空游戏里的有关系吗？",
+      "expected": "没有关系。噪声会话中有朋友分享黑神话悟空截图，但用户做的是自己的西游记动画原创设计",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_32",
+      "query": "三国题材的设计稿还在用吗？",
+      "expected": "之前因资金停了但设计稿保留。投资人张总看了西游记后问能不能做三国题材第二季",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_33",
+      "query": "用户做的动画和同事分享的电影设计有关系吗？",
+      "expected": "没有。哪吒电影海报等是噪声会话中同事分享的，和用户制作的动画是不同项目",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_34",
+      "query": "敦煌照片是旅游照还是工作素材？",
+      "expected": "是工作采风素材（不是旅游），用于场景设计（火焰山壁画色调、花果山泼墨风等）",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_35",
+      "query": "朋友发的莫高窟壁画照和用户的敦煌采风有什么关系？",
+      "expected": "没有直接关系。朋友的照片是噪声（旅游照），用户的才是工作采风素材",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_36",
+      "query": "租房合同和外包合同是同一类文件吗？",
+      "expected": "不是。租房合同是噪声会话中的日常生活文件，外包合同是杭州A动画公司的正式工作合同",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_37",
+      "query": "用户购物收据和项目发票有什么区别？",
+      "expected": "购物收据是日常消费噪声，项目发票ZP2024122001是外包首期30万的正式财务文件",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_38",
+      "query": "网上找到的免费UI模板和用户设计的App有关系吗？",
+      "expected": "没有。噪声会话中可能提到免费模板，用户的管理App是定制设计(V1 Jira风/V2 Trello风)",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_39",
+      "query": "美术培训班的作业和用户的设计有什么关系？",
+      "expected": "没有关系。美术培训班是噪声会话内容，不是用户的动画制作工作",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_40",
+      "query": "其他人分享的3D建模作品和用户的动画什么关系？",
+      "expected": "没有直接关系。用户的动画融合了水墨+3D效果，但不等于噪声中他人的3D作品",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_41",
+      "query": "把真孙悟空V3定稿和黑神话游戏截图区分开来",
+      "expected": "V3定稿：1:6头身比+战甲+祥云纹浮雕+水墨描边+可伸缩金箍棒+花果山瀑布。游戏截图是噪声中提到的商业产品",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_42",
+      "query": "朋友的敦煌旅游和用户的采风素材最关键的区别？",
+      "expected": "目的不同：朋友是旅游(噪声)，用户是工作采风(为场景设计取材)",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_43",
+      "query": "噪声中提到的合同信息和真实外包合同怎么区分？",
+      "expected": "真实合同：杭州A动画公司，西游记5-8集，120万，24帧4K。其他合同信息都是噪声",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_44",
+      "query": "用户到底做了几个动画项目？别的是噪声项目？",
+      "expected": "主要做西游记动画（核心），并行启动了哪吒设计。三国因资金停了。其他动画项目是噪声",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_45",
+      "query": "如果搜索「设计图」会返回很多结果，怎么找到用户的？",
+      "expected": "按项目过滤（西游记动画/哪吒/App UI），按时间线排序（2024.3-2024.12），确认是核心会话的",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_46",
+      "query": "用户的语音转写和其他人的语音消息怎么区分？",
+      "expected": "用户的语音转写涉及导演评审/外包沟通/投资人反馈等核心业务内容",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_47",
+      "query": "日常生活中的照片（如拍的食物、风景）是多模态评测的目标吗？",
+      "expected": "不是。噪声中的日常照片不属于核心工作素材，精准检索应该只返回核心设计/采风/文件等",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_48",
+      "query": "如果系统混淆了三国设计稿和西游记定稿说明什么问题？",
+      "expected": "说明记忆系统没能区分不同项目的资源，混淆了已停的三国和在进行的西游记",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_49",
+      "query": "搜索「火焰山」可能命中哪些噪声？",
+      "expected": "可能命中：黑神话中的火焰山关卡、他人的壁画照片中火焰山元素等。理想回复只包含用户的场景设计和采风素材",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_noise_50",
+      "query": "搜索「合同」可能命中哪些噪声？",
+      "expected": "可能命中：租房合同（噪声）、其他人提到的合同信息。只有杭州A动画公司的外包合同120万才是正确结果",
+      "category": "mm-noise-resist",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_31",
+      "query": "去年有个角色反复改了好多版的是哪个？",
+      "expected": "孙悟空，从V1(Q版暗色)到V2(正常明亮)到V3(水墨风定稿)改了三版",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_32",
+      "query": "那个可以变大变小的东西是什么？",
+      "expected": "金箍棒，V3版设计为可伸缩，收起状态是耳后小针",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_33",
+      "query": "有个地方的照片被用在了好几个场景里？",
+      "expected": "敦煌采风素材：壁画色调用在火焰山、泼墨风用在花果山、玉门关用在取经路过渡场景",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_34",
+      "query": "那个看起来像云朵的东西颜色变了是什么？",
+      "expected": "筋斗云，从V1白色写实变成V2淡粉色渐变卡通风",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_35",
+      "query": "管理项目的那个软件改了几次？",
+      "expected": "两次：V1(深色Jira甘特图)→V2(浅色Trello看板+AI助手)",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_36",
+      "query": "那笔钱是给谁的？",
+      "expected": "如果指30万发票→给杭州A动画公司的外包首期。如果指120万→外包合同总额",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_37",
+      "query": "谁看了成品特别高兴说要追加投资？",
+      "expected": "投资人张总，看了第一集成片满意，问能不能做三国第二季并追加投资",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_38",
+      "query": "有个和尚的角色是什么风格？",
+      "expected": "唐僧：温和书生形象，白色袈裟金边，九环锡杖，五佛冠，水墨背景",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_39",
+      "query": "那个画了两次的地方是哪？",
+      "expected": "敦煌，去了两次采风：第一次暖色（五月），第二次冬天冷色调补充素材",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_40",
+      "query": "做动画的过程中有外面的人帮忙做了一部分？",
+      "expected": "是，杭州A动画公司外包了5-8集的原画制作",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_41",
+      "query": "那个因为某人生病导致延期的是什么？",
+      "expected": "外包公司的调色师病了，导致第5集延迟一周",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_42",
+      "query": "有个设计本来要亮色后来又用了暗色？",
+      "expected": "第二次敦煌采风补了冬天冷色调（暗色），补充了阴冷场景素材",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_43",
+      "query": "电话里讨论过什么内容最后变成了正式文件？",
+      "expected": "评审会语音记录讨论了场景分工等内容，可能影响了后续正式安排",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_44",
+      "query": "那个从3D变成水墨风的是怎么回事？",
+      "expected": "不是从3D变水墨，而是水墨和3D融合——投资人张总特别喜欢这种效果",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_45",
+      "query": "颜色改来改去的那个角色是哪个？",
+      "expected": "孙悟空的配色改了三次：暗色(V1)→明亮(V2)→暖色+水墨(V3)",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_46",
+      "query": "有一段录音提到谁的工作分配被改了？",
+      "expected": "评审会语音中分配了芭蕉洞给李倩，导演提了潮湿感要求",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_47",
+      "query": "那个特别小的东西放在耳朵后面的？",
+      "expected": "V3金箍棒的收起状态——耳后小针",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_48",
+      "query": "花了几个月才最终完成的第一个作品？",
+      "expected": "从2024年3月开始到12月交付第一集，约9个月",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_49",
+      "query": "有没有什么东西因为没钱不做了后来又被提起？",
+      "expected": "三国项目因资金停了但设计稿保留，后来投资人看了西游记成片后问能不能做三国第二季",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_abstract_50",
+      "query": "「五月的颜色」指的是什么？",
+      "expected": "第一次敦煌采风(五月)的暖色调壁画素材，被导演指定用于火焰山场景",
+      "category": "mm-abstract-query",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_31",
+      "query": "孙悟空的表情变化时间线？",
+      "expected": "V1(2024.3)凶→V2(2024.6)自信微笑→V3(2024.9)保持微笑定稿",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_32",
+      "query": "金箍棒的设计变化按时间排列？",
+      "expected": "2024.3短到腰(V1)→2024.6与身等高(V2)→2024.9可伸缩耳后小针(V3)",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_33",
+      "query": "V3定稿之后发生了什么？",
+      "expected": "10月场景设计→11月第三集分镜→12月第一集交付+外包评审+发票",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_34",
+      "query": "两次敦煌采风分别是什么时候？间隔多久？",
+      "expected": "第一次约2024年5月(暖色)，第二次冬天, 间隔约半年",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_35",
+      "query": "从App V1到V2间隔多久？",
+      "expected": "V1约2024年4月, V2约2024年8月, 间隔约4个月",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_36",
+      "query": "哪吒项目是什么时候启动的？和西游记什么关系？",
+      "expected": "2024年7月并行启动，在西游记V2之后V3之前",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_37",
+      "query": "外包合同什么时候签的？首期什么时候付的？",
+      "expected": "约2024年6月签合同，12月开首期发票30万",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_38",
+      "query": "从第一张设计图到投资人看到成片经历了多久？",
+      "expected": "2024年3月第一版→12月交付第一集→投资人看片, 约9-10个月",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_39",
+      "query": "按月份列出2024年的设计里程碑",
+      "expected": "3月V1→4月App V1→5月敦煌采风1→6月V2+外包签约→7月哪吒启动→8月App V2→9月V3定稿→10月场景→11月分镜→12月交付",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_40",
+      "query": "所有涉及「版本更新」的事件按时间排？",
+      "expected": "悟空V1(3月)→App V1(4月)→悟空V2(6月)→筋斗云V2(6月)→App V2(8月)→悟空V3(9月)",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_41",
+      "query": "V1到V2之间发生了什么重要事件？",
+      "expected": "外推：4月App V1→5月敦煌采风1→6月签外包合同+悟空V2",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_42",
+      "query": "定稿V3和场景设计之间隔了多久？",
+      "expected": "V3定稿2024年9月→场景设计2024年10月，约1个月",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_43",
+      "query": "项目最忙的月份可能是哪个？",
+      "expected": "2024年6月：悟空V2+筋斗云V2+签外包合同→同时多件事并行",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_44",
+      "query": "从签约到交付第一集需要几个月？",
+      "expected": "6月签约→12月交付=6个月",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_45",
+      "query": "场景设计和分镜哪个先做的？",
+      "expected": "10月先做场景设计（火焰山/花果山），11月做第三集分镜",
+      "category": "mm-temporal-disambig",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_temporal_46",
+      "query": "导演在什么时间点提出了水墨的要求？",
+      "expected": "V2(6月)后导演说希望增加中国风元素（祥云纹水墨效果），V3(9月)实现",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_47",
+      "query": "外包公司的工作进度截至什么时候？",
+      "expected": "截至评审时第5集原画80%(调色师延期一周)+第6集分镜阶段",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_48",
+      "query": "投资人看成片后提出了什么时间计划？",
+      "expected": "看完第一集后问「能不能第二季做三国」→暗示2025年的计划",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_49",
+      "query": "整个项目从头到尾最关键的3个时间节点？",
+      "expected": "2024.3首版设计→2024.9定稿→2024.12交付第一集",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_temporal_50",
+      "query": "第二次采风的时间和目的？",
+      "expected": "冬天(约2024年11-12月)补充冷色调素材，用于阴冷场景",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_31",
+      "query": "导演需求+采风素材+最终场景三者如何关联？",
+      "expected": "导演指定火焰山用暖色→第一次采风壁画色调满足→场景设计采用",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_32",
+      "query": "外包合同+进度反馈+发票三者时间关系？",
+      "expected": "6月签120万合同→中间老陈反馈进度→12月首期30万发票ZP2024122001",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_33",
+      "query": "投资人+三国旧稿+西游记成片的关系？",
+      "expected": "投资人看了西游记成片满意→想追加投资做三国第二季→之前三国设计稿因资金停了但保留着",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_34",
+      "query": "花果山场景涉及哪些不同来源的素材？",
+      "expected": "V3定稿的花果山瀑布背景+敦煌采风的泼墨山水风格指导+导演确认方向",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_35",
+      "query": "角色设计+场景设计+分镜的依赖关系？",
+      "expected": "先角色(V1-V3)→场景(火焰山/花果山)→分镜(基于角色+场景)。角色定了才能开始场景和分镜",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_36",
+      "query": "芭蕉洞涉及哪些来源？",
+      "expected": "评审会语音(李倩负责+导演要潮湿感) + 火焰山场景图(远处有芭蕉洞轮廓)",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_37",
+      "query": "从设计到交付涉及多少个不同角色？",
+      "expected": "用户(主设计)、导演(审核方向)、老陈(外包PM)、李倩(芭蕉洞)、投资人张总(资金方)、调色师(延期)、A公司团队",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_38",
+      "query": "如果要做三国项目需要什么准备？",
+      "expected": "已有三国旧设计稿+投资人有意追投+西游记团队可复用→主要缺资金确认",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_39",
+      "query": "外包和自研部分如何分工？",
+      "expected": "自研：角色设计(1-4集)、场景设计、分镜、管理App。外包(A公司)：5-8集原画",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_40",
+      "query": "AI审查模块和管理App什么关系？",
+      "expected": "App V2加了AI助手入口，可能是管理效率工具的一部分",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_41",
+      "query": "玉门关素材是从哪来的？用在了哪？",
+      "expected": "敦煌采风时拍的，用于取经路过渡场景参考",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_42",
+      "query": "所有和「钱」相关的信息汇总？",
+      "expected": "外包合同120万+首期发票30万(ZP2024122001)+投资人可能追加投资(金额未定)+三国项目因资金停",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_43",
+      "query": "从角色设计到动画生产的完整工作流？",
+      "expected": "角色设计(3版)→采风取材(敦煌2次)→场景设计+分镜→外包原画→交付成片→投资人审片",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_44",
+      "query": "项目中有哪些「意外」或「延期」？",
+      "expected": "调色师病了延期一周、差点用了竞对(黑神话等)的风格但最终走原创水墨、三国因资金停了",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_45",
+      "query": "投资人的反馈如何影响项目未来方向？",
+      "expected": "对水墨+3D效果满意→可能追投做三国第二季→从单季项目变成系列化可能",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_46",
+      "query": "多模态资料如何互相验证？",
+      "expected": "设计图(视觉)↔语音记录(分工/指令)↔文档(合同/发票)↔采风照片(素材来源)→相互佐证",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_47",
+      "query": "如果只看语音记录能得到什么信息？",
+      "expected": "导演评审意见(芭蕉洞分工+材质要求)、外包进度(老陈反馈)、投资人观感(张总)",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_48",
+      "query": "如果只看设计图能知道什么？不能知道什么？",
+      "expected": "能知道：角色外观版本变化、场景风格。不能知道：谁负责什么、预算、时间安排（需要语音/文档补充）",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_49",
+      "query": "项目管理上最大的挑战是什么？",
+      "expected": "多方协同(内部+外包+投资人)、多版本迭代(3版角色+2版App)、多模态素材管理(图/音/文)",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_cross_50",
+      "query": "这个项目总共产出了多少种类型的素材？",
+      "expected": "设计图(角色V1-V3/场景/筋斗云/唐僧/App UI)、采风照片(敦煌2次)、语音记录(评审/沟通)、文档(合同/发票/分镜)",
+      "category": "mm-cross-ref",
+      "difficulty": "hard"
+    }
+  ]
+}

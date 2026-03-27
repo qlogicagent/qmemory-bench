@@ -1,0 +1,135 @@
+{
+  "name": "longmemeval-s",
+  "description": "LongMemEval-S quick subset — 12 questions across 6 dimensions",
+  "version": "1.0",
+  "sessions": [
+    {
+      "id": "sess_work",
+      "messages": [
+        {"role": "user", "content": "我刚从腾讯跳槽到字节跳动做后端开发了"},
+        {"role": "assistant", "content": "恭喜你！字节跳动是一家很好的公司，后端开发有很多机会。"},
+        {"role": "user", "content": "是的，我主要做Go和Java，之前在腾讯做了3年微服务"},
+        {"role": "assistant", "content": "3年微服务经验很扎实，字节跳动的技术栈也很偏向Go，你应该能很好地发挥。"},
+        {"role": "user", "content": "对了，我的工位在北京朝阳区的字节大厦"},
+        {"role": "assistant", "content": "朝阳区那边交通很方便，上班通勤应该还好。"}
+      ]
+    },
+    {
+      "id": "sess_hobby",
+      "messages": [
+        {"role": "user", "content": "我周末最喜欢去爬香山，北京的秋天特别美"},
+        {"role": "assistant", "content": "香山的红叶确实是北京秋天的一大亮点。"},
+        {"role": "user", "content": "我也喜欢做饭，特别是川菜，上周做了一道水煮鱼"},
+        {"role": "assistant", "content": "水煮鱼是经典川菜，你喜欢重口味的菜吗？"},
+        {"role": "user", "content": "是的，我比较喜欢辣的，不过我对花生过敏所以做菜要避开花生"},
+        {"role": "assistant", "content": "花生过敏需要特别注意，做川菜时确实要小心一些含花生的调料。"}
+      ]
+    },
+    {
+      "id": "sess_plan",
+      "messages": [
+        {"role": "user", "content": "我打算明年3月份去日本旅游，特别想看樱花"},
+        {"role": "assistant", "content": "3月底到4月初是日本樱花季的最佳观赏时间。"},
+        {"role": "user", "content": "我已经开始学日语了，每周三晚上在新东方上课"},
+        {"role": "assistant", "content": "不错，提前学习语言对旅游帮助很大。"},
+        {"role": "user", "content": "对了我上个月买了一台MacBook Pro M4来学编程"},
+        {"role": "assistant", "content": "M4芯片性能很强，用来开发体验会很好。"}
+      ]
+    },
+    {
+      "id": "sess_update",
+      "messages": [
+        {"role": "user", "content": "我之前说在字节跳动工作，其实上个月我已经跳到了小米"},
+        {"role": "assistant", "content": "原来如此，小米也是很好的公司。主要做什么方向？"},
+        {"role": "user", "content": "在小米做IoT平台后端，还是Go和Java技术栈"},
+        {"role": "assistant", "content": "IoT方向很有发展前景，小米的智能家居生态做得不错。"}
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_ssu_1",
+      "query": "用户目前在哪家公司工作？",
+      "expected": "小米",
+      "category": "single-session-user",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q_ssu_2",
+      "query": "用户的技术栈是什么？",
+      "expected": "Go和Java，后端开发，微服务经验",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_1",
+      "query": "助手对字节跳动的技术栈有什么评价？",
+      "expected": "字节跳动的技术栈偏向Go",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_2",
+      "query": "助手提到日本樱花的最佳观赏时间是什么时候？",
+      "expected": "3月底到4月初",
+      "category": "single-session-assistant",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q_pref_1",
+      "query": "用户有什么饮食偏好？",
+      "expected": "喜欢辣的，喜欢川菜，对花生过敏",
+      "category": "single-session-preference",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_pref_2",
+      "query": "用户周末喜欢做什么？",
+      "expected": "爬香山，做饭（特别是川菜）",
+      "category": "single-session-preference",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q_ku_1",
+      "query": "用户的工作经历有什么变化？",
+      "expected": "从腾讯跳到字节跳动，后来又从字节跳到小米",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_2",
+      "query": "用户现在做什么方向的开发？",
+      "expected": "IoT平台后端",
+      "category": "knowledge-update",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_tr_1",
+      "query": "用户上个月做了什么重要的事？",
+      "expected": "买了MacBook Pro M4，从字节跳到小米",
+      "category": "temporal-reasoning",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_tr_2",
+      "query": "用户什么时候计划去日本？",
+      "expected": "明年3月份",
+      "category": "temporal-reasoning",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q_ms_1",
+      "query": "综合所有对话，用户住在哪个城市？",
+      "expected": "北京（朝阳区）",
+      "category": "multi-session",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ms_2",
+      "query": "用户在学什么新技能？在哪里学？",
+      "expected": "学日语，在新东方上课，每周三晚上",
+      "category": "multi-session",
+      "difficulty": "standard"
+    }
+  ]
+}

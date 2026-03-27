@@ -1,0 +1,142 @@
+{
+  "name": "implicit-memory",
+  "description": "隐式记忆评测 — 测试从暗示、间接表达、潜台词中推断未直接说明信息的能力",
+  "version": "1.0",
+  "source": "custom",
+  "citation": "QMemory team — implicit memory evaluation v1.0",
+  "design_notes": "用户周明多次对话含大量隐含信息(去世婉辞/职业推断/年龄推算/经济暗示等)",
+  "sessions": [
+    {
+      "id": "impl-s01",
+      "messages": [
+        {"role": "user", "content": "唉，又加班到八点才回来。儿子已经睡了，又没来得及给他讲故事。"},
+        {"role": "assistant", "content": "确实辛苦。孩子多大了？"},
+        {"role": "user", "content": "刚上小学一年级。今天他语文考了98分，我老婆发给我看了，开心是开心，但又觉得亏欠他。"},
+        {"role": "assistant", "content": "能关注到孩子的成长已经很好了，周末多陪陪他。"},
+        {"role": "user", "content": "嗯，这周六他要参加学校的亲子运动会，我已经请假了。我太太说让我别再放鸽子了哈。"}
+      ],
+      "metadata": {"timestamp": "2024-03-01T20:00:00", "type": "core", "topic": "family-guilt"}
+    },
+    {
+      "id": "impl-s02",
+      "messages": [
+        {"role": "user", "content": "我把我爸接过来住了一阵子。他最近腿脚不太方便，老妈走了之后他一个人我不放心。"},
+        {"role": "assistant", "content": "尽孝心很好。老人家住得习惯吗？"},
+        {"role": "user", "content": "还行吧，就是楼层高他不太方便，我们这20楼。好在有电梯。他没事就在小区花园溜达。"},
+        {"role": "assistant", "content": "多走动对腿脚恢复有帮助。"},
+        {"role": "user", "content": "对，我给他报了个书法班，离家走路十分钟，他以前就会写毛笔字。"}
+      ],
+      "metadata": {"timestamp": "2024-03-10T19:30:00", "type": "core", "topic": "father-care"}
+    },
+    {
+      "id": "impl-s03",
+      "messages": [
+        {"role": "user", "content": "最近公司在搞组织架构调整，我们部门可能会合并。说实话有点慌。"},
+        {"role": "assistant", "content": "组织调整确实让人不安。你的岗位有影响吗？"},
+        {"role": "user", "content": "还不确定。我在这干了八年了，从刚毕业就进来，要是走了还真离不开。"},
+        {"role": "assistant", "content": "八年的积累是优势，不管怎样你的经验都很有价值。"},
+        {"role": "user", "content": "也是。不过我已经开始刷题了，LeetCode每天一两道，以防万一。上次同事被裁，一个月才找到工作，我可不想那样。"}
+      ],
+      "metadata": {"timestamp": "2024-03-20T21:00:00", "type": "core", "topic": "job-anxiety"}
+    },
+    {
+      "id": "impl-s04",
+      "messages": [
+        {"role": "user", "content": "今天带儿子去了迪士尼，排了好长的队。不过他坐了小飞象之后开心坏了，值了。"},
+        {"role": "assistant", "content": "迪士尼确实是小朋友的天堂。"},
+        {"role": "user", "content": "是的，但我腰真的受不了，站了一整天。最近坐太久了，腰椎间盘有点突出的迹象。"},
+        {"role": "assistant", "content": "久坐对腰椎伤害很大，建议每隔一小时起来活动一下。"},
+        {"role": "user", "content": "嗯。对了，我把老家的车开过来了，以后接我爸去书法班方便一些。以前都是打车。"}
+      ],
+      "metadata": {"timestamp": "2024-04-01T21:30:00", "type": "core", "topic": "disney-health"}
+    },
+    {
+      "id": "impl-s05",
+      "messages": [
+        {"role": "user", "content": "终于确定了，我们部门不裁员，反而要扩招。"},
+        {"role": "assistant", "content": "这是好消息！可以安心了。"},
+        {"role": "user", "content": "对，而且领导让我带一个新来的同事。90后的，挺年轻的。"},
+        {"role": "assistant", "content": "带新人也是一种锻炼管理能力的机会。"},
+        {"role": "user", "content": "嗯。不过有个问题，我在技术上容易碰到瓶颈了。以前写代码很有成就感，现在大部分时间在开会。"},
+        {"role": "user", "content": "老婆说我最近脾气不好，可能就是因为这个吧。上周因为一个线上bug跟测试同事吵了一架。"}
+      ],
+      "metadata": {"timestamp": "2024-04-15T20:00:00", "type": "core", "topic": "career-plateau"}
+    },
+    {
+      "id": "impl-s06",
+      "messages": [
+        {"role": "user", "content": "五一假期，我带全家回了老家。我爸终于回家住了，邻居们也高兴。"},
+        {"role": "assistant", "content": "陪老人回家看看挺好的。"},
+        {"role": "user", "content": "是啊，我在镇上的庙会给儿子买了个糖画，还有棉花糖，他从来没见过这些。"},
+        {"role": "assistant", "content": "城里的孩子确实很少有机会体验这种传统集市。"},
+        {"role": "user", "content": "对。自从回去我一直在想，是不是将来可以回老家去。但我老婆不太愿意，她是上海人，不习惯小城市。"},
+        {"role": "user", "content": "再说孩子上学在这边，也走不开。算了，想想而已。"}
+      ],
+      "metadata": {"timestamp": "2024-05-01T22:00:00", "type": "core", "topic": "hometown-nostalgia"}
+    },
+    {
+      "id": "impl-s07",
+      "messages": [
+        {"role": "user", "content": "带新人带了一个月了。他叫小林，某985本科毕业的，聪明是聪明，就是有点浮躁。"},
+        {"role": "assistant", "content": "年轻人需要时间沉淀，多引导他就好。"},
+        {"role": "user", "content": "嗯。对了最近开始每周六跟他一起打羽毛球，公司有场地。我好久没运动了，第二天腰酸腿疼的。"},
+        {"role": "assistant", "content": "循序渐进就好，先热身然后逐步加强度。"},
+        {"role": "user", "content": "对。我太太说我应该少喝酒，上次体检脂肪肝轻度了。但是应酬没办法啊。"}
+      ],
+      "metadata": {"timestamp": "2024-05-15T19:00:00", "type": "core", "topic": "mentoring-health"}
+    },
+    {
+      "id": "impl-s08",
+      "messages": [
+        {"role": "user", "content": "儿子过六一了，学校搞了个文艺汇演。他表演了一段诗朗诵，《静夜思》，有模有样的。"},
+        {"role": "assistant", "content": "很棒啊！小朋友敢上台表演说明很自信。"},
+        {"role": "user", "content": "对。不过他同班有个小朋友弹了钢琴，弹得真好。我老婆暗示了好几次说要给儿子报个乐器班。"},
+        {"role": "assistant", "content": "让孩子学个乐器确实不错，对脑力和审美都有帮助。"},
+        {"role": "user", "content": "道理我都懂，就是费用不低啊。最近刚换了个大一点的房子，贷款多了不少。"}
+      ],
+      "metadata": {"timestamp": "2024-06-01T20:00:00", "type": "core", "topic": "children-education"}
+    },
+    {
+      "id": "impl-s09-noise",
+      "messages": [
+        {"role": "user", "content": "今天下雨堵车堵了两小时。"},
+        {"role": "assistant", "content": "雨天通勤确实痛苦。"},
+        {"role": "user", "content": "还好车上有播客可以听。最近在听一个叫《随机波动》的，讲社会观察的，挺有意思。"}
+      ],
+      "metadata": {"timestamp": "2024-06-10T08:00:00", "type": "noise"}
+    },
+    {
+      "id": "impl-s10",
+      "messages": [
+        {"role": "user", "content": "老婆说她想重新回去上班了。她之前为了带孩子辞的，现在孩子上学了有时间了。"},
+        {"role": "assistant", "content": "她之前做什么工作？"},
+        {"role": "user", "content": "她学的是平面设计，以前在广告公司做过三年。不过她说要重新学一下新的软件。"},
+        {"role": "assistant", "content": "三年经验有基础，学新工具会很快的。"},
+        {"role": "user", "content": "我也鼓励她。双份收入压力能小一些。我们这边学区房贷款压力确实不小。"}
+      ],
+      "metadata": {"timestamp": "2024-06-20T19:00:00", "type": "core", "topic": "wife-career"}
+    }
+  ],
+  "questions": [
+    {"id": "impl-q01", "query": "周明的母亲还在世吗？", "expected": "大概率已经去世。他提到'老妈走了之后'，暗示母亲已过世。", "category": "implicit-family", "difficulty": "medium"},
+    {"id": "impl-q02", "query": "周明家有几口人？", "expected": "至少4口人：周明、妻子、儿子(小学一年级)。父亲一度同住但后来回老家了。", "category": "implicit-family", "difficulty": "medium"},
+    {"id": "impl-q03", "query": "周明大概多大年纪？", "expected": "约30岁左右。'从刚毕业就进来干了八年'，本科毕业约22岁+8年=30岁。", "category": "implicit-career", "difficulty": "hard"},
+    {"id": "impl-q04", "query": "周明是什么职业？", "expected": "程序员/软件开发。'以前写代码有成就感'、'刷LeetCode'、'线上bug跟测试吵架'。", "category": "implicit-career", "difficulty": "medium"},
+    {"id": "impl-q05", "query": "周明对工作满意吗？", "expected": "不太满意。技术瓶颈、脾气变差、大部分时间在开会。但部门不裁员后有缓解。", "category": "implicit-emotion", "difficulty": "hard"},
+    {"id": "impl-q06", "query": "周明家的经济压力大吗？", "expected": "比较大。换了大房子贷款多、学区房压力大、对乐器班费用犹豫、希望妻子上班赚双份收入。", "category": "implicit-finance", "difficulty": "hard"},
+    {"id": "impl-q07", "query": "周明的健康状况如何？", "expected": "有问题：腰椎间盘突出迹象(久坐)、轻度脂肪肝(应酬喝酒)、缺乏运动。", "category": "implicit-health", "difficulty": "hard"},
+    {"id": "impl-q08", "query": "周明住在哪个城市？", "expected": "大概率上海。妻子是上海人、有迪士尼(上海迪士尼)、提到学区房。", "category": "implicit-location", "difficulty": "hard"},
+    {"id": "impl-q09", "query": "周明和妻子关系好吗？", "expected": "总体不错但有摩擦。妻子说他脾气不好、常放鸽子。但他也配合(接父亲、去运动会)。", "category": "implicit-emotion", "difficulty": "hard"},
+    {"id": "impl-q10", "query": "周明的父亲有什么爱好？", "expected": "书法(毛笔字)。以前就会写，现在报了书法班继续学。", "category": "implicit-family", "difficulty": "easy"},
+    {"id": "impl-q11", "query": "周明为什么脾气变差了？", "expected": "工作上技术瓶颈(从写代码变成开会)、成就感缺失、线上bug压力。", "category": "implicit-emotion", "difficulty": "hard"},
+    {"id": "impl-q12", "query": "周明在职业发展上面临什么困境？", "expected": "技术→管理的转型期。代码写少了、开会多了、缺乏成就感、脾气变差。还没完全是管理岗。", "category": "implicit-career", "difficulty": "hard"},
+    {"id": "impl-q13", "query": "周明对孩子有什么愧疚感？", "expected": "加班多导致陪伴少(没讲故事、以前常放鸽子)。虽然考高分开心但觉得亏欠。", "category": "implicit-emotion", "difficulty": "medium"},
+    {"id": "impl-q14", "query": "周明有车吗？", "expected": "有。他提到'把老家的车开过来了'，通勤时也提到堵车。", "category": "implicit-family", "difficulty": "easy"},
+    {"id": "impl-q15", "query": "周明妻子想让儿子学什么？", "expected": "学乐器。她'暗示了好几次'想报乐器班，是看到别的孩子弹钢琴后触发的。", "category": "implicit-family", "difficulty": "easy"},
+    {"id": "impl-q16", "query": "周明的老婆工作吗？", "expected": "目前全职妈妈，正在计划重返职场。以前做平面设计在广告公司干了三年。", "category": "implicit-family", "difficulty": "medium"},
+    {"id": "impl-q17", "query": "周明听什么播客？", "expected": "听《随机波动》，一个社会观察类播客。在堵车时听的。", "category": "implicit-family", "difficulty": "easy"},
+    {"id": "impl-q18", "query": "周明学历是什么？", "expected": "信息不完整。他没说自己学历，新同事是985本科。从刷LeetCode推断至少本科。注意不能张冠李戴。", "category": "implicit-career", "difficulty": "hard"},
+    {"id": "impl-q19", "query": "周明最近搬家了吗？", "expected": "是的，换了个更大的(学区)房子。20楼是之前的，新家楼层不详。", "category": "implicit-finance", "difficulty": "medium"},
+    {"id": "impl-q20", "query": "周明有没有回老家的念头？", "expected": "有，五一回老家后想过。但妻子是上海人不习惯小城市，孩子上学也走不开，打消了。", "category": "implicit-emotion", "difficulty": "medium"}
+  ]
+}

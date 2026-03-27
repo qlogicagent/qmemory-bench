@@ -1,0 +1,300 @@
+{
+  "name": "locomo",
+  "description": "LoCoMo v2.0 — 对话历史检索评测 (5维度×50题×25会话) — 含 multi-hop/temporal 子集用于层级检索验证",
+  "version": "2.0",
+  "source": "synthetic",
+  "citation": "Maharana et al. 'Evaluating Very Long-Term Conversational Memory of LLM Agents.' ACL 2024. arXiv:2402.17753",
+  "design_notes": "扩展版。核心场景：摄影师林夏6个月工作生活。5维度: recall-accuracy(10)+multi-hop(15)+temporal(10)+logical-reasoning(10)+noise-resist(5)。multi-hop/temporal 维度专门测试层级检索(L2 episode + L3 schema)的增益。",
+
+  "sessions": [
+    {
+      "id": "sess_core_01",
+      "metadata": {"timestamp": "2025-02-05T14:00:00Z", "type": "core", "topic": "work-intro"},
+      "messages": [
+        {"role": "user", "content": "我叫林夏，是自由摄影师，主要拍商业和人像，偶尔拍风光"},
+        {"role": "assistant", "content": "自由摄影师很自由也很辛苦，接活和创作都得自己来。你主要在哪个城市接活？"},
+        {"role": "user", "content": "在成都，偶尔飞北京上海。我用索尼A7R5和A1，最常用的镜头是50 1.2 GM和24-70 2.8 GM2"},
+        {"role": "assistant", "content": "索尼旗舰双机加上GM镜头，配置很专业。50 1.2拍人像确实是利器。"},
+        {"role": "user", "content": "嗯，最近比较忙的是一个本地餐饮品牌「老灶火锅」的全年视觉合同，每季度拍一组"},
+        {"role": "assistant", "content": "全年合同稳定性不错。每季度一组，大概每次拍多少张成品？"},
+        {"role": "user", "content": "每组30-40张精修。报价是一组1.2万，全年四组打包4.5万"},
+        {"role": "assistant", "content": "4.5万全年合同，平均每组1.125万，打包价合理。"}
+      ]
+    },
+    {
+      "id": "sess_core_02",
+      "metadata": {"timestamp": "2025-02-15T10:00:00Z", "type": "core", "topic": "family"},
+      "messages": [
+        {"role": "user", "content": "我妹妹林秋这周末从重庆过来看我，她在一家律所做助理"},
+        {"role": "assistant", "content": "姐妹感情好。重庆到成都高铁也就一个多小时。"},
+        {"role": "user", "content": "对，她准备考法考，最近压力很大，我说带她去宽窄巷子逛逛放松"},
+        {"role": "assistant", "content": "法考确实压力大，换个环境放松很有必要。宽窄巷子周末人会比较多。"},
+        {"role": "user", "content": "我爸妈在绵阳老家，爸是退伍军人现在在社区管物业，妈在一家私立幼儿园当园长"},
+        {"role": "assistant", "content": "绵阳离成都也不远，两边都能照顾到。"}
+      ]
+    },
+    {
+      "id": "sess_core_03",
+      "metadata": {"timestamp": "2025-03-01T16:00:00Z", "type": "core", "topic": "client-project-1"},
+      "messages": [
+        {"role": "user", "content": "接了个新单，成都IFS的一个珠宝品牌「玲珑坊」要拍产品图+模特宣传片"},
+        {"role": "assistant", "content": "珠宝拍摄对光线要求很高。这个项目预算怎么样？"},
+        {"role": "user", "content": "产品图2万，模特宣传2.5万，加后期一共5万。三月底交"},
+        {"role": "assistant", "content": "5万的预算不错。三月底交时间也比较紧，尤其模特安排加后期。"},
+        {"role": "user", "content": "嗯我找了老搭档小柯做灯光，模特找的是上次合作的周瑶"},
+        {"role": "assistant", "content": "有固定搭档效率高。周瑶之前合作过应该磨合好了。"}
+      ]
+    },
+    {
+      "id": "sess_core_04",
+      "metadata": {"timestamp": "2025-03-10T09:00:00Z", "type": "core", "topic": "gear-upgrade"},
+      "messages": [
+        {"role": "user", "content": "在考虑入一个100-400 GM，拍户外用得到"},
+        {"role": "assistant", "content": "100-400 GM是好镜头，但两万多的价格不便宜，拍风光和活动都用得上。"},
+        {"role": "user", "content": "嗯犹豫中，先看看成都二手市场有没有好价。预算一万八以内"},
+        {"role": "assistant", "content": "二手可以找找，一万八差不多能找到成色不错的。"},
+        {"role": "user", "content": "另外A1的手柄GP-V1也想换，快门按键有点不灵了"},
+        {"role": "assistant", "content": "手柄不灵影响拍摄效率，索尼售后也可以看看。"}
+      ]
+    },
+    {
+      "id": "sess_core_05",
+      "metadata": {"timestamp": "2025-03-25T15:00:00Z", "type": "core", "topic": "project-delivery"},
+      "messages": [
+        {"role": "user", "content": "玲珑坊的片子拍完了，产品图客户很满意，宣传片剪了4版才过"},
+        {"role": "assistant", "content": "产品图一次过说明功底好。宣传片多改几版也正常，珠宝品牌要求高。"},
+        {"role": "user", "content": "周瑶表现不错，客户说下半年还想找她。另外小柯被我推荐给了另一个客户"},
+        {"role": "assistant", "content": "建立了好的合作链就会有转介绍。"},
+        {"role": "user", "content": "结款的时候玲珑坊多给了3000说是奖励，总共5.3万"},
+        {"role": "assistant", "content": "客户主动加钱说明认可度很高。5.3万的项目收入不错。"}
+      ]
+    },
+    {
+      "id": "sess_core_06",
+      "metadata": {"timestamp": "2025-04-10T11:00:00Z", "type": "core", "topic": "trip-plan"},
+      "messages": [
+        {"role": "user", "content": "五月想去川西色达+理塘拍藏地风光，自驾。大概五天行程"},
+        {"role": "assistant", "content": "五月川西风光很好。色达和理塘海拔都不低，要注意高反。"},
+        {"role": "user", "content": "打算带A7R5和14 1.4 GM拍星空，再带个70-200做长焦"},
+        {"role": "assistant", "content": "14mm拍星空很好，高原光污染少效果应该很棒。70-200拍远处的经幡寺庙也合适。"},
+        {"role": "user", "content": "我朋友阿坤也想一起，他是做视频的，自带DJI Air3和稳定器"},
+        {"role": "assistant", "content": "有航拍搭配你的照片，出来的素材会很丰富。DJI Air3拍高原也够用。"}
+      ]
+    },
+    {
+      "id": "sess_core_07",
+      "metadata": {"timestamp": "2025-04-20T09:30:00Z", "type": "core", "topic": "studio-expenses"},
+      "messages": [
+        {"role": "user", "content": "工作室的季度支出统计：房租8000/月，水电网1500/月，器材保养约2000/季"},
+        {"role": "assistant", "content": "三个月固定开支约3万，加器材保养3.2万左右。"},
+        {"role": "user", "content": "嗯，Q1收入老灶1.2万+玲珑坊5.3万+零散小单约1.5万=8万。减掉支出盈利还行"},
+        {"role": "assistant", "content": "Q1盈利约4.8万，利润率60%，作为自由职业者很不错了。"},
+        {"role": "user", "content": "今年想多接几个品牌合同提高稳定收入，目标全年35万"},
+        {"role": "assistant", "content": "全年35万需要每季度约8-9万，Q1已经8万了，保持这个节奏可以。"}
+      ]
+    },
+    {
+      "id": "sess_core_08",
+      "metadata": {"timestamp": "2025-05-05T20:00:00Z", "type": "core", "topic": "trip-result"},
+      "messages": [
+        {"role": "user", "content": "从川西回来了！色达的红房子太震撼了，理塘草原也好美"},
+        {"role": "assistant", "content": "色达的红房子确实震撼。拍了多少张？"},
+        {"role": "user", "content": "五天拍了2400张，精选了60张准备出一组作品。星空那张特别满意"},
+        {"role": "assistant", "content": "2400张里选60张，选片率2.5%，质量控制严格。那张星空期待看到。"},
+        {"role": "user", "content": "阿坤拍的航拍也不错，他剪了个3分钟的短片发B站，已经2万播放了"},
+        {"role": "assistant", "content": "航拍加地面拍摄的配合效果应该很好。2万播放量不错。"}
+      ]
+    },
+    {
+      "id": "sess_core_09",
+      "metadata": {"timestamp": "2025-05-20T13:00:00Z", "type": "core", "topic": "new-client"},
+      "messages": [
+        {"role": "user", "content": "通过玲珑坊介绍认识了一个做高端民宿的客户「云隐山房」，在峨眉山脚下"},
+        {"role": "assistant", "content": "珠宝品牌转介绍民宿，说明之前的合作口碑好。"},
+        {"role": "user", "content": "他们想拍一套空间+环境+人文感觉的宣传照，预算3万"},
+        {"role": "assistant", "content": "3万拍民宿宣传照，预算合理。民宿摄影需要氛围感。"},
+        {"role": "user", "content": "打算6月去实地看看，顺便带老灶火锅Q2的活一起推进"},
+        {"role": "assistant", "content": "两个项目合并出差效率高。峨眉山的夏天不热，适合拍摄。"}
+      ]
+    },
+    {
+      "id": "sess_core_10",
+      "metadata": {"timestamp": "2025-06-15T16:00:00Z", "type": "core", "topic": "work-update"},
+      "messages": [
+        {"role": "user", "content": "云隐山房实地走了一圈，环境超好。老板周总人也很好，还请我泡了好茶"},
+        {"role": "assistant", "content": "好的客户关系从第一次见面开始。周总看起来很有诚意。"},
+        {"role": "user", "content": "拍了两天，空间照用14mm广角，环境用70-200拍远山。人文部分还需要再补拍"},
+        {"role": "assistant", "content": "超广角拍空间+长焦拍远山，搭配合理。人文部分可以等有客人入住再拍。"},
+        {"role": "user", "content": "老灶火锅Q2也拍了，夏季新品主题，这次用了很多冰块做道具"},
+        {"role": "assistant", "content": "夏季主题配冰块确实有视觉冲击力。餐饮摄影的道具很重要。"}
+      ]
+    },
+    {
+      "id": "sess_core_11",
+      "metadata": {"timestamp": "2025-06-25T11:00:00Z", "type": "core", "topic": "sister-update"},
+      "messages": [
+        {"role": "user", "content": "我妹林秋法考第一阶段客观题过了！分数360多，压线过的"},
+        {"role": "assistant", "content": "恭喜！客观题过了就成功一大半了。压线也是过。"},
+        {"role": "user", "content": "她现在准备主观题，10月考。我说考完带她去三亚放松"},
+        {"role": "assistant", "content": "有奖励目标动力更足。三亚10月底天气还不错。"},
+        {"role": "user", "content": "爸知道后高兴得很，说要给她报销培训费"},
+        {"role": "assistant", "content": "家人的支持很重要。"}
+      ]
+    },
+    {
+      "id": "sess_core_12",
+      "metadata": {"timestamp": "2025-07-01T10:00:00Z", "type": "core", "topic": "half-year-review"},
+      "messages": [
+        {"role": "user", "content": "半年了做个小结：收入方面老灶2.4万(两季)+玲珑坊5.3万+云隐山房3万+零散小单约4万=14.7万"},
+        {"role": "assistant", "content": "半年14.7万，按这个节奏全年35万目标有可能达到。"},
+        {"role": "user", "content": "设备那个100-400 GM还是没买，成都二手太少了。但入了一个50-100的八羽怪"},
+        {"role": "assistant", "content": "八羽怪50-100拍高倍微距和人像都有独特味道，价格也比GM便宜多了。"},
+        {"role": "user", "content": "下半年主要目标：1) 再签两个品牌全年合同 2) 出一本川西影集 3) 把个人网站做好"},
+        {"role": "assistant", "content": "三个目标都很具体。影集可以用精选的60张川西作品为主。"}
+      ]
+    },
+    {
+      "id": "sess_core_13",
+      "metadata": {"timestamp": "2025-07-15T14:00:00Z", "type": "core", "topic": "gear-decision"},
+      "messages": [
+        {"role": "user", "content": "最终还是在京东买了100-400 GM的全新，1.98万。活动叠了两张券省了1200"},
+        {"role": "assistant", "content": "1.98万减1200，实付1.86万在预算一万八以内。新镜头手感肯定好。"},
+        {"role": "user", "content": "试拍了一下午，400端的解析力确实强。为十月去稻城用"},
+        {"role": "assistant", "content": "400端拍远处雪山效果应该很好。十月稻城秋色也美。"},
+        {"role": "user", "content": "A1那个手柄最后送修了，索尼保修内换了新的，没花钱"},
+        {"role": "assistant", "content": "保修期内换新省了一笔。手柄问题解决了拍摄也顺手。"}
+      ]
+    },
+    {
+      "id": "sess_core_14",
+      "metadata": {"timestamp": "2025-07-30T17:00:00Z", "type": "core", "topic": "new-brand-contract"},
+      "messages": [
+        {"role": "user", "content": "签了第二个全年合同！成都本地的一个精酿啤酒品牌「锦城酿造」"},
+        {"role": "assistant", "content": "恭喜！精酿品牌拍摄应该很有趣。合同条件怎样？"},
+        {"role": "user", "content": "每两个月拍一次产品+场景，全年6组，打包价6万。每组约25张精修"},
+        {"role": "assistant", "content": "6万÷6组=每组1万，尺度合理。精酿的场景拍摄光线和氛围很关键。"},
+        {"role": "user", "content": "他们创始人姓陈，很年轻90后，意识很好要做品牌视觉升级"},
+        {"role": "assistant", "content": "有品牌意识的年轻创始人是好客户，合作空间大。"}
+      ]
+    },
+    {
+      "id": "sess_core_15",
+      "metadata": {"timestamp": "2025-08-10T19:00:00Z", "type": "core", "topic": "personal-website"},
+      "messages": [
+        {"role": "user", "content": "个人网站选了用Squarespace搭，选了Brine模板，域名是linxia.photo"},
+        {"role": "assistant", "content": "Squarespace对摄影师友好，Brine模板排版效果好。linxia.photo域名简洁好记。"},
+        {"role": "user", "content": "先放了川西系列、玲珑坊珠宝和几组人像作品集。后面加老灶和云隐的"},
+        {"role": "assistant", "content": "三个系列涵盖风光+商业+人像，很好地展示能力范围。"},
+        {"role": "user", "content": "每年域名+主机费大概1200左右。值得的"},
+        {"role": "assistant", "content": "1200/年作为获客渠道很划算。"}
+      ]
+    },
+    {"id": "sess_noise_01", "metadata": {"timestamp": "2025-02-08T12:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "朋友阿良也是做摄影的，他主拍婚庆，一场完整跟拍收5000"},
+      {"role": "assistant", "content": "婚庆摄影累但收入稳定。"},
+      {"role": "user", "content": "他用的佳能R5加24-70和70-200三件套"},
+      {"role": "assistant", "content": "佳能R5婚庆足够了。"}
+    ]},
+    {"id": "sess_noise_02", "metadata": {"timestamp": "2025-02-20T15:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "今天去太古里喝咖啡，遇到一个写生的画家"},
+      {"role": "assistant", "content": "太古里确实有文艺氛围。"}
+    ]},
+    {"id": "sess_noise_03", "metadata": {"timestamp": "2025-03-05T10:00:00Z", "type": "noise", "topic": "similar-project"}, "messages": [
+      {"role": "user", "content": "阿良说他也接了个珠宝品牌的单子，在重庆，报价4万"},
+      {"role": "assistant", "content": "珠宝拍摄现在需求挺大的。"},
+      {"role": "user", "content": "他说那个品牌叫「翡翠阁」，比你那个玲珑坊规模小"},
+      {"role": "assistant", "content": "翡翠阁和玲珑坊不是同一家。每个品牌调性不同。"}
+    ]},
+    {"id": "sess_noise_04", "metadata": {"timestamp": "2025-03-15T14:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "成都今天下雨，出不了门"},
+      {"role": "assistant", "content": "成都春天多雨。"}
+    ]},
+    {"id": "sess_noise_05", "metadata": {"timestamp": "2025-04-05T18:00:00Z", "type": "noise", "topic": "gear-confuse"}, "messages": [
+      {"role": "user", "content": "阿坤新买了DJI Air3S，说比他旧的Air3好很多"},
+      {"role": "assistant", "content": "Air3S确实有不少升级。"},
+      {"role": "user", "content": "他也在考虑入索尼A7C2做视频机"},
+      {"role": "assistant", "content": "A7C2确实小巧，适合做视频副机。"}
+    ]},
+    {"id": "sess_noise_06", "metadata": {"timestamp": "2025-04-15T10:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "看了个纪录片讲非洲野生动物摄影的，太震撼了"},
+      {"role": "assistant", "content": "野生动物摄影确实震撼。"}
+    ]},
+    {"id": "sess_noise_07", "metadata": {"timestamp": "2025-05-10T11:00:00Z", "type": "noise", "topic": "similar-trip"}, "messages": [
+      {"role": "user", "content": "阿坤又去了一趟川西，这次去的是九寨沟。他说风景太美了"},
+      {"role": "assistant", "content": "九寨沟确实美。他这次是做视频项目还是个人旅拍？"},
+      {"role": "user", "content": "个人旅拍，不是商业的。拍了1500多张照片"},
+      {"role": "assistant", "content": "1500张不少，可以挑些好的做作品集。"}
+    ]},
+    {"id": "sess_noise_08", "metadata": {"timestamp": "2025-05-25T16:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "今天吃了个成都的串串，太辣了"},
+      {"role": "assistant", "content": "成都串串确实辣。"}
+    ]},
+    {"id": "sess_noise_09", "metadata": {"timestamp": "2025-06-10T09:00:00Z", "type": "noise", "topic": "income-confuse"}, "messages": [
+      {"role": "user", "content": "阿良上半年婚庆拍了20场，收入10万"},
+      {"role": "assistant", "content": "半年20场不少了，平均一周差不多一场。"},
+      {"role": "user", "content": "他还在考虑接商业活，说想转型"},
+      {"role": "assistant", "content": "从婚庆转商业需要不同的作品集。"}
+    ]},
+    {"id": "sess_noise_10", "metadata": {"timestamp": "2025-07-05T15:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "刚看了个帖子说成都摄影工作室月租平均要8500了"},
+      {"role": "assistant", "content": "成都工作室租金确实在涨。"}
+    ]}
+  ],
+
+  "questions": [
+    {"id": "q_ra_01", "query": "林夏的主要拍摄方向是什么？", "expected": "商业摄影和人像，偶尔拍风光", "category": "recall-accuracy", "difficulty": "easy"},
+    {"id": "q_ra_02", "query": "林夏用什么相机？", "expected": "索尼A7R5和A1", "category": "recall-accuracy", "difficulty": "easy"},
+    {"id": "q_ra_03", "query": "老灶火锅全年合同的报价是多少？", "expected": "全年四组打包4.5万，每组1.2万", "category": "recall-accuracy", "difficulty": "standard"},
+    {"id": "q_ra_04", "query": "玲珑坊项目最终收了多少钱？", "expected": "5.3万（原价5万+3000奖励）", "category": "recall-accuracy", "difficulty": "standard"},
+    {"id": "q_ra_05", "query": "林夏的妹妹叫什么名字？在做什么？", "expected": "林秋，在重庆一家律所做助理，正在准备法考", "category": "recall-accuracy", "difficulty": "standard"},
+    {"id": "q_ra_06", "query": "林夏的工作室月租金是多少？", "expected": "8000元/月", "category": "recall-accuracy", "difficulty": "standard"},
+    {"id": "q_ra_07", "query": "川西之行拍了多少张？精选了多少？", "expected": "拍了2400张，精选60张", "category": "recall-accuracy", "difficulty": "standard"},
+    {"id": "q_ra_08", "query": "林夏的个人网站域名是什么？", "expected": "linxia.photo，用Squarespace搭建的Brine模板", "category": "recall-accuracy", "difficulty": "standard"},
+    {"id": "q_ra_09", "query": "100-400 GM最终花了多少钱买的？", "expected": "1.86万（标价1.98万减1200优惠券）", "category": "recall-accuracy", "difficulty": "hard"},
+    {"id": "q_ra_10", "query": "锦城酿造的全年合同条件？", "expected": "每两个月拍一次，全年6组，打包价6万，每组约25张精修", "category": "recall-accuracy", "difficulty": "standard"},
+
+    {"id": "q_mh_01", "query": "玲珑坊的项目从接单到交付经历了什么？", "expected": "3月初接单(产品图+模特宣传)→找灯光小柯+模特周瑶→拍摄→产品图一次过→宣传片改了4版→3月底交付→客户追加3000奖励→总收5.3万", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_02", "query": "林夏的100-400 GM镜头购买决策过程？", "expected": "3月考虑入(拍户外用)→预算1.8万→先看成都二手→半年没找到好价→7月京东活动买全新1.98万减1200=1.86万→试拍满意→为10月稻城准备", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_03", "query": "林秋的法考进展如何？", "expected": "2月压力大来成都放松→6月客观题过了(360多分压线)→10月考主观题→考完姐姐带她去三亚→爸要报销培训费", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_04", "query": "老灶火锅合作的完整时间线？", "expected": "2月签全年合同(4组4.5万)→Q1拍第一组1.2万→6月拍Q2(夏季新品冰块主题)→下半年还有Q3Q4", "category": "multi-hop", "difficulty": "standard"},
+    {"id": "q_mh_05", "query": "云隐山房的项目从哪里来的？进展如何？", "expected": "通过玲珑坊转介绍认识→在峨眉山脚下→5月谈的→预算3万→6月实地拍了两天→用14mm拍空间+70-200拍远山→人文部分待补拍", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_06", "query": "林夏的下半年三个目标分别是什么？各进展如何？", "expected": "1)再签两个品牌合同→已签锦城酿造6万。2)出川西影集→有60张精选。3)做个人网站→已上线linxia.photo", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_07", "query": "林夏的客户网络是怎么建立的？", "expected": "老灶(本地餐饮)→玲珑坊(IFS珠宝)→周瑶模特被客户认可→云隐山房(通过玲珑坊转介绍)→锦城酿造(第二个全年合同)", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_08", "query": "A1手柄GP-V1最终怎么处理的？", "expected": "3月发现快门按键不灵→7月送修→索尼保修内换新→没花钱", "category": "multi-hop", "difficulty": "standard"},
+    {"id": "q_mh_09", "query": "林夏2025年上半年的出行和拍摄地点变化？", "expected": "2月成都本地→3月IFS/成都棚拍→4月计划川西→5月色达理塘自驾→6月峨眉山云隐+成都老灶→7月京东买镜头备稻城", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_10", "query": "林夏的合作伙伴分别是谁？各自的角色和贡献？", "expected": "小柯(灯光老搭档,推荐给了其他客户)、周瑶(人像模特,被玲珑坊指明下半年继续)、阿坤(视频朋友,DJI Air3,B站)。注意：阿良是朋友但不是搭档", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_11", "query": "从收入角度看，林夏各个客户对她的贡献比例如何？", "expected": "半年14.7万：玲珑坊5.3万(36%)>零散4万(27%)>云隐山房3万(20%)>老灶2.4万(16%)。锦城酿造刚签(全年6万)预计成为第二大客户", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_12", "query": "林夏的设备采购/维护决策链是怎样的？", "expected": "从犹豫(3月看100-400)→等二手→买八羽怪过渡→最终7月买全新→A1手柄送修免费换新。整体策略：核心设备不将就，配件灵活处理", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_13", "query": "玲珑坊合作对林夏后续业务产生了什么连锁影响？", "expected": "1)周瑶被客户留用→积累模特资源。2)小柯被推荐→增强搭档网。3)云隐山房通过玲珑坊转介绍→新客3万。整体提升了林夏的行业口碑和客户链路", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_14", "query": "川西之旅对林夏的创作和业务有什么影响？", "expected": "1)精选60张准备影集(下半年目标之一)。2)星空照表现好(用14mm)。3)验证了长焦需求→促成100-400 GM购买决策。4)认识阿坤航拍能力(B站2万播放)", "category": "multi-hop", "difficulty": "hard"},
+    {"id": "q_mh_15", "query": "林夏的全年合同策略是如何演进的？", "expected": "2月签第一个全年合同(老灶4.5万/年)→7月目标再签两个→7月底签第二个(锦城酿造6万/年)→品牌合同从1个扩展到2个。策略：以稳定品牌合同为底+项目制为增量", "category": "multi-hop", "difficulty": "hard"},
+
+    {"id": "q_tp_01", "query": "3月份林夏在忙什么？", "expected": "3月初接玲珑坊珠宝项目(5万)→找小柯做灯光+周瑶模特→3月10日考虑100-400镜头→3月底交片(产品图一次过/宣传片4版)→收款5.3万", "category": "temporal", "difficulty": "hard"},
+    {"id": "q_tp_02", "query": "林夏何时开始考虑买100-400 GM？何时真正买的？中间间隔多久？", "expected": "3月10日开始考虑→先看二手→找不到→7月15日京东买全新。间隔约4个月(3月→7月)", "category": "temporal", "difficulty": "hard"},
+    {"id": "q_tp_03", "query": "林秋的法考客观题是什么时候通过的？主观题什么时候考？", "expected": "6月25日知道客观题过了(360多分压线)。主观题10月考", "category": "temporal", "difficulty": "standard"},
+    {"id": "q_tp_04", "query": "2025年上半年林夏签了几个品牌合同？分别什么时间签的？", "expected": "两个：2月老灶火锅(全年4.5万)、7月底锦城酿造(全年6万)。玲珑坊和云隐山房是项目制不是年合同", "category": "temporal", "difficulty": "hard"},
+    {"id": "q_tp_05", "query": "川西旅拍是几月去的？待了多久？", "expected": "5月去的，五天行程。5月5日左右回来", "category": "temporal", "difficulty": "standard"},
+    {"id": "q_tp_06", "query": "林夏的半年财务总结是什么时候做的？总数是多少？", "expected": "7月1日做的半年总结。收入14.7万：老灶2.4万+玲珑坊5.3万+云隐山房3万+零散4万", "category": "temporal", "difficulty": "standard"},
+    {"id": "q_tp_07", "query": "玲珑坊项目从下单到收款总共历时多久？", "expected": "3月1日接单→3月25日交片→收款5.3万。历时约25天", "category": "temporal", "difficulty": "hard"},
+    {"id": "q_tp_08", "query": "老灶火锅Q2拍的是什么主题？什么时间拍的？", "expected": "6月拍的。夏季新品主题，用了很多冰块做道具", "category": "temporal", "difficulty": "standard"},
+    {"id": "q_tp_09", "query": "云隐山房项目从认识到实地拍摄隔了多久？", "expected": "5月20日通过玲珑坊转介绍认识→6月15日实地拍摄。间隔约1个月", "category": "temporal", "difficulty": "hard"},
+    {"id": "q_tp_10", "query": "网站上线和锦城酿造签约，哪个先发生？", "expected": "锦城酿造签约(7月30日)先于网站上线(8月10日)。两者间隔约10天", "category": "temporal", "difficulty": "hard"},
+
+    {"id": "q_lr_01", "query": "如果林夏整年都按Q1的收入水平，能达到35万目标吗？", "expected": "Q1收入8万×4=32万，差3万。下半年加了锦城酿造(6万)和云隐(3万)，目标很可能达到", "category": "logical-reasoning", "difficulty": "hard"},
+    {"id": "q_lr_02", "query": "林夏买的100-400 GM是新品还是二手？为什么？", "expected": "全新。虽然最初想买二手(预算1.8万)，但成都二手太少找不到，最终京东买全新1.86万(优惠后在预算内)", "category": "logical-reasoning", "difficulty": "standard"},
+    {"id": "q_lr_03", "query": "阿良和林夏都拍珠宝但项目不同，区别是什么？", "expected": "林夏拍的是成都IFS的玲珑坊(5万+3000→5.3万)，阿良拍的是重庆的翡翠阁(4万)。不同城市不同品牌不同价格", "category": "logical-reasoning", "difficulty": "hard"},
+    {"id": "q_lr_04", "query": "林夏工作室一年的固定成本大概多少？", "expected": "房租8000×12=9.6万，水电网1500×12=1.8万，器材保养2000×4=0.8万，网站1200。总计约12.3万", "category": "logical-reasoning", "difficulty": "hard"},
+    {"id": "q_lr_05", "query": "川西之行2400张选60张，和商业项目每组30-40张相比，选片思路有什么不同？", "expected": "川西选片率2.5%(60/2400)远低于商业项目。商业是定量交付(每组30-40张)，风光/创作是精选最佳", "category": "logical-reasoning", "difficulty": "hard"},
+    {"id": "q_lr_06", "query": "阿坤拍了1500张川西照片和林夏拍了2400张有什么区别？", "expected": "林夏去的是色达+理塘(商业+创作目的,五天2400张精选60)。阿坤后来去的九寨沟(个人旅拍非商业,1500张)。不同目的地不同时间不同目的", "category": "logical-reasoning", "difficulty": "hard"},
+    {"id": "q_lr_07", "query": "林夏的半年收入14.7万减去半年固定成本约6万，利润率多少？", "expected": "14.7-6=8.7万利润，利润率约59%。和Q1单算(8-3.2)/8=60%一致", "category": "logical-reasoning", "difficulty": "hard"},
+    {"id": "q_lr_08", "query": "网上说成都工作室月租平均8500，和林夏的8000对比说明什么？", "expected": "林夏8000低于成都平均8500，租金相对便宜。但帖子是噪声数据不一定权威", "category": "logical-reasoning", "difficulty": "standard"},
+    {"id": "q_lr_09", "query": "林夏的器材投资回报率如何判断？", "expected": "核心设备(A7R5+A1+镜头群)支撑了14.7万半年收入。新入100-400耗资1.86万用于稻城创作+可能的商业用途。八羽怪价格便宜。整体器材投资回报高", "category": "logical-reasoning", "difficulty": "hard"},
+    {"id": "q_lr_10", "query": "如果阿良上半年婚庆收入10万但林夏商业收入14.7万，谁的效率更高？", "expected": "阿良20场×5000=10万。林夏少数几个项目=14.7万。林夏客单价高但项目少，阿良走量但单价低。林夏总收入更高", "category": "logical-reasoning", "difficulty": "hard"},
+
+    {"id": "q_nr_01", "query": "林夏自己用的无人机是什么型号？", "expected": "林夏没有无人机。是朋友阿坤有DJI Air3。不应该混淆林夏和阿坤的设备", "category": "noise-resist", "difficulty": "hard"},
+    {"id": "q_nr_02", "query": "阿坤川西之旅去了哪里？拍了多少张？", "expected": "注意区分两次川西旅行：阿坤和林夏一起去的是色达+理塘(林夏拍的2400张)。阿坤后来自己去的九寨沟(1500张)。应回答色达理塘(与林夏同行)或九寨沟(个人旅拍)", "category": "noise-resist", "difficulty": "hard"},
+    {"id": "q_nr_03", "query": "林夏拍的珠宝品牌叫什么？报价多少？", "expected": "玲珑坊，5万(最终5.3万含奖励)。不是阿良拍的翡翠阁(4万)，虽然两个都是珠宝但不同人不同品牌", "category": "noise-resist", "difficulty": "hard"},
+    {"id": "q_nr_04", "query": "成都摄影工作室租金是8000还是8500？", "expected": "林夏工作室月租8000。网上帖子说平均8500是第三方信息。实际数据8000", "category": "noise-resist", "difficulty": "standard"},
+    {"id": "q_nr_05", "query": "阿坤用的是DJI Air3还是Air3S？", "expected": "川西旅行时用的DJI Air3。后来阿坤又新买了Air3S。两个时间点不同的设备", "category": "noise-resist", "difficulty": "hard"}
+  ]
+}

@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "qmemory-bench"
+version = "0.1.0"
+description = "Multi-dimensional benchmark suite for QMemory — LongMemEval-S, LoCoMo, Chinese, Conflict, Profile, Stress"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.11"
+authors = [
+    { name = "QLogicAgent", email = "dev@qlogicagent.com" },
+]
+keywords = ["memory", "benchmark", "ai", "evaluation", "longmemeval"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "qmemory>=0.1.0",
+    "httpx>=0.27",
+    "click>=8.1",
+    "rich>=13.0",
+    "nicegui>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "pyinstaller>=6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/qlogicagent/qmemory-bench"
+Repository = "https://github.com/qlogicagent/qmemory-bench"
+Issues = "https://github.com/qlogicagent/qmemory-bench/issues"
+
+[project.scripts]
+qmemory-bench = "qmemory_bench.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/qmemory_bench"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]

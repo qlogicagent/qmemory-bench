@@ -1,0 +1,217 @@
+{
+  "name": "profile-accuracy",
+  "description": "用户画像提取准确率 v1.0 — 偏好/习惯/事实/时效性（4维度×30题×18会话）",
+  "version": "1.0",
+  "source": "custom",
+  "design_notes": "场景：一位大学教师（孙婷，35岁）的工作和日常生活。核心测试：从杂乱对话中准确提取用户偏好、生活习惯、客观事实，并识别哪些信息是最新的。10条核心+8条噪声。",
+
+  "sessions": [
+    {
+      "id": "sess_core_01",
+      "metadata": {"timestamp": "2025-03-01T09:00:00Z", "type": "core", "topic": "intro"},
+      "messages": [
+        {"role": "user", "content": "我是孙婷，在南京某985大学教英语，副教授，35岁"},
+        {"role": "assistant", "content": "副教授在35岁是不错的成绩。英语系还是外语学院？"},
+        {"role": "user", "content": "外国语学院英语系，主要教大一大二的综合英语和口语课"},
+        {"role": "assistant", "content": "基础课程教学量大，但也很重要。"},
+        {"role": "user", "content": "老公叫方明，在南京一家三甲医院做骨科医生，主治医师"},
+        {"role": "assistant", "content": "大学老师加医生，双向忙碌。"},
+        {"role": "user", "content": "女儿方小雨，6岁，下半年要上小学了"},
+        {"role": "assistant", "content": "幼小衔接是大事。"}
+      ]
+    },
+    {
+      "id": "sess_core_02",
+      "metadata": {"timestamp": "2025-03-10T14:00:00Z", "type": "core", "topic": "food-pref"},
+      "messages": [
+        {"role": "user", "content": "我是无辣不欢的人，特别爱吃鸭血粉丝汤和盐水鸭，南京本地菜"},
+        {"role": "assistant", "content": "鸭血粉丝汤和盐水鸭是南京特色。"},
+        {"role": "user", "content": "但是对海鲜过敏，虾蟹都不行，一吃就起疹子"},
+        {"role": "assistant", "content": "海鲜过敏要注意，外出吃饭记得和服务员说。"},
+        {"role": "user", "content": "最爱的餐厅是学校后门的「金陵老味道」，每周至少去两次"},
+        {"role": "assistant", "content": "学校后门的小店通常实惠又好吃。"},
+        {"role": "user", "content": "老公是淮安人喜欢甜口的菜，我们点菜经常打架"},
+        {"role": "assistant", "content": "甜和辣的口味冲突。一个解决方案是各点各的。"}
+      ]
+    },
+    {
+      "id": "sess_core_03",
+      "metadata": {"timestamp": "2025-03-20T10:00:00Z", "type": "core", "topic": "daily-routine"},
+      "messages": [
+        {"role": "user", "content": "我的日常：6点起床，6:30跑步（学校操场3公里），7:30送女儿上幼儿园"},
+        {"role": "assistant", "content": "早起跑步3公里很好。幼儿园离家远吗？"},
+        {"role": "user", "content": "走路十分钟。上午有课就上课，没课就在办公室写论文或备课"},
+        {"role": "assistant", "content": "教学和科研两手抓。"},
+        {"role": "user", "content": "下午3:30接女儿放学，带她去学校操场玩，然后回家做饭"},
+        {"role": "assistant", "content": "时间安排很规律。"},
+        {"role": "user", "content": "晚上9点女儿睡了以后才有自己的时间，看看书或者追剧到11点"},
+        {"role": "assistant", "content": "9-11点是宝贵的个人时间。"}
+      ]
+    },
+    {
+      "id": "sess_core_04",
+      "metadata": {"timestamp": "2025-04-05T16:00:00Z", "type": "core", "topic": "hobbies"},
+      "messages": [
+        {"role": "user", "content": "我的爱好挺多的：跑步、看英文小说、养花、做手账"},
+        {"role": "assistant", "content": "爱好丰富。做手账是记录生活？"},
+        {"role": "user", "content": "对，每天写手账记录女儿的成长，从她出生到现在6年没断过"},
+        {"role": "assistant", "content": "6年的手账记录太珍贵了。"},
+        {"role": "user", "content": "最近在读的小说是Kazuo Ishiguro的Never Let Me Go"},
+        {"role": "assistant", "content": "石黑一雄的《别让我走》，很好的选择。他的文笔细腻。"},
+        {"role": "user", "content": "阳台上养了十几盆多肉和两盆月季，最喜欢的品种是龙沙宝石"},
+        {"role": "assistant", "content": "龙沙宝石是经典藤本月季，开花确实美。"}
+      ]
+    },
+    {
+      "id": "sess_core_05",
+      "metadata": {"timestamp": "2025-04-20T11:00:00Z", "type": "core", "topic": "research"},
+      "messages": [
+        {"role": "user", "content": "最近在写一篇关于二语习得中语用能力发展的论文，目标发SSCI"},
+        {"role": "assistant", "content": "SSCI是不小的目标。二语习得语用研究方向很好。"},
+        {"role": "user", "content": "数据收集了200个样本，大一到大四各50人，做了一年跟踪"},
+        {"role": "assistant", "content": "纵向研究一年200样本，数据量不错。"},
+        {"role": "user", "content": "合作导师是北京外国语大学的王教授，他在语用方向是权威"},
+        {"role": "assistant", "content": "有权威导师合作增加发表可能性。"},
+        {"role": "user", "content": "投的是Journal of Pragmatics，影响因子2.8"},
+        {"role": "assistant", "content": "Journal of Pragmatics是语用学顶刊，IF 2.8不错。"}
+      ]
+    },
+    {
+      "id": "sess_core_06",
+      "metadata": {"timestamp": "2025-05-10T09:00:00Z", "type": "core", "topic": "daughter"},
+      "messages": [
+        {"role": "user", "content": "给方小雨报了个英语启蒙班和一个舞蹈班"},
+        {"role": "assistant", "content": "英语启蒙利用你的专业优势。舞蹈锻炼体态。"},
+        {"role": "user", "content": "英语班是我自己教的小班课，用的是我编的教材，每周六上午"},
+        {"role": "assistant", "content": "自己的妈妈教英语，小朋友有福了。"},
+        {"role": "user", "content": "舞蹈班学的中国舞，在学校旁边的艺术中心，周日下午"},
+        {"role": "assistant", "content": "中国舞培养气质。周末安排蛮充实的。"},
+        {"role": "user", "content": "她最近痴迷恐龙，房间里全是恐龙玩具，说以后要当古生物学家"},
+        {"role": "assistant", "content": "小朋友的恐龙热是好的求知欲表现。"}
+      ]
+    },
+    {
+      "id": "sess_core_07",
+      "metadata": {"timestamp": "2025-06-01T15:00:00Z", "type": "core", "topic": "travel-plan"},
+      "messages": [
+        {"role": "user", "content": "暑假计划带全家去英国，我在剑桥有个访学交流的机会，两周"},
+        {"role": "assistant", "content": "学术交流加家庭旅行一举两得。"},
+        {"role": "user", "content": "老公请了年假，带小雨在伦敦和牛津玩。我在剑桥做完workshop就汇合"},
+        {"role": "assistant", "content": "分两路再汇合挺合理。小朋友能在英国长见识。"},
+        {"role": "user", "content": "顺便带小雨去自然历史博物馆看恐龙化石，她要是知道了肯定高兴疯"},
+        {"role": "assistant", "content": "伦敦自然历史博物馆的恐龙展馆确实震撼，小朋友会很喜欢。"}
+      ]
+    },
+    {
+      "id": "sess_core_08",
+      "metadata": {"timestamp": "2025-07-15T10:00:00Z", "type": "core", "topic": "routine-change"},
+      "messages": [
+        {"role": "user", "content": "暑假作息变了：不用送孩子上学了，改成7点起床7:30跑步5公里"},
+        {"role": "assistant", "content": "跑步从3公里加到5公里，距离增加了。"},
+        {"role": "user", "content": "每天上午写论文，下午带小雨做英语启蒙或去游泳。她在学蛙泳"},
+        {"role": "assistant", "content": "暑假安排合理。女孩学游泳很好。"},
+        {"role": "user", "content": "晚上不追剧了改看学术文献，在准备9月的开学第一课"},
+        {"role": "assistant", "content": "开学第一课准备充分学生体验也好。"}
+      ]
+    },
+    {
+      "id": "sess_core_09",
+      "metadata": {"timestamp": "2025-08-10T16:00:00Z", "type": "core", "topic": "uk-trip"},
+      "messages": [
+        {"role": "user", "content": "英国回来了！剑桥的workshop收获很大，和王教授一起做了口头报告"},
+        {"role": "assistant", "content": "口头报告在国际会议上展示是很好的学术曝光。"},
+        {"role": "user", "content": "小雨在自然历史博物馆看到恐龙化石确实疯了，拍了好多照片"},
+        {"role": "assistant", "content": "亲眼看到化石对小朋友触动很大。"},
+        {"role": "user", "content": "老公在牛津给小雨买了个剑桥大学的卫衣，尺码买大了，说让她穿到上大学"},
+        {"role": "assistant", "content": "这个寓意好。"}
+      ]
+    },
+    {
+      "id": "sess_core_10",
+      "metadata": {"timestamp": "2025-09-01T08:30:00Z", "type": "core", "topic": "new-semester"},
+      "messages": [
+        {"role": "user", "content": "论文被Journal of Pragmatics接收了！R2一轮修改后接受"},
+        {"role": "assistant", "content": "恭喜！SSCI论文发表是重要的学术成果。"},
+        {"role": "user", "content": "开学了，今年新带了一门研究生课：英语语用学导论"},
+        {"role": "assistant", "content": "研究生课和你的研究方向完全匹配。"},
+        {"role": "user", "content": "小雨正式上小学了！南京外国语学校仙林分校，今天开学典礼"},
+        {"role": "assistant", "content": "南外仙林分校是很好的学校。小雨开启新阶段了。"},
+        {"role": "user", "content": "新学期目标：再发一篇SSCI，申请一个国社科基金"},
+        {"role": "assistant", "content": "论文+基金双管齐下，副教授到教授的必经之路。"}
+      ]
+    },
+
+    {"id": "sess_noise_01", "metadata": {"timestamp": "2025-03-05T12:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "同事张老师最近也在投SSCI，投的是Applied Linguistics"},
+      {"role": "assistant", "content": "Applied Linguistics影响因子更高，竞争也更激烈。"}
+    ]},
+    {"id": "sess_noise_02", "metadata": {"timestamp": "2025-03-25T10:00:00Z", "type": "noise", "topic": "food-confuse"}, "messages": [
+      {"role": "user", "content": "同事李老师超爱吃海鲜，上次请客点了一桌螃蟹"},
+      {"role": "assistant", "content": "秋天吃蟹是好时节。"},
+      {"role": "user", "content": "她还推荐了个日料店说生鱼片特别新鲜"},
+      {"role": "assistant", "content": "新鲜的生鱼片确实好吃。"}
+    ]},
+    {"id": "sess_noise_03", "metadata": {"timestamp": "2025-04-10T15:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "今天带学生做了个课堂演讲练习，有个学生表现特别好"},
+      {"role": "assistant", "content": "鼓励优秀的学生很重要。"}
+    ]},
+    {"id": "sess_noise_04", "metadata": {"timestamp": "2025-05-01T09:00:00Z", "type": "noise", "topic": "plant-confuse"}, "messages": [
+      {"role": "user", "content": "邻居王阿姨送了我一盆蝴蝶兰，但我不太会养"},
+      {"role": "assistant", "content": "蝴蝶兰浇水不能太多，避免积水烂根。"}
+    ]},
+    {"id": "sess_noise_05", "metadata": {"timestamp": "2025-05-20T14:00:00Z", "type": "noise", "topic": "hobby-confuse"}, "messages": [
+      {"role": "user", "content": "闺蜜小周周末去学了油画，说很解压"},
+      {"role": "assistant", "content": "油画确实有治愈效果。"},
+      {"role": "user", "content": "她还在做手帐，和我的风格不同，她是贴纸派"},
+      {"role": "assistant", "content": "手帐有很多风格。"}
+    ]},
+    {"id": "sess_noise_06", "metadata": {"timestamp": "2025-06-20T11:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "期末批卷子批到眼花，120份大二的期末作文"},
+      {"role": "assistant", "content": "120份作文批起来确实辛苦。"}
+    ]},
+    {"id": "sess_noise_07", "metadata": {"timestamp": "2025-07-10T16:00:00Z", "type": "noise", "topic": "routine-confuse"}, "messages": [
+      {"role": "user", "content": "老公最近夜班很多，半夜才回来"},
+      {"role": "assistant", "content": "医生夜班确实辛苦。"}
+    ]},
+    {"id": "sess_noise_08", "metadata": {"timestamp": "2025-08-25T10:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "听说隔壁学院有人评教授破格了，才32岁"},
+      {"role": "assistant", "content": "破格教授确实厉害。"}
+    ]}
+  ],
+
+  "questions": [
+    {"id": "q_pe_01", "query": "孙婷有什么饮食偏好？", "expected": "无辣不欢，爱吃鸭血粉丝汤和盐水鸭（南京本地菜）。最爱的餐厅是学校后门的金陵老味道（每周至少两次）", "category": "preference-extract", "difficulty": "standard"},
+    {"id": "q_pe_02", "query": "孙婷有什么饮食禁忌？", "expected": "海鲜过敏（虾蟹都不行，一吃就起疹子）", "category": "preference-extract", "difficulty": "standard"},
+    {"id": "q_pe_03", "query": "孙婷的阅读偏好是什么？", "expected": "喜欢英文小说，最近在读石黑一雄的Never Let Me Go。晚上也看学术文献", "category": "preference-extract", "difficulty": "standard"},
+    {"id": "q_pe_04", "query": "孙婷的花卉偏好？", "expected": "养多肉和月季（十几盆多肉+两盆月季），最喜欢龙沙宝石（藤本月季）", "category": "preference-extract", "difficulty": "standard"},
+    {"id": "q_pe_05", "query": "孙婷和老公的口味冲突？", "expected": "孙婷爱辣，老公方明是淮安人喜欢甜口，点菜经常打架", "category": "preference-extract", "difficulty": "hard"},
+    {"id": "q_pe_06", "query": "孙婷给女儿选了什么兴趣班？反映什么教育偏好？", "expected": "英语启蒙（自己编教材教）+中国舞=学术+艺术双管齐下，利用自身英语专业优势", "category": "preference-extract", "difficulty": "hard"},
+    {"id": "q_pe_07", "query": "孙婷的学术目标是什么？", "expected": "发SSCI论文（已发1篇Journal of Pragmatics）+申国社科基金→走副教授升教授路线", "category": "preference-extract", "difficulty": "standard"},
+    {"id": "q_pe_08", "query": "如果推荐餐厅给孙婷应该避免什么？", "expected": "避免海鲜餐厅（过敏），可以推荐辣味餐厅或南京本地菜", "category": "preference-extract", "difficulty": "standard"},
+
+    {"id": "q_he_01", "query": "孙婷的晨间运动习惯？", "expected": "每天跑步。学期中6:00起床6:30跑3公里，暑假7:00起床7:30跑5公里", "category": "habit-extract", "difficulty": "hard"},
+    {"id": "q_he_02", "query": "孙婷的接送孩子时间？", "expected": "学期中7:30送幼儿园，下午3:30接放学。暑假不用送。新学期小雨上小学", "category": "habit-extract", "difficulty": "standard"},
+    {"id": "q_he_03", "query": "孙婷晚上的个人时间是什么时候？做什么？", "expected": "9点女儿睡后到11点。学期中看书或追剧，暑假改看学术文献准备课程", "category": "habit-extract", "difficulty": "hard"},
+    {"id": "q_he_04", "query": "孙婷的手账习惯？", "expected": "每天记录女儿成长，从出生到现在（6年没断过）", "category": "habit-extract", "difficulty": "standard"},
+    {"id": "q_he_05", "query": "孙婷每周有哪些固定活动？", "expected": "周一到五：跑步+上课/写论文+接女儿。周六上午：教女儿英语启蒙小班课。周日下午：送女儿去艺术中心学中国舞", "category": "habit-extract", "difficulty": "hard"},
+    {"id": "q_he_06", "query": "孙婷去金陵老味道的频率？", "expected": "每周至少两次", "category": "habit-extract", "difficulty": "easy"},
+    {"id": "q_he_07", "query": "暑假的日程和学期中有什么不同？", "expected": "起床从6:00改7:00，跑步从3km加到5km，不用接送孩子，下午带女儿游泳/英语启蒙，晚上看文献而非追剧", "category": "habit-extract", "difficulty": "hard"},
+
+    {"id": "q_fe_01", "query": "孙婷的职业信息？", "expected": "南京某985大学外国语学院英语系副教授，35岁，教大一大二综合英语和口语，新学期加了研究生语用学导论", "category": "fact-extract", "difficulty": "standard"},
+    {"id": "q_fe_02", "query": "孙婷的家庭成员？", "expected": "老公方明（南京三甲医院骨科主治医师），女儿方小雨（6岁，9月上南外仙林分校小学一年级）", "category": "fact-extract", "difficulty": "standard"},
+    {"id": "q_fe_03", "query": "孙婷的研究方向和成果？", "expected": "二语习得中语用能力发展。200样本纵向1年跟踪，合作导师北外王教授，论文发表在Journal of Pragmatics(IF 2.8)", "category": "fact-extract", "difficulty": "hard"},
+    {"id": "q_fe_04", "query": "方小雨有什么特点？", "expected": "6岁，痴迷恐龙(说要当古生物学家)，在学英语和中国舞，在学蛙泳，上南外仙林分校", "category": "fact-extract", "difficulty": "standard"},
+    {"id": "q_fe_05", "query": "英国之行的收获？", "expected": "剑桥workshop做了口头报告，女儿在自然历史博物馆看恐龙化石很兴奋，老公在牛津买了剑桥卫衣（买大了）", "category": "fact-extract", "difficulty": "standard"},
+    {"id": "q_fe_06", "query": "孙婷家住在哪里？", "expected": "南京，走路十分钟到女儿的幼儿园/学校", "category": "fact-extract", "difficulty": "easy"},
+    {"id": "q_fe_07", "query": "孙婷阳台上养了什么花？", "expected": "十几盆多肉和两盆月季，最喜欢龙沙宝石（藤本月季）。邻居送了一盆蝴蝶兰（不太会养）", "category": "fact-extract", "difficulty": "standard"},
+    {"id": "q_fe_08", "query": "孙婷的论文数据细节？", "expected": "200个样本，大一到大四各50人，纵向跟踪一年", "category": "fact-extract", "difficulty": "standard"},
+
+    {"id": "q_tl_01", "query": "方小雨现在在哪上学？", "expected": "南外仙林分校小学一年级（9月开学）。之前在幼儿园（已毕业）", "category": "timeliness", "difficulty": "standard"},
+    {"id": "q_tl_02", "query": "孙婷现在每天跑多少公里？", "expected": "不确定——学期中3公里，暑假5公里。9月开学后可能回到3公里", "category": "timeliness", "difficulty": "hard"},
+    {"id": "q_tl_03", "query": "孙婷教什么课？", "expected": "最新：大一大二综合英语和口语+新增研究生英语语用学导论（9月起）", "category": "timeliness", "difficulty": "hard"},
+    {"id": "q_tl_04", "query": "孙婷的SSCI论文状态？", "expected": "已接收发表（R2修改后接受）。不再是投稿或审稿中", "category": "timeliness", "difficulty": "standard"},
+    {"id": "q_tl_05", "query": "孙婷晚上是追剧还是看文献？", "expected": "暑假时改成看文献。但9月之后可能恢复追剧也可能继续看文献，取决于当前阶段", "category": "timeliness", "difficulty": "hard"},
+    {"id": "q_tl_06", "query": "孙婷的新学期目标是什么？", "expected": "再发一篇SSCI+申请国社科基金", "category": "timeliness", "difficulty": "standard"},
+    {"id": "q_tl_07", "query": "孙婷在读什么书？", "expected": "最后一次提到在读Never Let Me Go（4月）。之后是否换了新书不确定", "category": "timeliness", "difficulty": "hard"}
+  ]
+}

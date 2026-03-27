@@ -1,0 +1,512 @@
+{
+  "name": "multimodal",
+  "description": "多模态精准检索评测 — 在大量相似数据与长期噪声下，通过抽象/模糊文本精准定位源数据",
+  "version": "2.0",
+  "source": "QMemory Team (custom)",
+  "design_notes": "以动画设计师 2 年工作流为核心场景。12 个核心会话 + 8 个高混淆噪声会话。6 个评测维度：基础回忆、精准检索、抗噪声、抽象查询、时间消歧、跨模态关联。重点测试：(1) 用模糊文本找到精确的源数据；(2) 在大量相似数据中不混淆；(3) 跨时间跨模态的关联能力。",
+  "sessions": [
+    {
+      "id": "sess_xiyouji_v1",
+      "metadata": {"timestamp": "2024-03-10T10:00:00Z", "type": "core", "modality": "image", "project": "西游记动画"},
+      "messages": [
+        {"role": "user", "content": "开始做西游记动画了，先画了孙悟空的角色设计第一版"},
+        {"role": "assistant", "content": "太好了，发来看看吧。"},
+        {"role": "user", "content": "[设计图] 孙悟空角色设计V1：身高比例偏Q版（头身比1:4），穿虎皮裙，金箍棒较短只到腰部高度，配色偏暗（深棕+暗金），面部表情比较凶，眼睛是红色的，背景是简单的白底"},
+        {"role": "assistant", "content": "Q版比例很可爱，不过金箍棒比例可能需要调整，配色偏暗了些。"},
+        {"role": "user", "content": "[设计图] 这是筋斗云的概念图：V1版本是传统白色祥云造型，边缘有金色光晕，云朵偏写实风格"},
+        {"role": "assistant", "content": "写实风筋斗云和Q版人物可能风格不太统一，后面可以再调一下。"}
+      ]
+    },
+    {
+      "id": "sess_xiyouji_v2",
+      "metadata": {"timestamp": "2024-06-15T14:00:00Z", "type": "core", "modality": "image", "project": "西游记动画"},
+      "messages": [
+        {"role": "user", "content": "孙悟空的设计改了第二版，修了好多问题"},
+        {"role": "assistant", "content": "看看改了哪些地方。"},
+        {"role": "user", "content": "[设计图] 孙悟空角色设计V2：改为正常头身比1:6，虎皮裙改成战甲风格，金箍棒加长到与身等高，配色改为明亮暖色（亮金+正红），表情改为自信微笑，眼睛改为金色，增加了披风细节，背景改为淡黄色渐变"},
+        {"role": "assistant", "content": "这版好多了，比例协调了，配色也更有活力，金色眼睛很有神。"},
+        {"role": "user", "content": "[设计图] 筋斗云V2改成了卡通风格，更圆润蓬松，颜色从白色改成了淡粉色渐变，增加了星星点缀和彩虹尾迹"},
+        {"role": "assistant", "content": "卡通风格的筋斗云和人物更搭了，淡粉色很梦幻。"},
+        {"role": "user", "content": "导演说V2整体方向对了，但是希望增加一些中国风元素，比如祥云纹和水墨效果"},
+        {"role": "assistant", "content": "明白，可以在下一版融入这些元素。"}
+      ]
+    },
+    {
+      "id": "sess_xiyouji_v3_final",
+      "metadata": {"timestamp": "2024-09-20T10:00:00Z", "type": "core", "modality": "image", "project": "西游记动画"},
+      "messages": [
+        {"role": "user", "content": "孙悟空最终定稿了！终于过了"},
+        {"role": "assistant", "content": "恭喜！让我看看最终版。"},
+        {"role": "user", "content": "[设计图] 孙悟空最终定稿V3：保持V2的1:6头身比和战甲，在肩甲和腰带上加了祥云纹浮雕，金箍棒改为可伸缩设计（收起状态是耳后的小针），整体增加水墨笔触的描边效果，背景是水墨风的花果山瀑布"},
+        {"role": "assistant", "content": "水墨效果的花果山背景很有意境，祥云纹细节也很精致。"},
+        {"role": "user", "content": "[设计图] 唐僧角色设计定稿：温和书生形象，白色袈裟配金边，手持九环锡杖，戴五佛冠，眉目清秀，背景同样是水墨风格"},
+        {"role": "assistant", "content": "唐僧的温和气质和水墨背景很搭，和孙悟空的风格统一了。"},
+        {"role": "user", "content": "导演特别喜欢这版，说金箍棒可伸缩的设计在后面的动画里会很有表现力"},
+        {"role": "assistant", "content": "确实，变化的道具在动画里会增加很多看点。"}
+      ]
+    },
+    {
+      "id": "sess_xiyouji_scene",
+      "metadata": {"timestamp": "2024-10-05T11:00:00Z", "type": "core", "modality": "image", "project": "西游记动画"},
+      "messages": [
+        {"role": "user", "content": "场景设计也出了一批"},
+        {"role": "assistant", "content": "看看场景怎么样。"},
+        {"role": "user", "content": "[场景设计图] 火焰山场景：以敦煌壁画色调为基础，绛红色的山体上有流动的岩浆纹理，天空是暗橘红色，地面有龟裂效果，远处有芭蕉洞的轮廓"},
+        {"role": "assistant", "content": "敦煌色调是个好选择，和整体的中国风很搭。"},
+        {"role": "user", "content": "[场景设计图] 花果山场景：水帘洞外景，大量的翠绿色植被，瀑布从巨石间倾泻而下，水雾中有彩虹，猴群在树间跳跃。采用了泼墨山水的画法"},
+        {"role": "assistant", "content": "泼墨手法的花果山太美了，和角色设计的水墨风完全一致。"},
+        {"role": "user", "content": "这两个场景参考了我们去敦煌采风时拍的素材"},
+        {"role": "assistant", "content": "实地采风的素材确实能让场景更有生命力。"}
+      ]
+    },
+    {
+      "id": "sess_nezha_design",
+      "metadata": {"timestamp": "2024-07-20T09:00:00Z", "type": "core", "modality": "image", "project": "哪吒动画"},
+      "messages": [
+        {"role": "user", "content": "另一个项目哪吒动画也开始了，先做角色设计"},
+        {"role": "assistant", "content": "好的，发来看看。"},
+        {"role": "user", "content": "[设计图] 哪吒角色设计：叛逆少年形象，黑色烟熏妆，混天绑改为朋克风红色飘带，脚踩风火轮是机械朋克风格带齿轮，乾坤圈改为手环造型，配色以黑红为主"},
+        {"role": "assistant", "content": "朋克风哪吒很有现代感，和传统形象差别很大，很有辨识度。"},
+        {"role": "user", "content": "[设计图] 太乙真人角色设计：胖乎乎的慈祥老人，穿夏威夷花衬衫，戴墨镜，手持iPad（替代仙家法宝），坐在改装的猪上"},
+        {"role": "assistant", "content": "哈哈太乙真人的形象太搞笑了，iPad替代法宝这个创意很好。"},
+        {"role": "user", "content": "这个项目和西游记是同时进行的，但风格完全不一样，哪吒走潮酷路线"},
+        {"role": "assistant", "content": "两个项目分开不同风格是好的，各有特色。"}
+      ]
+    },
+    {
+      "id": "sess_dunhuang_trip1",
+      "metadata": {"timestamp": "2024-05-01T08:00:00Z", "type": "core", "modality": "image", "project": "采风"},
+      "messages": [
+        {"role": "user", "content": "到敦煌了，拍了好多参考素材"},
+        {"role": "assistant", "content": "敦煌的壁画色彩很有参考价值。"},
+        {"role": "user", "content": "[照片] 莫高窟第45窟的菩萨壁画特写，色彩以石绿和朱砂红为主，有明显的矿物颜料颗粒感"},
+        {"role": "assistant", "content": "矿物颜料的质感在动画中可以做为材质参考。"},
+        {"role": "user", "content": "[照片] 鸣沙山/月牙泉全景，日落时分，沙丘呈金色，月牙泉倒映着天光"},
+        {"role": "assistant", "content": "这个光影效果太适合做火焰山的日落场景了。"},
+        {"role": "user", "content": "[照片] 玉门关遗址外景，黄土夯筑的方形城堡残垣，周围是无尽的戈壁，天际线上有骆驼队的剪影"},
+        {"role": "assistant", "content": "玉门关的苍凉感可以用在取经路上的过渡场景。"},
+        {"role": "user", "content": "这次拍的素材主要用于火焰山和取经路上的场景参考，色调和光影参考价值很高"},
+        {"role": "assistant", "content": "确实，这些照片的色彩和光影都能直接指导场景设计。"}
+      ]
+    },
+    {
+      "id": "sess_dunhuang_trip2",
+      "metadata": {"timestamp": "2025-01-10T09:00:00Z", "type": "core", "modality": "image", "project": "采风"},
+      "messages": [
+        {"role": "user", "content": "又去了一次敦煌，补拍一些素材"},
+        {"role": "assistant", "content": "冬天的敦煌感觉又不一样吧。"},
+        {"role": "user", "content": "[照片] 莫高窟第320窟的飞天壁画细节，飘带的动态曲线非常优美，色彩偏冷调（石青+白粉），和上次45窟的暖调完全不同"},
+        {"role": "assistant", "content": "冷暖色调的对比可以用在不同场景的氛围区分上。"},
+        {"role": "user", "content": "[照片] 冬天的鸣沙山，沙丘上覆盖薄雪，呈现银白和浅金的交错，月牙泉结了薄冰"},
+        {"role": "assistant", "content": "雪中鸣沙山太美了，这种调子可以用在寒冰地狱或者雪山场景。"},
+        {"role": "user", "content": "这次主要补拍冷色调的素材，上次五月去的时候光线太暖了，缺少阴冷场景的参考"},
+        {"role": "assistant", "content": "暖冷两套素材配合使用就很全面了。"}
+      ]
+    },
+    {
+      "id": "sess_app_ui_v1",
+      "metadata": {"timestamp": "2024-04-15T15:00:00Z", "type": "core", "modality": "image", "project": "内部工具"},
+      "messages": [
+        {"role": "user", "content": "做了一个动画制作进度管理的内部 App，先看看 V1 的 UI"},
+        {"role": "assistant", "content": "好的，发来看看设计。"},
+        {"role": "user", "content": "[UI截图] App V1：深色主题，左侧是项目列表栏（显示西游记、哪吒等项目），主区域是甘特图式进度条，右侧是任务详情面板。顶部有团队头像行和通知铃铛。整体风格类似Jira"},
+        {"role": "assistant", "content": "Jira风格的布局很实用，甘特图适合动画制作这种多阶段的项目。"},
+        {"role": "user", "content": "组里的同事反映深色主题看久了累，而且甘特图不方便看同一个角色在不同集的进度"},
+        {"role": "assistant", "content": "可以考虑加个浅色主题切换，甘特图可以增加按角色筛选的功能。"}
+      ]
+    },
+    {
+      "id": "sess_app_ui_v2",
+      "metadata": {"timestamp": "2024-08-20T14:00:00Z", "type": "core", "modality": "image", "project": "内部工具"},
+      "messages": [
+        {"role": "user", "content": "App UI 改到第二版了"},
+        {"role": "assistant", "content": "看看改了什么。"},
+        {"role": "user", "content": "[UI截图] App V2：改为浅色主题（白底+蓝灰色调），去掉了甘特图改为看板视图（类似Trello），每个卡片是一个镜头任务，卡片上有缩略图预览，增加了按角色/按集数/按制作阶段三种筛选维度，右下角新增AI助手入口"},
+        {"role": "assistant", "content": "看板视图确实更直观，缩略图预览很实用，能一眼看到画面进度。"},
+        {"role": "user", "content": "大家普遍觉得V2好用多了，但是希望卡片缩略图能支持点击放大预览"},
+        {"role": "assistant", "content": "点击放大是个必要功能，可以加个lightbox效果。"}
+      ]
+    },
+    {
+      "id": "sess_contracts_audio",
+      "metadata": {"timestamp": "2024-05-25T10:00:00Z", "type": "core", "modality": "mixed", "project": "业务"},
+      "messages": [
+        {"role": "user", "content": "帮我记一下这几份合同和会议内容"},
+        {"role": "assistant", "content": "好的，发过来吧。"},
+        {"role": "user", "content": "[文档: 动画外包合同_A公司.pdf] 与杭州A动画公司签订的西游记第5-8集动画外包合同，金额120万，工期2024年6月至2024年12月，分三期付款（30%+40%+30%），质量标准需达到24帧/秒，分辨率4K"},
+        {"role": "assistant", "content": "120万做4集4K动画，单集30万的价格适中。"},
+        {"role": "user", "content": "[文档: 音乐授权合同_B公司.pdf] 与B音乐工作室签订的西游记原创配乐合同，金额35万，包含主题曲1首+背景音乐15首+音效包，授权期限3年独占"},
+        {"role": "assistant", "content": "35万含主题曲和15首背景音乐，性价比挺高的。"},
+        {"role": "user", "content": "[语音转写] 今天和A公司的项目经理老陈开了电话会，他说第5集的原画已经完成80%，预计下周能交初稿，但调色师病了可能延迟一周。第6集还在分镜阶段"},
+        {"role": "assistant", "content": "第5集进度还行，调色延迟一周问题不大。第6集需要关注分镜进度。"},
+        {"role": "user", "content": "[语音转写] 导演组内部评审会录音：导演王明说火焰山场景的色调要参考敦煌五月拍的那批暖色调照片，不要用冬天补拍的冷色调。芭蕉洞内部安排李倩负责，要有洞穴的潮湿感"},
+        {"role": "assistant", "content": "记住了，火焰山用暖色调素材，芭蕉洞由李倩负责，要体现潮湿感。"}
+      ]
+    },
+    {
+      "id": "sess_delivery_ep1",
+      "metadata": {"timestamp": "2024-12-20T16:00:00Z", "type": "core", "modality": "mixed", "project": "西游记动画"},
+      "messages": [
+        {"role": "user", "content": "西游记第一集终于交付了！"},
+        {"role": "assistant", "content": "恭喜！大工程啊。"},
+        {"role": "user", "content": "[成片截图] 第一集开场镜头：花果山全景，清晨薄雾中猴群嬉戏，孙悟空站在水帘洞口的巨石上眺望远方，整个画面是泼墨山水加数字动画的融合风格"},
+        {"role": "assistant", "content": "开场就是花果山全景真的很有气势，水墨风和数字动画融合得很好看。"},
+        {"role": "user", "content": "[文档: 第一集交付发票.pdf] 杭州A公司开具的第一集制作服务费发票，金额30万（首期付款），发票号：ZP2024122001，日期：2024年12月20日"},
+        {"role": "assistant", "content": "30万首期付款已开票，记得留好发票。"},
+        {"role": "user", "content": "[语音转写] 播放了成片给投资人看，投资人张总说很满意，特别喜欢水墨和3D结合的效果，问能不能第二季做三国题材，他追加投资"},
+        {"role": "assistant", "content": "投资人张总反馈很正面，三国题材是个好方向。"}
+      ]
+    },
+    {
+      "id": "sess_storyboard",
+      "metadata": {"timestamp": "2024-11-05T10:00:00Z", "type": "core", "modality": "image", "project": "西游记动画"},
+      "messages": [
+        {"role": "user", "content": "第三集三打白骨精的分镜画好了"},
+        {"role": "assistant", "content": "三打白骨精是经典桥段，分镜一定很有看点。"},
+        {"role": "user", "content": "[分镜稿] 第三集核心场景分镜：白骨精三次变身的对比图——第一次变为村姑（手提竹篮，内藏毒果），第二次变为老妇（拄着龙头拐杖），第三次变为老翁（骑瘦驴，背上有骷髅暗纹）。每次变身孙悟空都用火眼金睛透视，画面分为表象层和真相层"},
+        {"role": "assistant", "content": "表象层和真相层的双层分镜处理很巧妙，火眼金睛的透视效果一定很有表现力。"},
+        {"role": "user", "content": "这段分镜是我画得最满意的部分，每次变身的对比都精心设计过"},
+        {"role": "assistant", "content": "三次递进的设计加上双层呈现，观众一定能感受到紧张感。"}
+      ]
+    },
+
+    {
+      "id": "sess_noise_wukong_game",
+      "metadata": {"timestamp": "2024-08-25T20:00:00Z", "type": "noise", "modality": "image"},
+      "messages": [
+        {"role": "user", "content": "黑神话悟空终于出了，截了几张图"},
+        {"role": "assistant", "content": "游戏画面很震撼吧。"},
+        {"role": "user", "content": "[游戏截图] 黑神话悟空的孙悟空形象：写实暗黑风格，穿黑色锁子甲，金箍棒粗壮如铁柱，面部有疤痕，战斗场景背景是废墟寺庙"},
+        {"role": "assistant", "content": "黑神话的暗黑写实风确实震撼，和动画片的风格完全不同路线。"},
+        {"role": "user", "content": "[游戏截图] 黑神话里的花果山也很壮观，写实风的热带雨林加巨型瀑布"},
+        {"role": "assistant", "content": "写实花果山和你们动画里泼墨风的花果山各有千秋。"}
+      ]
+    },
+    {
+      "id": "sess_noise_sanguo_old",
+      "metadata": {"timestamp": "2023-12-10T14:00:00Z", "type": "noise", "modality": "image"},
+      "messages": [
+        {"role": "user", "content": "翻到了前年做三国项目的一些老图"},
+        {"role": "assistant", "content": "三国项目的设计图吗？"},
+        {"role": "user", "content": "[设计图] 三国项目的关羽角色设计：传统戏曲脸谱风，红脸长髯，青龙偃月刀很夸张地大，穿绿色战袍，整体是国潮插画风格"},
+        {"role": "assistant", "content": "国潮风格的关羽很有特色，和戏曲结合是个好思路。"},
+        {"role": "user", "content": "这个项目后来因为资金问题停了，但设计稿留着以后可能还用"},
+        {"role": "assistant", "content": "设计稿留好，说不定以后有机会重启。"}
+      ]
+    },
+    {
+      "id": "sess_noise_art_class",
+      "metadata": {"timestamp": "2024-04-20T19:00:00Z", "type": "noise", "modality": "image"},
+      "messages": [
+        {"role": "user", "content": "上周末参加了一个水墨人物画的培训班"},
+        {"role": "assistant", "content": "培训班画了什么？"},
+        {"role": "user", "content": "[习作] 水墨培训班作品：用传统水墨画了一个齐天大圣的形象，纯黑白水墨，寥寥几笔勾勒出腾云驾雾的姿态，走的是大写意路线"},
+        {"role": "assistant", "content": "大写意的齐天大圣很有气韵生动的感觉，和工笔的感觉完全不同。"},
+        {"role": "user", "content": "老师说我的笔力不够，线条还需要更果断些"},
+        {"role": "assistant", "content": "水墨画的线条确实需要很多练习，多临帖多练就好了。"}
+      ]
+    },
+    {
+      "id": "sess_noise_friend_dunhuang",
+      "metadata": {"timestamp": "2024-05-05T12:00:00Z", "type": "noise", "modality": "image"},
+      "messages": [
+        {"role": "user", "content": "我同事小刘也去了敦煌，发了几张照片给我"},
+        {"role": "assistant", "content": "你们前后脚去的呀。"},
+        {"role": "user", "content": "[朋友照片] 小刘拍的莫高窟第57窟美人菩萨，角度是正面全身像，和第45窟比色彩更鲜艳，保存更好"},
+        {"role": "assistant", "content": "第57窟确实是保存最好的洞窟之一。"},
+        {"role": "user", "content": "[朋友照片] 小刘在鸣沙山骑骆驼的自拍，正午，光线很硬，沙子发白"},
+        {"role": "assistant", "content": "正午日光太强了，拍素材还是早晚光线更好。"}
+      ]
+    },
+    {
+      "id": "sess_noise_other_app",
+      "metadata": {"timestamp": "2024-09-15T11:00:00Z", "type": "noise", "modality": "image"},
+      "messages": [
+        {"role": "user", "content": "朋友公司做的一个影视制作管理App，参考了解一下"},
+        {"role": "assistant", "content": "同行的产品可以借鉴。"},
+        {"role": "user", "content": "[UI截图] 友商App截图：也是浅色主题看板风格，但用的是时间轴横向排列而非卡片，每个任务节点是圆形气泡，支持拖拽调整工期"},
+        {"role": "assistant", "content": "时间轴加气泡的设计挺新颖的，拖拽调整工期在实际使用中应该很方便。"},
+        {"role": "user", "content": "他们的缩略图预览做得比我们好，支持在线播放视频片段"},
+        {"role": "assistant", "content": "在线播放是个好功能，你们V3可以加上。"}
+      ]
+    },
+    {
+      "id": "sess_noise_rent_contract",
+      "metadata": {"timestamp": "2024-06-01T10:00:00Z", "type": "noise", "modality": "document"},
+      "messages": [
+        {"role": "user", "content": "续租了房子，更新一下合同信息"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "[文档: 租房合同.pdf] 北京朝阳区望京SOHO附近，月租金7200元，租期2024年6月至2025年5月，押一付三，房东李杰"},
+        {"role": "assistant", "content": "望京SOHO附近交通方便，7200的价格还可以。"}
+      ]
+    },
+    {
+      "id": "sess_noise_nezha_movie",
+      "metadata": {"timestamp": "2024-07-28T21:00:00Z", "type": "noise", "modality": "mixed"},
+      "messages": [
+        {"role": "user", "content": "今天去看了哪吒之魔童闹海，聊聊观后感"},
+        {"role": "assistant", "content": "看完怎么样？"},
+        {"role": "user", "content": "电影里哪吒的形象和我们项目里设计得差别挺大的，电影是丑萌路线，我们走的朋克路线"},
+        {"role": "assistant", "content": "风格差异化是好事，你们的朋克哪吒辨识度很高。"},
+        {"role": "user", "content": "[电影票照片] 北京五棵松万达IMAX厅，哪吒之魔童闹海，2024年7月28日19:30场"},
+        {"role": "assistant", "content": "IMAX厅看动画效果确实好。"}
+      ]
+    },
+    {
+      "id": "sess_noise_daily",
+      "metadata": {"timestamp": "2024-11-20T12:00:00Z", "type": "noise", "modality": "text"},
+      "messages": [
+        {"role": "user", "content": "中午吃了一碗兰州拉面，大份的，加了个鸡蛋"},
+        {"role": "assistant", "content": "兰州拉面经济实惠。"},
+        {"role": "user", "content": "下午3点要开周会，准备一下上周的工作汇报"},
+        {"role": "assistant", "content": "需要我帮你整理汇报要点吗？"},
+        {"role": "user", "content": "不用了，主要汇报第三集分镜的进度和第一集上色返修的问题"},
+        {"role": "assistant", "content": "好的，上色返修的问题开会时重点说一下。"}
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_basic_1",
+      "query": "我的哪吒动画项目里，哪吒是什么形象风格？",
+      "expected": "叛逆少年形象，朋克风格，黑色烟熏妆，混天绑改为朋克风红色飘带，风火轮是机械朋克风格带齿轮，乾坤圈改为手环，配色黑红为主",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_2",
+      "query": "西游记动画里唐僧的角色设计是什么样的？",
+      "expected": "温和书生形象，白色袈裟配金边，手持九环锡杖，戴五佛冠，眉目清秀，水墨风格背景",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_3",
+      "query": "我做的那个进度管理App第二版有什么改进？",
+      "expected": "改为浅色主题（白底+蓝灰色调），甘特图改为看板视图（类似Trello），每个卡片有缩略图预览，增加了按角色/按集数/按制作阶段三种筛选，新增AI助手入口",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_basic_4",
+      "query": "火焰山的场景设计是什么色调风格？",
+      "expected": "以敦煌壁画色调为基础，绛红色山体有流动岩浆纹理，暗橘红色天空，地面龟裂，远处有芭蕉洞轮廓",
+      "category": "mm-basic-recall",
+      "difficulty": "standard"
+    },
+
+    {
+      "id": "q_precision_1",
+      "query": "我们动画项目里孙悟空和那个游戏里的孙悟空有什么区别？",
+      "expected": "动画项目的孙悟空最终版是水墨中国风，1:6头身比战甲+祥云纹+水墨描边，金色眼睛自信微笑。黑神话悟空是写实暗黑风，黑色锁子甲，面部有疤痕，场景是废墟寺庙",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard",
+      "metadata": {"tests": "区分同名角色在不同上下文中的精确设计差异"}
+    },
+    {
+      "id": "q_precision_2",
+      "query": "我拍的莫高窟壁画照片和同事小刘拍的有什么不同？",
+      "expected": "用户拍的是第45窟菩萨壁画（石绿+朱砂红色调，有矿物颜料颗粒感）和第320窟飞天壁画（石青+白粉冷调）。小刘拍的是第57窟美人菩萨（正面全身像，色彩更鲜艳保存更好）",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard",
+      "metadata": {"tests": "区分不同人拍摄的相似题材照片"}
+    },
+    {
+      "id": "q_precision_3",
+      "query": "孙悟空V1和V3定稿相比，金箍棒的设计有哪些变化？",
+      "expected": "V1金箍棒较短只到腰部高度。V2加长到与身等高。V3改为可伸缩设计，收起状态是耳后的小针。导演特别喜欢V3的可伸缩设计",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard",
+      "metadata": {"tests": "精确追踪同一设计元素在多版本迭代中的变化"}
+    },
+    {
+      "id": "q_precision_4",
+      "query": "我们的App和友商的那个影视管理App有什么不同？",
+      "expected": "我们的App V2是看板视图用卡片展示，有缩略图预览和三种筛选维度。友商App用时间轴横向排列+圆形气泡节点+拖拽调整工期，且支持在线播放视频片段",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard",
+      "metadata": {"tests": "区分两个相似类型产品的具体差异"}
+    },
+    {
+      "id": "q_precision_5",
+      "query": "西游记动画里花果山场景用的是什么画法？成片第一集开头也有花果山吗？",
+      "expected": "场景设计中花果山采用泼墨山水画法，翠绿植被加瀑布。第一集开场就是花果山全景镜头，清晨薄雾中猴群嬉戏，孙悟空站在水帘洞口巨石上，是泼墨山水加数字动画的融合风格",
+      "category": "mm-precision-retrieve",
+      "difficulty": "hard",
+      "metadata": {"tests": "同一场景在设计稿和成片中的对应关系"}
+    },
+
+    {
+      "id": "q_noise_1",
+      "query": "我画的那个齐天大圣是什么风格？",
+      "expected": "培训班的水墨习作：纯黑白水墨大写意风格，寥寥几笔勾勒腾云驾雾姿态。注意这不是动画项目的孙悟空设计。老师评价笔力不够，线条需要更果断",
+      "category": "mm-noise-resist",
+      "difficulty": "hard",
+      "metadata": {"tests": "区分培训班习作vs动画项目设计图，同为猴王形象"}
+    },
+    {
+      "id": "q_noise_2",
+      "query": "哪吒动画项目的角色和电影院看的哪吒有什么不同？",
+      "expected": "项目里的哪吒是朋克风（黑色烟熏妆、朋克飘带、机械风火轮），电影《哪吒之魔童闹海》是丑萌路线。两者风格差异化明显",
+      "category": "mm-noise-resist",
+      "difficulty": "hard",
+      "metadata": {"tests": "区分同名IP在自有项目vs外部电影中的不同形象"}
+    },
+    {
+      "id": "q_noise_3",
+      "query": "我拍的鸣沙山照片是什么样的？不是别人拍的",
+      "expected": "用户拍了两次：第一次2024年5月日落时分，沙丘呈金色，月牙泉倒映天光。第二次2025年1月冬天，沙丘覆薄雪呈银白浅金交错，月牙泉结薄冰。小刘拍的是正午光线很硬沙子发白的版本",
+      "category": "mm-noise-resist",
+      "difficulty": "hard",
+      "metadata": {"tests": "排除朋友拍的相同地点照片，只返回用户自己拍的"}
+    },
+    {
+      "id": "q_noise_4",
+      "query": "关于火焰山的场景，导演说用哪次采风的照片做参考？",
+      "expected": "导演王明在评审会上说火焰山场景要用敦煌五月拍的暖色调照片（第一次采风），明确不要用冬天补拍的冷色调",
+      "category": "mm-noise-resist",
+      "difficulty": "hard",
+      "metadata": {"tests": "需关联导演指令+正确识别两次采风的色调差异"}
+    },
+    {
+      "id": "q_noise_5",
+      "query": "那个被停掉的老项目是什么？和现在的项目什么关系？",
+      "expected": "前年做的三国项目因资金问题停了，关羽角色设计是国潮戏曲脸谱风。这是独立项目和现在的西游记/哪吒无关，但设计稿留着以后可能重启。投资人张总提议第二季做三国题材",
+      "category": "mm-noise-resist",
+      "difficulty": "hard",
+      "metadata": {"tests": "区分已停项目vs进行中项目，关联投资人的三国提议"}
+    },
+
+    {
+      "id": "q_abstract_1",
+      "query": "去年那个猴子动画里主角最新版本的设计图长什么样？",
+      "expected": "孙悟空最终定稿V3：1:6头身比战甲，肩甲腰带有祥云纹浮雕，金箍棒可伸缩（收起是耳后小针），水墨笔触描边，背景是水墨风花果山瀑布",
+      "category": "mm-abstract-query",
+      "difficulty": "hard",
+      "metadata": {"tests": "用'猴子动画'指代西游记，用'最新版本'指代V3定稿"}
+    },
+    {
+      "id": "q_abstract_2",
+      "query": "我在沙漠那边拍的日落照片是哪个场景的参考？",
+      "expected": "2024年5月在鸣沙山拍的日落照片（沙丘呈金色，月牙泉倒映天光），主要用于火焰山和取经路上的场景参考",
+      "category": "mm-abstract-query",
+      "difficulty": "hard",
+      "metadata": {"tests": "用'沙漠''日落照片'间接描述鸣沙山采风照"}
+    },
+    {
+      "id": "q_abstract_3",
+      "query": "那个有反派三次变装的分镜画了什么内容？",
+      "expected": "第三集三打白骨精的核心分镜：白骨精三次变身——村姑（手提竹篮内藏毒果）、老妇（拄龙头拐杖）、老翁（骑瘦驴背上有骷髅暗纹），每次变身分为表象层和真相层通过火眼金睛透视呈现",
+      "category": "mm-abstract-query",
+      "difficulty": "hard",
+      "metadata": {"tests": "用'反派三次变装'指代白骨精三次变身"}
+    },
+    {
+      "id": "q_abstract_4",
+      "query": "那个潮一点的少年英雄动画项目进展如何？",
+      "expected": "哪吒动画项目（朋克风格），目前角色设计已完成（哪吒+太乙真人），和西游记项目同时进行中",
+      "category": "mm-abstract-query",
+      "difficulty": "hard",
+      "metadata": {"tests": "用'潮一点的少年英雄'指代朋克风哪吒"}
+    },
+    {
+      "id": "q_abstract_5",
+      "query": "帮我找找和老师傅有关的那个佛壁画的采风资料",
+      "expected": "可能指两个：2024年5月拍的莫高窟第45窟菩萨壁画（石绿+朱砂红，矿物颜料颗粒感），或2025年1月拍的第320窟飞天壁画（石青+白粉冷调）。两次都是在莫高窟拍摄的壁画参考素材",
+      "category": "mm-abstract-query",
+      "difficulty": "hard",
+      "metadata": {"tests": "用'老师傅''佛壁画'模糊指代莫高窟壁画照片"}
+    },
+
+    {
+      "id": "q_temporal_1",
+      "query": "去年上半年和今年年初分别去敦煌拍了什么不同的素材？",
+      "expected": "2024年5月（去年上半年）拍的是暖色调素材：第45窟菩萨壁画、鸣沙山日落金色沙丘、玉门关遗址。2025年1月（今年年初）拍的是冷色调补充素材：第320窟飞天壁画冷调、冬天鸣沙山覆雪银白色",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard",
+      "metadata": {"tests": "区分两次敦煌采风的不同时间和色调目的"}
+    },
+    {
+      "id": "q_temporal_2",
+      "query": "孙悟空的设计从最初到定稿，配色是怎么一步步变化的？",
+      "expected": "V1（2024年3月）：深棕+暗金配色偏暗。V2（2024年6月）：改为亮金+正红明亮暖色。V3（2024年9月）：保持V2暖色基调，增加水墨笔触描边和祥云纹浮雕。三版配色从暗到明再到融合水墨",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard",
+      "metadata": {"tests": "按时间线追踪同一角色的设计迭代"}
+    },
+    {
+      "id": "q_temporal_3",
+      "query": "那个App的UI经历了几个版本？各自什么时候做的，分别用了什么主题风格？",
+      "expected": "两个版本。V1（2024年4月）：深色主题Jira风格甘特图。V2（2024年8月）：浅色主题Trello风看板视图。V2改进了：浅色主题、缩略图预览、三种筛选维度、AI助手入口",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard",
+      "metadata": {"tests": "按时间线追踪产品UI的迭代历史"}
+    },
+    {
+      "id": "q_temporal_4",
+      "query": "从开始到交付第一集一共花了多长时间？中间有哪些关键节点？",
+      "expected": "2024年3月开始设计到2024年12月交付，约9个月。关键节点：3月V1角色设计→5月敦煌采风→6月V2设计+外包合同→7月哪吒项目并行启动→9月V3定稿→10月场景设计→11月第三集分镜→12月第一集交付",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard",
+      "metadata": {"tests": "跨多个会话整合完整时间线"}
+    },
+
+    {
+      "id": "q_cross_1",
+      "query": "和杭州那家外包公司合作的情况整体怎么样？涉及哪些文件和沟通？",
+      "expected": "杭州A动画公司：签了西游记5-8集外包合同120万，24帧4K标准。项目经理老陈反馈第5集原画完成80%但调色师病了延迟一周，第6集在分镜阶段。第一集交付时开了30万首期发票（ZP2024122001）",
+      "category": "mm-cross-ref",
+      "difficulty": "hard",
+      "metadata": {"tests": "整合合同文档+语音沟通+发票，构建完整合作关系"}
+    },
+    {
+      "id": "q_cross_2",
+      "query": "敦煌采风的素材具体被用在了哪些地方？",
+      "expected": "火焰山场景以敦煌壁画色调为基础（导演指定用五月暖色调），花果山场景也在采风后确定了泼墨山水风格。玉门关素材用于取经路过渡场景参考。冬天第二次采风的冷色调补充了阴冷场景素材",
+      "category": "mm-cross-ref",
+      "difficulty": "hard",
+      "metadata": {"tests": "将采风照片与场景设计+导演指令进行跨会话关联"}
+    },
+    {
+      "id": "q_cross_3",
+      "query": "投资人对项目有什么反馈？后续可能有什么计划？",
+      "expected": "投资人张总看了第一集成片很满意，特别喜欢水墨和3D结合的效果，问能不能第二季做三国题材并追加投资。之前三国项目因资金停了但设计稿有保留",
+      "category": "mm-cross-ref",
+      "difficulty": "hard",
+      "metadata": {"tests": "关联投资人反馈+已停三国项目，推理可能的项目延续"}
+    },
+    {
+      "id": "q_cross_4",
+      "query": "芭蕉洞场景是谁负责的？导演对材质有什么要求？在哪个场景设计图里和火焰山一起出现的？",
+      "expected": "芭蕉洞由李倩负责，导演要求有洞穴的潮湿感。火焰山场景设计图远处有芭蕉洞的轮廓。这两个信息分别来自评审会语音记录和场景设计图",
+      "category": "mm-cross-ref",
+      "difficulty": "hard",
+      "metadata": {"tests": "将语音会议指令与场景设计图进行跨模态关联"}
+    },
+
+    {
+      "id": "q_basic_5",
+      "query": "唐僧的定稿设计长什么样？整体是什么风格？",
+      "expected": "温和书生形象，白色袈裟配金边，手持九环锡杖，戴五佛冠，眉目清秀，水墨风格背景。与孙悟空V3定稿同一时期完成（2024年9月），风格统一",
+      "category": "mm-basic-recall",
+      "difficulty": "standard",
+      "metadata": {"tests": "从角色定稿会话中直接提取唐僧描述"}
+    },
+    {
+      "id": "q_temporal_5",
+      "query": "筋斗云的设计改了几版？每一版的造型和颜色是什么？",
+      "expected": "两版。V1（2024年3月）：传统白色祥云造型，边缘金色光晕，写实风格。V2（2024年6月）：卡通风格，更圆润蓬松，颜色从白色改为淡粉色渐变，增加星星点缀和彩虹尾迹",
+      "category": "mm-temporal-disambig",
+      "difficulty": "hard",
+      "metadata": {"tests": "追踪道具在不同版本间的视觉变化"}
+    },
+    {
+      "id": "q_cross_5",
+      "query": "项目里有多少个不同的角色需要设计？分别是谁负责的？哪些已经定稿了？",
+      "expected": "至少5个角色：孙悟空（用户自己设计，V3已定稿）、唐僧（已定稿）、哪吒（并行项目启动设计）。场景由具体负责人分工：芭蕉洞李倩、火焰山导演指定暖色调。外包A公司负责5-8集原画",
+      "category": "mm-cross-ref",
+      "difficulty": "hard",
+      "metadata": {"tests": "跨所有会话整合人员分工与项目进度全貌"}
+    }
+  ]
+}

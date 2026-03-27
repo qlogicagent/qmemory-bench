@@ -1,0 +1,4749 @@
+{
+  "name": "longmemeval-s",
+  "description": "LongMemEval-S v2.0 standard — 六维度×150题×125会话（10核心+115噪声）",
+  "version": "2.0",
+  "source": "synthetic — inspired by LongMemEval (arXiv:2410.10813)",
+  "citation": "Di Wu et al. 'LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory.' arXiv:2410.10813, 2024.",
+  "design_notes": "5x expansion: 100+ noise sessions simulate real data accumulation over 1 year. 40 work-noise (replicating similar roles/companies), 20 hobby-noise (similar outdoor activities), 10 family-noise (similar family situations in same city), 30 daily chitchat.",
+  "sessions": [
+    {
+      "id": "sess_work_v1",
+      "metadata": {
+        "timestamp": "2025-02-10T14:00:00Z",
+        "type": "core",
+        "topic": "work-tencent"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我在腾讯做了三年后端开发，主要做微服务架构"
+        },
+        {
+          "role": "assistant",
+          "content": "三年微服务经验很扎实。你主要用什么技术栈？"
+        },
+        {
+          "role": "user",
+          "content": "Java为主，用Spring Cloud全家桶，也写一些Go的中间件"
+        },
+        {
+          "role": "assistant",
+          "content": "Java+Go的组合在后端开发中很常见。"
+        },
+        {
+          "role": "user",
+          "content": "我的直属leader叫张伟，他是P9，我是P7"
+        },
+        {
+          "role": "assistant",
+          "content": "P7在腾讯已经是中级工程师了，继续加油。"
+        },
+        {
+          "role": "user",
+          "content": "我们团队在深圳南山科技园的腾讯大厦办公"
+        },
+        {
+          "role": "assistant",
+          "content": "南山科技园那边互联网公司很集中。"
+        },
+        {
+          "role": "user",
+          "content": "最近团队在做一个支付网关重构项目，代号Phoenix"
+        },
+        {
+          "role": "assistant",
+          "content": "Phoenix这个代号不错，涅槃重生的意思。项目周期多长？"
+        },
+        {
+          "role": "user",
+          "content": "计划三个月，Q2上线，预算大概200万"
+        },
+        {
+          "role": "assistant",
+          "content": "三个月200万的项目规模不小，做好规划很重要。"
+        }
+      ]
+    },
+    {
+      "id": "sess_hobby_v1",
+      "metadata": {
+        "timestamp": "2025-03-08T10:00:00Z",
+        "type": "core",
+        "topic": "hobby"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我周末一般都去爬山，最喜欢深圳的梧桐山"
+        },
+        {
+          "role": "assistant",
+          "content": "梧桐山是深圳最高的山，景色不错。"
+        },
+        {
+          "role": "user",
+          "content": "上周攀了大梧桐主峰，海拔943米，用了3个半小时"
+        },
+        {
+          "role": "assistant",
+          "content": "3个半小时登顶943米不错，体力很好。"
+        },
+        {
+          "role": "user",
+          "content": "我还喜欢打羽毛球，每周三晚上固定在南山体育馆打"
+        },
+        {
+          "role": "assistant",
+          "content": "固定时间运动是好习惯。"
+        },
+        {
+          "role": "user",
+          "content": "下个月想去四姑娘山试试，二峰5276米，要提前练体能"
+        },
+        {
+          "role": "assistant",
+          "content": "海拔5276米需要注意高反，建议提前做高原适应训练。"
+        },
+        {
+          "role": "user",
+          "content": "对，我已经报名了一个户外俱乐部叫'深圳野行者'，五月出发"
+        },
+        {
+          "role": "assistant",
+          "content": "有俱乐部组织更安全。五月天气也比较适合。"
+        }
+      ]
+    },
+    {
+      "id": "sess_family",
+      "metadata": {
+        "timestamp": "2025-04-20T16:00:00Z",
+        "type": "core",
+        "topic": "family"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我爸今年58了，在老家湖南长沙开了个小餐馆"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙的餐饮业确实很发达。"
+        },
+        {
+          "role": "user",
+          "content": "我妈退休了，以前是中学语文老师，现在帮我爸打理餐馆"
+        },
+        {
+          "role": "assistant",
+          "content": "退休后还能帮忙也是互相有个照应。"
+        },
+        {
+          "role": "user",
+          "content": "我媳妇叫陈晓雪，在腾讯做产品经理，P7"
+        },
+        {
+          "role": "assistant",
+          "content": "你们都在腾讯工作，挺方便的。"
+        },
+        {
+          "role": "user",
+          "content": "我们去年刚买了南山的房子，120平，月供一万五"
+        },
+        {
+          "role": "assistant",
+          "content": "南山区的房价确实不低，120平的月供一万五在深圳算合理。"
+        },
+        {
+          "role": "user",
+          "content": "儿子叫刘小明，三岁了，在上幼儿园中班"
+        },
+        {
+          "role": "assistant",
+          "content": "三岁上中班挺好的，幼儿园在家附近吗？"
+        },
+        {
+          "role": "user",
+          "content": "就在小区对面的金苹果幼儿园，走路五分钟"
+        },
+        {
+          "role": "assistant",
+          "content": "这么近上学很方便。"
+        }
+      ]
+    },
+    {
+      "id": "sess_work_v2_promotion",
+      "metadata": {
+        "timestamp": "2025-06-15T09:00:00Z",
+        "type": "core",
+        "topic": "work-promotion"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "告诉你个好消息！我上周晋升P8了！"
+        },
+        {
+          "role": "assistant",
+          "content": "恭喜晋升P8！这是一个很重要的里程碑。"
+        },
+        {
+          "role": "user",
+          "content": "Phoenix项目提前两周上线了，TPS从2000提到了8000，leader在评审会上特别表扬了我"
+        },
+        {
+          "role": "assistant",
+          "content": "提前交付而且性能提升4倍，确实值得表扬。P8涨薪了吧？"
+        },
+        {
+          "role": "user",
+          "content": "涨了，年包从60万到了85万"
+        },
+        {
+          "role": "assistant",
+          "content": "涨了25万，涨幅不错。"
+        },
+        {
+          "role": "user",
+          "content": "张伟说准备让我带一个5人小团队，做新的Gateway项目"
+        },
+        {
+          "role": "assistant",
+          "content": "从个人贡献者到团队负责人是很大的角色转变，加油。"
+        }
+      ]
+    },
+    {
+      "id": "sess_travel",
+      "metadata": {
+        "timestamp": "2025-05-18T20:00:00Z",
+        "type": "core",
+        "topic": "travel"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "四姑娘山回来了！二峰登顶成功！"
+        },
+        {
+          "role": "assistant",
+          "content": "恭喜登顶5276米！感觉怎么样？"
+        },
+        {
+          "role": "user",
+          "content": "4500米以上开始有点头疼但靠意志力坚持住了，日出的时候到达峰顶，真的太震撼了"
+        },
+        {
+          "role": "assistant",
+          "content": "能看到日出太值了。高反能扛住说明体能准备不错。"
+        },
+        {
+          "role": "user",
+          "content": "队里有个叫老王的大哥，52岁了还能爬五千多米，佩服"
+        },
+        {
+          "role": "assistant",
+          "content": "52岁登顶5276米确实厉害。"
+        },
+        {
+          "role": "user",
+          "content": "下一个目标是国庆去哈巴雪山，海拔5396米"
+        },
+        {
+          "role": "assistant",
+          "content": "哈巴雪山难度更大一些，要做好充分准备。"
+        }
+      ]
+    },
+    {
+      "id": "sess_work_v3_jobchange",
+      "metadata": {
+        "timestamp": "2025-09-01T14:00:00Z",
+        "type": "core",
+        "topic": "work-jobchange"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我下周要从腾讯离职了，要去字节跳动"
+        },
+        {
+          "role": "assistant",
+          "content": "这是个很大的决定，是什么让你决定跳槽的？"
+        },
+        {
+          "role": "user",
+          "content": "字节给我开了P2-3（相当于腾讯P9），base翻了快一倍，年包150万"
+        },
+        {
+          "role": "assistant",
+          "content": "翻倍的年包确实很有吸引力。字节的技术栈和腾讯差异大吗？"
+        },
+        {
+          "role": "user",
+          "content": "他们主要用Go和Python，Java用得少，正好我Go也会"
+        },
+        {
+          "role": "assistant",
+          "content": "Go是字节的主要语言，你有Go经验很好。"
+        },
+        {
+          "role": "user",
+          "content": "新岗位在北京，字节方舟大厦，做推荐系统基础架构"
+        },
+        {
+          "role": "assistant",
+          "content": "从深圳搬到北京变化还挺大的。家里怎么安排？"
+        },
+        {
+          "role": "user",
+          "content": "媳妇先留在深圳，等她那边也调到北京再说，先两地跑"
+        },
+        {
+          "role": "assistant",
+          "content": "两地跑确实辛苦，希望能早日团聚。"
+        },
+        {
+          "role": "user",
+          "content": "我新leader叫赵磊，2-4级别，据说技术很强，是Go语言社区的知名贡献者"
+        },
+        {
+          "role": "assistant",
+          "content": "有技术大牛带应该能学到很多。"
+        }
+      ]
+    },
+    {
+      "id": "sess_hobby_v2_update",
+      "metadata": {
+        "timestamp": "2025-10-10T18:00:00Z",
+        "type": "core",
+        "topic": "hobby-update"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "哈巴雪山也登顶了！5396米！"
+        },
+        {
+          "role": "assistant",
+          "content": "又一座雪山拿下了，厉害！"
+        },
+        {
+          "role": "user",
+          "content": "到了北京后发现这边周末可以去百花山、灵山，海拔两千多还行"
+        },
+        {
+          "role": "assistant",
+          "content": "北京周边的山虽不高但也有特色。"
+        },
+        {
+          "role": "user",
+          "content": "羽毛球也换了地方，现在每周四晚上在朝阳体育馆打"
+        },
+        {
+          "role": "assistant",
+          "content": "换了城市习惯也要调整，保持运动是好的。"
+        },
+        {
+          "role": "user",
+          "content": "新认识了一个球友叫李明，他是字节做前端的，我们现在经常双打"
+        },
+        {
+          "role": "assistant",
+          "content": "有固定搭档打球更有动力。"
+        }
+      ]
+    },
+    {
+      "id": "sess_work_v4_bytedance",
+      "metadata": {
+        "timestamp": "2025-11-20T10:00:00Z",
+        "type": "core",
+        "topic": "work-bytedance"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "在字节两个多月了，感觉节奏确实比腾讯快很多"
+        },
+        {
+          "role": "assistant",
+          "content": "字节的快节奏是出名的。适应得怎么样？"
+        },
+        {
+          "role": "user",
+          "content": "技术栈已经全面切到Go了，Java已经不怎么写了"
+        },
+        {
+          "role": "assistant",
+          "content": "全栈切换也是一种成长。"
+        },
+        {
+          "role": "user",
+          "content": "我负责的推荐引擎项目代号叫Falcon，目标是把推荐延迟从50ms降到20ms"
+        },
+        {
+          "role": "assistant",
+          "content": "50ms到20ms是个很有挑战的优化目标。"
+        },
+        {
+          "role": "user",
+          "content": "团队有12个人，比腾讯的5人团队大多了"
+        },
+        {
+          "role": "assistant",
+          "content": "12人团队管理上会更复杂一些。"
+        },
+        {
+          "role": "user",
+          "content": "赵磊说如果Falcon做好了，明年可以评2-4+，接近2-5了"
+        },
+        {
+          "role": "assistant",
+          "content": "字节2-5相当于很高的级别了，加油！"
+        }
+      ]
+    },
+    {
+      "id": "sess_family_v2",
+      "metadata": {
+        "timestamp": "2025-12-25T09:00:00Z",
+        "type": "core",
+        "topic": "family-update"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "圣诞节带老婆儿子回长沙看爸妈了"
+        },
+        {
+          "role": "assistant",
+          "content": "一家人团聚挺好的。"
+        },
+        {
+          "role": "user",
+          "content": "我爸的餐馆今年生意特别好，打算明年开第二家分店"
+        },
+        {
+          "role": "assistant",
+          "content": "生意好是好事，扩张要控制好节奏。"
+        },
+        {
+          "role": "user",
+          "content": "小明已经四岁了，转到了深圳另一个幼儿园叫启明星，大班了"
+        },
+        {
+          "role": "assistant",
+          "content": "大班就开始准备幼小衔接了。"
+        },
+        {
+          "role": "user",
+          "content": "媳妇说她明年三月可能调到字节北京，总算能在一起了"
+        },
+        {
+          "role": "assistant",
+          "content": "太好了，一家人终于能团聚了。"
+        },
+        {
+          "role": "user",
+          "content": "等她来了准备在朝阳看套房子，预算五百万左右"
+        },
+        {
+          "role": "assistant",
+          "content": "朝阳500万应该能找到不错的二居室。"
+        }
+      ]
+    },
+    {
+      "id": "sess_yearend",
+      "metadata": {
+        "timestamp": "2026-01-05T14:00:00Z",
+        "type": "core",
+        "topic": "yearend-summary"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "2025年过得真快，回顾一下这一年变化太大了"
+        },
+        {
+          "role": "assistant",
+          "content": "确实，从腾讯到字节，从深圳到北京，变化很大。"
+        },
+        {
+          "role": "user",
+          "content": "今年爬了四姑娘山和哈巴雪山两座五千米以上的山，明年目标是去尼泊尔走EBC"
+        },
+        {
+          "role": "assistant",
+          "content": "EBC是很多登山者的朝圣之路。"
+        },
+        {
+          "role": "user",
+          "content": "工作上Falcon项目第一阶段已经把延迟从50ms降到了28ms，还差8ms"
+        },
+        {
+          "role": "assistant",
+          "content": "已经优化了44%，剩下的8ms可能是最难的部分。"
+        },
+        {
+          "role": "user",
+          "content": "新年愿望：Falcon做完、全家搬到北京、EBC走一趟"
+        },
+        {
+          "role": "assistant",
+          "content": "三个目标都很具体可执行，希望明年都能实现。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_similar_1",
+      "metadata": {
+        "timestamp": "2025-01-20T11:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老赵在阿里做后端，也是做Java微服务的"
+        },
+        {
+          "role": "assistant",
+          "content": "阿里Java用得多，他在杭州还是北京？"
+        },
+        {
+          "role": "user",
+          "content": "在杭州西溪园区，P7，leader叫王磊，他们团队做支付系统"
+        },
+        {
+          "role": "assistant",
+          "content": "阿里的支付系统规模很大。"
+        },
+        {
+          "role": "user",
+          "content": "他今年准备跳到美团去，美团给了L8"
+        },
+        {
+          "role": "assistant",
+          "content": "从阿里到美团也是不错的选择。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_similar_2",
+      "metadata": {
+        "timestamp": "2025-03-15T16:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看到新闻说字节今年在招很多Go开发，薪资很高"
+        },
+        {
+          "role": "assistant",
+          "content": "字节一直在扩张，尤其是基础架构团队。"
+        },
+        {
+          "role": "user",
+          "content": "我同事老李说他收到了字节的offer，年包120万"
+        },
+        {
+          "role": "assistant",
+          "content": "120万年包在字节算什么级别？"
+        },
+        {
+          "role": "user",
+          "content": "据说是2-2级别，做推荐系统的"
+        },
+        {
+          "role": "assistant",
+          "content": "推荐系统是字节的核心业务。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_similar",
+      "metadata": {
+        "timestamp": "2025-04-05T09:00:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我表弟周末喜欢徒步，他上个月去了武功山"
+        },
+        {
+          "role": "assistant",
+          "content": "武功山草甸很美，海拔多少？"
+        },
+        {
+          "role": "user",
+          "content": "1918米，他说风景很好，就是人太多了"
+        },
+        {
+          "role": "assistant",
+          "content": "武功山确实是网红山，节假日人很多。"
+        },
+        {
+          "role": "user",
+          "content": "他计划暑假去稻城亚丁，最高点5958米"
+        },
+        {
+          "role": "assistant",
+          "content": "亚丁的牛奶海很值得一看。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_similar",
+      "metadata": {
+        "timestamp": "2025-05-01T14:00:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事老陈家也在长沙，他爸开了个早餐店"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙的早餐店生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在华为做测试，两个人异地，一个深圳一个东莞"
+        },
+        {
+          "role": "assistant",
+          "content": "深圳到东莞虽然不远但天天跑也辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家闺女今年6岁了，在上小学一年级"
+        },
+        {
+          "role": "assistant",
+          "content": "小学一年级也该适应了。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_salary_confuse",
+      "metadata": {
+        "timestamp": "2025-07-20T10:00:00Z",
+        "type": "noise",
+        "topic": "salary-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看到脉脉上有人晒腾讯P8的薪资，说年包90万"
+        },
+        {
+          "role": "assistant",
+          "content": "腾讯P8的年包确实差不多这个范围。"
+        },
+        {
+          "role": "user",
+          "content": "也有人说字节2-3能到130万，不同部门差别很大"
+        },
+        {
+          "role": "assistant",
+          "content": "确实，核心业务部门薪资更高一些。"
+        },
+        {
+          "role": "user",
+          "content": "我觉得薪资还是看个人能力，有的P7也能拿80万"
+        },
+        {
+          "role": "assistant",
+          "content": "确实，绩效好的话薪资可以谈到更高。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_mountain_confuse",
+      "metadata": {
+        "timestamp": "2025-09-15T18:00:00Z",
+        "type": "noise",
+        "topic": "mountain-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看了个纪录片讲珠峰攀登的，1996年山难太惨了"
+        },
+        {
+          "role": "assistant",
+          "content": "1996年珠峰山难确实是登山史上的悲剧。"
+        },
+        {
+          "role": "user",
+          "content": "海拔8000米以上叫死亡区，人的判断力会严重下降"
+        },
+        {
+          "role": "assistant",
+          "content": "极端高海拔对人体的影响确实很大。"
+        },
+        {
+          "role": "user",
+          "content": "不过现在商业登珠峰的人越来越多了，听说要60万"
+        },
+        {
+          "role": "assistant",
+          "content": "商业登珠峰价格确实不菲。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_project_confuse",
+      "metadata": {
+        "timestamp": "2025-10-25T11:00:00Z",
+        "type": "noise",
+        "topic": "project-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看到GitHub上一个开源项目叫Falcon，做LLM推理优化的"
+        },
+        {
+          "role": "assistant",
+          "content": "Falcon这个名字在技术圈确实很常见。"
+        },
+        {
+          "role": "user",
+          "content": "他们的方案是用CUDA kernel优化，延迟能降到15ms"
+        },
+        {
+          "role": "assistant",
+          "content": "CUDA级别的优化确实能达到很低的延迟。"
+        },
+        {
+          "role": "user",
+          "content": "不过他们是做LLM推理的，和推荐系统的Falcon不一样"
+        },
+        {
+          "role": "assistant",
+          "content": "名字相同但领域完全不同。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_1",
+      "metadata": {
+        "timestamp": "2025-01-15T09:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天北京降温了，零下十二度，出门差点冻死"
+        },
+        {
+          "role": "assistant",
+          "content": "北京冬天确实冷，记得多穿点。"
+        },
+        {
+          "role": "user",
+          "content": "中午吃了个黄焖鸡米饭，一般般"
+        },
+        {
+          "role": "assistant",
+          "content": "下次换个口味试试？"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_2",
+      "metadata": {
+        "timestamp": "2025-02-25T20:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "昨晚看了一部电影，流浪地球3，特效太炸了"
+        },
+        {
+          "role": "assistant",
+          "content": "流浪地球系列确实特效越来越好。"
+        },
+        {
+          "role": "user",
+          "content": "我更喜欢悬疑片，比如消失的她那类"
+        },
+        {
+          "role": "assistant",
+          "content": "悬疑片确实很刺激，节奏紧凑。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_3",
+      "metadata": {
+        "timestamp": "2025-06-02T19:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "618买了个机械键盘，HHKB Professional Classic"
+        },
+        {
+          "role": "assistant",
+          "content": "HHKB的手感很独特，有人爱有人不习惯。"
+        },
+        {
+          "role": "user",
+          "content": "还买了双跑鞋，准备开始跑步了"
+        },
+        {
+          "role": "assistant",
+          "content": "跑步入门很简单，坚持最重要。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_4",
+      "metadata": {
+        "timestamp": "2025-07-10T08:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "上周末去了个密室逃脱，恐怖主题的"
+        },
+        {
+          "role": "assistant",
+          "content": "恐怖密室很刺激，几个人去的？"
+        },
+        {
+          "role": "user",
+          "content": "四个人，一个小时通关了，算快的"
+        },
+        {
+          "role": "assistant",
+          "content": "一小时通关确实不错。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_5",
+      "metadata": {
+        "timestamp": "2025-08-05T14:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "天气太热了，40度，不想出门"
+        },
+        {
+          "role": "assistant",
+          "content": "40度确实太热了，注意防暑。"
+        },
+        {
+          "role": "user",
+          "content": "在家看了一天B站，刷了好多技术视频"
+        },
+        {
+          "role": "assistant",
+          "content": "B站技术区内容还是挺丰富的。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_6",
+      "metadata": {
+        "timestamp": "2025-08-25T16:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "给老婆买了个生日蛋糕，提拉米苏的"
+        },
+        {
+          "role": "assistant",
+          "content": "提拉米苏是很受欢迎的口味。"
+        },
+        {
+          "role": "user",
+          "content": "还订了个花束，99朵红玫瑰"
+        },
+        {
+          "role": "assistant",
+          "content": "很浪漫。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_7",
+      "metadata": {
+        "timestamp": "2025-11-05T20:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "双十一买了台PS5 Pro，准备好好玩一阵"
+        },
+        {
+          "role": "assistant",
+          "content": "PS5 Pro性能确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "最想玩GTA6，不过要明年才出"
+        },
+        {
+          "role": "assistant",
+          "content": "GTA6确实万众期待。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_8",
+      "metadata": {
+        "timestamp": "2025-12-10T12:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "最近特别忙，加了三天班了"
+        },
+        {
+          "role": "assistant",
+          "content": "注意休息。"
+        },
+        {
+          "role": "user",
+          "content": "点了个外卖烤肉饭，饿了么上评分4.8结果一般"
+        },
+        {
+          "role": "assistant",
+          "content": "外卖评分有时候不太准。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_000",
+      "metadata": {
+        "timestamp": "2025-01-05T00:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老赵在阿里做后端开发，P6级别"
+        },
+        {
+          "role": "assistant",
+          "content": "阿里的后端开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Flink，在做实时推荐系统项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在阿里用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包40万，在杭州西溪园区"
+        },
+        {
+          "role": "assistant",
+          "content": "杭州西溪园区的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_001",
+      "metadata": {
+        "timestamp": "2025-01-08T16:48:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小刘在美团做前端开发，L8级别"
+        },
+        {
+          "role": "assistant",
+          "content": "美团的前端开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+gRPC，在做数据中台项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在美团用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包45万，在北京望京"
+        },
+        {
+          "role": "assistant",
+          "content": "北京望京的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_002",
+      "metadata": {
+        "timestamp": "2025-01-12T09:36:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老陈在百度做全栈工程师，T7级别"
+        },
+        {
+          "role": "assistant",
+          "content": "百度的全栈工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Python+C++，在做营销平台项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在百度用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包50万，在北京科技园"
+        },
+        {
+          "role": "assistant",
+          "content": "北京科技园的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_003",
+      "metadata": {
+        "timestamp": "2025-01-16T02:24:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小张在快手做系统架构师，K2级别"
+        },
+        {
+          "role": "assistant",
+          "content": "快手的系统架构师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Python，在做支付网关项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在快手用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包55万，在北京五道口"
+        },
+        {
+          "role": "assistant",
+          "content": "北京五道口的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_004",
+      "metadata": {
+        "timestamp": "2025-01-19T19:12:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友大李在拼多多做AI工程师，D8级别"
+        },
+        {
+          "role": "assistant",
+          "content": "拼多多的AI工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Kotlin，在做用户增长引擎项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在拼多多用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包60万，在上海长宁"
+        },
+        {
+          "role": "assistant",
+          "content": "上海长宁的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_005",
+      "metadata": {
+        "timestamp": "2025-01-23T12:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友阿杰在网易做数据工程师，资深级别"
+        },
+        {
+          "role": "assistant",
+          "content": "网易的数据工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Netty，在做搜索优化项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在网易用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包65万，在杭州滨江"
+        },
+        {
+          "role": "assistant",
+          "content": "杭州滨江的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_006",
+      "metadata": {
+        "timestamp": "2025-01-27T04:48:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老马在华为做SRE，专家级别"
+        },
+        {
+          "role": "assistant",
+          "content": "华为的SRE岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用C/C++，在做智能客服项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在华为用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包70万，在深圳坂田"
+        },
+        {
+          "role": "assistant",
+          "content": "深圳坂田的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_007",
+      "metadata": {
+        "timestamp": "2025-01-30T21:36:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小王在小红书做测试开发，总监级别"
+        },
+        {
+          "role": "assistant",
+          "content": "小红书的测试开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Python，在做内容审核系统项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在小红书用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包75万，在上海新天地"
+        },
+        {
+          "role": "assistant",
+          "content": "上海新天地的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_008",
+      "metadata": {
+        "timestamp": "2025-02-03T14:24:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老吴在京东做移动开发，高级级别"
+        },
+        {
+          "role": "assistant",
+          "content": "京东的移动开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Spring，在做广告投放平台项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在京东用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包80万，在北京亦庄"
+        },
+        {
+          "role": "assistant",
+          "content": "北京亦庄的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_009",
+      "metadata": {
+        "timestamp": "2025-02-07T07:12:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友阿豪在蚂蚁金服做安全工程师，资深级别"
+        },
+        {
+          "role": "assistant",
+          "content": "蚂蚁金服的安全工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+SOFA，在做物流调度项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在蚂蚁金服用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包85万，在杭州Z空间"
+        },
+        {
+          "role": "assistant",
+          "content": "杭州Z空间的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_010",
+      "metadata": {
+        "timestamp": "2025-02-11T00:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小林在滴滴做后端开发，专家级别"
+        },
+        {
+          "role": "assistant",
+          "content": "滴滴的后端开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Python，在做风控系统项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在滴滴用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包90万，在北京西二旗"
+        },
+        {
+          "role": "assistant",
+          "content": "北京西二旗的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_011",
+      "metadata": {
+        "timestamp": "2025-02-14T16:48:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友大周在B站做前端开发，总监级别"
+        },
+        {
+          "role": "assistant",
+          "content": "B站的前端开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Java，在做直播基础架构项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在B站用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包95万，在上海杨浦"
+        },
+        {
+          "role": "assistant",
+          "content": "上海杨浦的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_012",
+      "metadata": {
+        "timestamp": "2025-02-18T09:36:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老孙在微软亚研做全栈工程师，高级级别"
+        },
+        {
+          "role": "assistant",
+          "content": "微软亚研的全栈工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用C#+TypeScript，在做云原生平台项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在微软亚研用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包100万，在北京丹棱街"
+        },
+        {
+          "role": "assistant",
+          "content": "北京丹棱街的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_013",
+      "metadata": {
+        "timestamp": "2025-02-22T02:24:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小何在字节(飞书)做系统架构师，资深级别"
+        },
+        {
+          "role": "assistant",
+          "content": "字节(飞书)的系统架构师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Rust，在做AI训练框架项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在字节(飞书)用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包105万，在北京海淀"
+        },
+        {
+          "role": "assistant",
+          "content": "北京海淀的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_014",
+      "metadata": {
+        "timestamp": "2025-02-25T19:12:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友阿龙在腾讯(云)做AI工程师，专家级别"
+        },
+        {
+          "role": "assistant",
+          "content": "腾讯(云)的AI工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Java，在做图数据库项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在腾讯(云)用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包110万，在深圳宝安"
+        },
+        {
+          "role": "assistant",
+          "content": "深圳宝安的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_015",
+      "metadata": {
+        "timestamp": "2025-03-01T12:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老邓在OPPO做数据工程师，总监级别"
+        },
+        {
+          "role": "assistant",
+          "content": "OPPO的数据工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Kotlin，在做消息队列项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在OPPO用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包115万，在深圳后海"
+        },
+        {
+          "role": "assistant",
+          "content": "深圳后海的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_016",
+      "metadata": {
+        "timestamp": "2025-03-05T04:48:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小曹在vivo做SRE，高级级别"
+        },
+        {
+          "role": "assistant",
+          "content": "vivo的SRE岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Python，在做API网关项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在vivo用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包120万，在东莞长安"
+        },
+        {
+          "role": "assistant",
+          "content": "东莞长安的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_017",
+      "metadata": {
+        "timestamp": "2025-03-08T21:36:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友大黄在大疆做测试开发，资深级别"
+        },
+        {
+          "role": "assistant",
+          "content": "大疆的测试开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用C++嵌入式，在做低代码平台项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在大疆用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包125万，在深圳南山"
+        },
+        {
+          "role": "assistant",
+          "content": "深圳南山的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_018",
+      "metadata": {
+        "timestamp": "2025-03-12T14:24:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老许在商汤做移动开发，专家级别"
+        },
+        {
+          "role": "assistant",
+          "content": "商汤的移动开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Python+CUDA，在做智能调度项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在商汤用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包130万，在上海徐汇"
+        },
+        {
+          "role": "assistant",
+          "content": "上海徐汇的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_019",
+      "metadata": {
+        "timestamp": "2025-03-16T07:12:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小郑在旷视做安全工程师，总监级别"
+        },
+        {
+          "role": "assistant",
+          "content": "旷视的安全工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Python+C++，在做推荐引擎Falcon项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在旷视用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包135万，在北京海淀"
+        },
+        {
+          "role": "assistant",
+          "content": "北京海淀的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_020",
+      "metadata": {
+        "timestamp": "2025-03-20T00:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老赵在阿里做后端开发，P6级别"
+        },
+        {
+          "role": "assistant",
+          "content": "阿里的后端开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Flink，在做实时推荐系统项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在阿里用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包140万，在杭州西溪园区"
+        },
+        {
+          "role": "assistant",
+          "content": "杭州西溪园区的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_021",
+      "metadata": {
+        "timestamp": "2025-03-23T16:48:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小刘在美团做前端开发，L7级别"
+        },
+        {
+          "role": "assistant",
+          "content": "美团的前端开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+gRPC，在做数据中台项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在美团用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包145万，在北京望京"
+        },
+        {
+          "role": "assistant",
+          "content": "北京望京的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_022",
+      "metadata": {
+        "timestamp": "2025-03-27T09:36:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老陈在百度做全栈工程师，T7级别"
+        },
+        {
+          "role": "assistant",
+          "content": "百度的全栈工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Python+C++，在做营销平台项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在百度用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包150万，在北京科技园"
+        },
+        {
+          "role": "assistant",
+          "content": "北京科技园的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_023",
+      "metadata": {
+        "timestamp": "2025-03-31T02:24:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小张在快手做系统架构师，K3+级别"
+        },
+        {
+          "role": "assistant",
+          "content": "快手的系统架构师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Python，在做支付网关项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在快手用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包155万，在北京五道口"
+        },
+        {
+          "role": "assistant",
+          "content": "北京五道口的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_024",
+      "metadata": {
+        "timestamp": "2025-04-03T19:12:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友大李在拼多多做AI工程师，D7级别"
+        },
+        {
+          "role": "assistant",
+          "content": "拼多多的AI工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Kotlin，在做用户增长引擎项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在拼多多用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包160万，在上海长宁"
+        },
+        {
+          "role": "assistant",
+          "content": "上海长宁的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_025",
+      "metadata": {
+        "timestamp": "2025-04-07T12:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友阿杰在网易做数据工程师，资深级别"
+        },
+        {
+          "role": "assistant",
+          "content": "网易的数据工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Netty，在做搜索优化项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在网易用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包165万，在杭州滨江"
+        },
+        {
+          "role": "assistant",
+          "content": "杭州滨江的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_026",
+      "metadata": {
+        "timestamp": "2025-04-11T04:48:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老马在华为做SRE，专家级别"
+        },
+        {
+          "role": "assistant",
+          "content": "华为的SRE岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用C/C++，在做智能客服项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在华为用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包170万，在深圳坂田"
+        },
+        {
+          "role": "assistant",
+          "content": "深圳坂田的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_027",
+      "metadata": {
+        "timestamp": "2025-04-14T21:36:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小王在小红书做测试开发，总监级别"
+        },
+        {
+          "role": "assistant",
+          "content": "小红书的测试开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Python，在做内容审核系统项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在小红书用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包175万，在上海新天地"
+        },
+        {
+          "role": "assistant",
+          "content": "上海新天地的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_028",
+      "metadata": {
+        "timestamp": "2025-04-18T14:24:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老吴在京东做移动开发，高级级别"
+        },
+        {
+          "role": "assistant",
+          "content": "京东的移动开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Spring，在做广告投放平台项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在京东用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包180万，在北京亦庄"
+        },
+        {
+          "role": "assistant",
+          "content": "北京亦庄的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_029",
+      "metadata": {
+        "timestamp": "2025-04-22T07:12:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友阿豪在蚂蚁金服做安全工程师，资深级别"
+        },
+        {
+          "role": "assistant",
+          "content": "蚂蚁金服的安全工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+SOFA，在做物流调度项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在蚂蚁金服用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包185万，在杭州Z空间"
+        },
+        {
+          "role": "assistant",
+          "content": "杭州Z空间的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_030",
+      "metadata": {
+        "timestamp": "2025-04-26T00:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小林在滴滴做后端开发，专家级别"
+        },
+        {
+          "role": "assistant",
+          "content": "滴滴的后端开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Python，在做风控系统项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在滴滴用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包190万，在北京西二旗"
+        },
+        {
+          "role": "assistant",
+          "content": "北京西二旗的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_031",
+      "metadata": {
+        "timestamp": "2025-04-29T16:48:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友大周在B站做前端开发，总监级别"
+        },
+        {
+          "role": "assistant",
+          "content": "B站的前端开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Java，在做直播基础架构项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在B站用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包195万，在上海杨浦"
+        },
+        {
+          "role": "assistant",
+          "content": "上海杨浦的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_032",
+      "metadata": {
+        "timestamp": "2025-05-03T09:36:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老孙在微软亚研做全栈工程师，高级级别"
+        },
+        {
+          "role": "assistant",
+          "content": "微软亚研的全栈工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用C#+TypeScript，在做云原生平台项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在微软亚研用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包40万，在北京丹棱街"
+        },
+        {
+          "role": "assistant",
+          "content": "北京丹棱街的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_033",
+      "metadata": {
+        "timestamp": "2025-05-07T02:24:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小何在字节(飞书)做系统架构师，资深级别"
+        },
+        {
+          "role": "assistant",
+          "content": "字节(飞书)的系统架构师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Rust，在做AI训练框架项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在字节(飞书)用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包45万，在北京海淀"
+        },
+        {
+          "role": "assistant",
+          "content": "北京海淀的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_034",
+      "metadata": {
+        "timestamp": "2025-05-10T19:12:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友阿龙在腾讯(云)做AI工程师，专家级别"
+        },
+        {
+          "role": "assistant",
+          "content": "腾讯(云)的AI工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Go+Java，在做图数据库项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在腾讯(云)用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包50万，在深圳宝安"
+        },
+        {
+          "role": "assistant",
+          "content": "深圳宝安的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_035",
+      "metadata": {
+        "timestamp": "2025-05-14T12:00:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老邓在OPPO做数据工程师，总监级别"
+        },
+        {
+          "role": "assistant",
+          "content": "OPPO的数据工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Kotlin，在做消息队列项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在OPPO用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包55万，在深圳后海"
+        },
+        {
+          "role": "assistant",
+          "content": "深圳后海的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_036",
+      "metadata": {
+        "timestamp": "2025-05-18T04:48:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小曹在vivo做SRE，高级级别"
+        },
+        {
+          "role": "assistant",
+          "content": "vivo的SRE岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Java+Python，在做API网关项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在vivo用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包60万，在东莞长安"
+        },
+        {
+          "role": "assistant",
+          "content": "东莞长安的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_037",
+      "metadata": {
+        "timestamp": "2025-05-21T21:36:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友大黄在大疆做测试开发，资深级别"
+        },
+        {
+          "role": "assistant",
+          "content": "大疆的测试开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用C++嵌入式，在做低代码平台项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在大疆用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包65万，在深圳南山"
+        },
+        {
+          "role": "assistant",
+          "content": "深圳南山的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_038",
+      "metadata": {
+        "timestamp": "2025-05-25T14:24:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老许在商汤做移动开发，专家级别"
+        },
+        {
+          "role": "assistant",
+          "content": "商汤的移动开发岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Python+CUDA，在做智能调度项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在商汤用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包70万，在上海徐汇"
+        },
+        {
+          "role": "assistant",
+          "content": "上海徐汇的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_work_039",
+      "metadata": {
+        "timestamp": "2025-05-29T07:12:00Z",
+        "type": "noise",
+        "topic": "work-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友小郑在旷视做安全工程师，总监级别"
+        },
+        {
+          "role": "assistant",
+          "content": "旷视的安全工程师岗位需求确实大。"
+        },
+        {
+          "role": "user",
+          "content": "他主要用Python+C++，在做推荐引擎Falcon项目"
+        },
+        {
+          "role": "assistant",
+          "content": "这个技术栈在旷视用得很多。"
+        },
+        {
+          "role": "user",
+          "content": "年包75万，在北京海淀"
+        },
+        {
+          "role": "assistant",
+          "content": "北京海淀的生活成本也不低。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_000",
+      "metadata": {
+        "timestamp": "2025-06-02T00:00:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我表弟上个月去了武功山，海拔1918米"
+        },
+        {
+          "role": "assistant",
+          "content": "武功山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是人太多了"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_001",
+      "metadata": {
+        "timestamp": "2025-06-05T16:48:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我表哥上个月去了稻城亚丁三神山，海拔5958米"
+        },
+        {
+          "role": "assistant",
+          "content": "稻城亚丁三神山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_002",
+      "metadata": {
+        "timestamp": "2025-06-09T09:36:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我大学同学老肖上个月去了玉龙雪山，海拔5596米"
+        },
+        {
+          "role": "assistant",
+          "content": "玉龙雪山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_003",
+      "metadata": {
+        "timestamp": "2025-06-13T02:24:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我邻居老刘上个月去了太白山，海拔3767米"
+        },
+        {
+          "role": "assistant",
+          "content": "太白山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_004",
+      "metadata": {
+        "timestamp": "2025-06-16T19:12:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我球友小杨上个月去了贡嘎山，海拔7553米"
+        },
+        {
+          "role": "assistant",
+          "content": "贡嘎山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_005",
+      "metadata": {
+        "timestamp": "2025-06-20T12:00:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我高中同学阿强上个月去了雀儿山，海拔6168米"
+        },
+        {
+          "role": "assistant",
+          "content": "雀儿山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_006",
+      "metadata": {
+        "timestamp": "2025-06-24T04:48:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我前同事老方上个月去了泰山，海拔1524米"
+        },
+        {
+          "role": "assistant",
+          "content": "泰山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是人太多了"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_007",
+      "metadata": {
+        "timestamp": "2025-06-27T21:36:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我健身教练老胡上个月去了五台山，海拔3058米"
+        },
+        {
+          "role": "assistant",
+          "content": "五台山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_008",
+      "metadata": {
+        "timestamp": "2025-07-01T14:24:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我跑友小谢上个月去了峨眉山，海拔3099米"
+        },
+        {
+          "role": "assistant",
+          "content": "峨眉山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_009",
+      "metadata": {
+        "timestamp": "2025-07-05T07:12:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我驴友大陈上个月去了黄山，海拔1865米"
+        },
+        {
+          "role": "assistant",
+          "content": "黄山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是人太多了"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_010",
+      "metadata": {
+        "timestamp": "2025-07-09T00:00:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我朋友老高上个月去了华山，海拔2155米"
+        },
+        {
+          "role": "assistant",
+          "content": "华山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是人太多了"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_011",
+      "metadata": {
+        "timestamp": "2025-07-12T16:48:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我堂哥上个月去了嵩山，海拔1491米"
+        },
+        {
+          "role": "assistant",
+          "content": "嵩山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是人太多了"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_012",
+      "metadata": {
+        "timestamp": "2025-07-16T09:36:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同学小韩上个月去了武当山，海拔1612米"
+        },
+        {
+          "role": "assistant",
+          "content": "武当山的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是人太多了"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_013",
+      "metadata": {
+        "timestamp": "2025-07-20T02:24:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我前leader上个月去了雪宝顶，海拔5588米"
+        },
+        {
+          "role": "assistant",
+          "content": "雪宝顶的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_014",
+      "metadata": {
+        "timestamp": "2025-07-23T19:12:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我隔壁楼邻居上个月去了贡嘎，海拔7553米"
+        },
+        {
+          "role": "assistant",
+          "content": "贡嘎的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_015",
+      "metadata": {
+        "timestamp": "2025-07-27T12:00:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我表弟上个月去了珠峰大本营线，海拔5364米"
+        },
+        {
+          "role": "assistant",
+          "content": "珠峰大本营线的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_016",
+      "metadata": {
+        "timestamp": "2025-07-31T04:48:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我表哥上个月去了慕士塔格，海拔7546米"
+        },
+        {
+          "role": "assistant",
+          "content": "慕士塔格的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_017",
+      "metadata": {
+        "timestamp": "2025-08-03T21:36:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我大学同学老肖上个月去了岗什卡雪峰，海拔5254米"
+        },
+        {
+          "role": "assistant",
+          "content": "岗什卡雪峰的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_018",
+      "metadata": {
+        "timestamp": "2025-08-07T14:24:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我邻居老刘上个月去了那玛峰，海拔5588米"
+        },
+        {
+          "role": "assistant",
+          "content": "那玛峰的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_hobby_019",
+      "metadata": {
+        "timestamp": "2025-08-11T07:12:00Z",
+        "type": "noise",
+        "topic": "hobby-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我球友小杨上个月去了半脊峰，海拔5430米"
+        },
+        {
+          "role": "assistant",
+          "content": "半脊峰的风景确实不错。"
+        },
+        {
+          "role": "user",
+          "content": "他说体验很好，就是高反有点严重"
+        },
+        {
+          "role": "assistant",
+          "content": "户外活动安全第一。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_000",
+      "metadata": {
+        "timestamp": "2025-08-15T00:00:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事老陈家也在长沙，他爸开了个早餐店"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙早餐店生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在华为做测试，两个人异地"
+        },
+        {
+          "role": "assistant",
+          "content": "异地确实辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家闺女今年6岁了，在上小学一年级"
+        },
+        {
+          "role": "assistant",
+          "content": "孩子成长很快。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_001",
+      "metadata": {
+        "timestamp": "2025-08-18T16:48:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事小冯家也在长沙，他妈开了个服装店"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙服装店生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在字节做HR，两个人异地"
+        },
+        {
+          "role": "assistant",
+          "content": "异地确实辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家儿子今年5岁了，在上幼儿园大班"
+        },
+        {
+          "role": "assistant",
+          "content": "孩子成长很快。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_002",
+      "metadata": {
+        "timestamp": "2025-08-22T09:36:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事大杨家也在长沙，他爸开了个五金店"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙五金店生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在阿里做运营，两个人异地"
+        },
+        {
+          "role": "assistant",
+          "content": "异地确实辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家女儿今年8岁了，在上小学二年级"
+        },
+        {
+          "role": "assistant",
+          "content": "孩子成长很快。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_003",
+      "metadata": {
+        "timestamp": "2025-08-26T02:24:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事老郭家也在长沙，他叔叔开了个修理厂"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙修理厂生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在美团做财务，两个人异地"
+        },
+        {
+          "role": "assistant",
+          "content": "异地确实辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家儿子今年3岁了，在上托班"
+        },
+        {
+          "role": "assistant",
+          "content": "孩子成长很快。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_004",
+      "metadata": {
+        "timestamp": "2025-08-29T19:12:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事小薛家也在长沙，他哥开了个川菜馆"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙川菜馆生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在拼多多做客服，两个人异地"
+        },
+        {
+          "role": "assistant",
+          "content": "异地确实辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家双胞胎今年4岁了，在上中班"
+        },
+        {
+          "role": "assistant",
+          "content": "孩子成长很快。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_005",
+      "metadata": {
+        "timestamp": "2025-09-02T12:00:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事老潘家也在长沙，他爸开了个便利店"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙便利店生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在百度做产品，两个人异地"
+        },
+        {
+          "role": "assistant",
+          "content": "异地确实辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家闺女今年7岁了，在上一年级"
+        },
+        {
+          "role": "assistant",
+          "content": "孩子成长很快。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_006",
+      "metadata": {
+        "timestamp": "2025-09-06T04:48:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事阿超家也在长沙，他妈开了个面包房"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙面包房生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在京东做前端，两个人异地"
+        },
+        {
+          "role": "assistant",
+          "content": "异地确实辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家儿子今年2岁了，在上早教"
+        },
+        {
+          "role": "assistant",
+          "content": "孩子成长很快。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_007",
+      "metadata": {
+        "timestamp": "2025-09-09T21:36:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事小梁家也在长沙，他爸开了个水果摊"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙水果摊生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在快手做运维，两个人异地"
+        },
+        {
+          "role": "assistant",
+          "content": "异地确实辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家女儿今年9岁了，在上三年级"
+        },
+        {
+          "role": "assistant",
+          "content": "孩子成长很快。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_008",
+      "metadata": {
+        "timestamp": "2025-09-13T14:24:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事老严家也在长沙，他姐开了个美容院"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙美容院生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在网易做设计，两个人异地"
+        },
+        {
+          "role": "assistant",
+          "content": "异地确实辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家侄女今年5岁了，在上大班"
+        },
+        {
+          "role": "assistant",
+          "content": "孩子成长很快。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_family_009",
+      "metadata": {
+        "timestamp": "2025-09-17T07:12:00Z",
+        "type": "noise",
+        "topic": "family-confuse"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "我同事大邱家也在长沙，他弟开了个烧烤店"
+        },
+        {
+          "role": "assistant",
+          "content": "长沙烧烤店生意应该不错。"
+        },
+        {
+          "role": "user",
+          "content": "他媳妇在滴滴做后端，两个人异地"
+        },
+        {
+          "role": "assistant",
+          "content": "异地确实辛苦。"
+        },
+        {
+          "role": "user",
+          "content": "他家儿子今年4岁了，在上中班"
+        },
+        {
+          "role": "assistant",
+          "content": "孩子成长很快。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_000",
+      "metadata": {
+        "timestamp": "2025-09-21T00:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天好热啊，不想上班"
+        },
+        {
+          "role": "assistant",
+          "content": "夏天确实难熬，注意防暑。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_001",
+      "metadata": {
+        "timestamp": "2025-09-24T16:48:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "外卖点了个轻食沙拉，减肥中"
+        },
+        {
+          "role": "assistant",
+          "content": "注意营养均衡。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_002",
+      "metadata": {
+        "timestamp": "2025-09-28T09:36:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "双十一剁手了好多东西"
+        },
+        {
+          "role": "assistant",
+          "content": "双十一确实容易冲动消费。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_003",
+      "metadata": {
+        "timestamp": "2025-10-02T02:24:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "昨天看了个综艺好搞笑"
+        },
+        {
+          "role": "assistant",
+          "content": "是什么综艺？"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_004",
+      "metadata": {
+        "timestamp": "2025-10-05T19:12:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "健身房新办了张年卡"
+        },
+        {
+          "role": "assistant",
+          "content": "坚持运动是好事。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_005",
+      "metadata": {
+        "timestamp": "2025-10-09T12:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "周末去了宜家，买了个书架"
+        },
+        {
+          "role": "assistant",
+          "content": "宜家的家具性价比不错。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_006",
+      "metadata": {
+        "timestamp": "2025-10-13T04:48:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "最近在学做饭，试了红烧肉"
+        },
+        {
+          "role": "assistant",
+          "content": "自己做饭健康又省钱。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_007",
+      "metadata": {
+        "timestamp": "2025-10-16T21:36:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "被蚊子咬了好几个包"
+        },
+        {
+          "role": "assistant",
+          "content": "可以用花露水。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_008",
+      "metadata": {
+        "timestamp": "2025-10-20T14:24:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "空调坏了热死了"
+        },
+        {
+          "role": "assistant",
+          "content": "赶紧找物业报修。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_009",
+      "metadata": {
+        "timestamp": "2025-10-24T07:12:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事过生日，AA制请吃饭"
+        },
+        {
+          "role": "assistant",
+          "content": "团队聚餐感情好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_010",
+      "metadata": {
+        "timestamp": "2025-10-28T00:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "新买的耳机降噪效果不错"
+        },
+        {
+          "role": "assistant",
+          "content": "降噪耳机工作时很有用。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_011",
+      "metadata": {
+        "timestamp": "2025-10-31T16:48:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "周末带猫去打疫苗了"
+        },
+        {
+          "role": "assistant",
+          "content": "宠物健康很重要。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_012",
+      "metadata": {
+        "timestamp": "2025-11-04T09:36:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "看了场脱口秀，笑死了"
+        },
+        {
+          "role": "assistant",
+          "content": "现场看脱口秀确实比线上好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_013",
+      "metadata": {
+        "timestamp": "2025-11-08T02:24:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "手机屏幕摔碎了，心疼"
+        },
+        {
+          "role": "assistant",
+          "content": "贴个钢化膜比较好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_014",
+      "metadata": {
+        "timestamp": "2025-11-11T19:12:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天地铁晚点了，上班迟到"
+        },
+        {
+          "role": "assistant",
+          "content": "可以考虑早出门几分钟。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_015",
+      "metadata": {
+        "timestamp": "2025-11-15T12:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事推荐了本书《纳瓦尔宝典》"
+        },
+        {
+          "role": "assistant",
+          "content": "这本书口碑不错。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_016",
+      "metadata": {
+        "timestamp": "2025-11-19T04:48:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "买了个机器人扫地机"
+        },
+        {
+          "role": "assistant",
+          "content": "扫地机解放双手。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_017",
+      "metadata": {
+        "timestamp": "2025-11-22T21:36:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "下雨了没带伞，淋成落汤鸡"
+        },
+        {
+          "role": "assistant",
+          "content": "可以在办公室备一把伞。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_018",
+      "metadata": {
+        "timestamp": "2025-11-26T14:24:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "试驾了小米SU7，感觉不错"
+        },
+        {
+          "role": "assistant",
+          "content": "国产电车进步很大。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_019",
+      "metadata": {
+        "timestamp": "2025-11-30T07:12:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "把Macbook升级到了M4 Pro"
+        },
+        {
+          "role": "assistant",
+          "content": "M4 Pro性能确实强。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_020",
+      "metadata": {
+        "timestamp": "2025-12-04T00:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天的外卖迟了四十分钟，冷了"
+        },
+        {
+          "role": "assistant",
+          "content": "可以给差评。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_021",
+      "metadata": {
+        "timestamp": "2025-12-07T16:48:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "去了个剧本杀，恐怖主题的"
+        },
+        {
+          "role": "assistant",
+          "content": "恐怖主题确实刺激。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_022",
+      "metadata": {
+        "timestamp": "2025-12-11T09:36:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "最近迷上了钓鱼，很解压"
+        },
+        {
+          "role": "assistant",
+          "content": "钓鱼确实修身养性。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_023",
+      "metadata": {
+        "timestamp": "2025-12-15T02:24:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "新配了副眼镜，蔡司镜片"
+        },
+        {
+          "role": "assistant",
+          "content": "蔡司镜片确实清晰。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_024",
+      "metadata": {
+        "timestamp": "2025-12-18T19:12:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天做了个PPT被老板打回来了"
+        },
+        {
+          "role": "assistant",
+          "content": "多改几版就好了。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_025",
+      "metadata": {
+        "timestamp": "2025-12-22T12:00:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "周末去采摘草莓了"
+        },
+        {
+          "role": "assistant",
+          "content": "现在正好是草莓季。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_026",
+      "metadata": {
+        "timestamp": "2025-12-26T04:48:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "同事结婚随了600份子钱"
+        },
+        {
+          "role": "assistant",
+          "content": "现在份子钱确实不便宜。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_027",
+      "metadata": {
+        "timestamp": "2025-12-29T21:36:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "健身练背的时候拉伤了"
+        },
+        {
+          "role": "assistant",
+          "content": "运动要注意热身。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_028",
+      "metadata": {
+        "timestamp": "2026-01-02T14:24:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "买了个投影仪在家看电影"
+        },
+        {
+          "role": "assistant",
+          "content": "投影仪体验确实好。"
+        }
+      ]
+    },
+    {
+      "id": "sess_noise_daily_029",
+      "metadata": {
+        "timestamp": "2026-01-06T07:12:00Z",
+        "type": "noise"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "公司搬了新工位，离窗户近"
+        },
+        {
+          "role": "assistant",
+          "content": "靠窗采光好。"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_ssu_1",
+      "query": "用户在腾讯的时候是什么级别？做什么方向的？",
+      "expected": "P7级别，在腾讯做后端开发三年，主要做微服务架构，技术栈以Java（Spring Cloud全家桶）为主，也写Go中间件。在深圳南山科技园腾讯大厦办公",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_2",
+      "query": "用户在字节跳动做什么？级别和薪资怎么样？",
+      "expected": "在字节跳动做推荐系统基础架构，级别P2-3（相当于腾讯P9），年包150万。工作地点在北京字节方舟大厦。主要用Go和Python",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_3",
+      "query": "用户家人的情况是什么？爸妈做什么的？",
+      "expected": "爸爸58岁（2025年），在湖南长沙开小餐馆，2025年生意好打算开第二家分店。妈妈退休前是中学语文老师，退休后帮丈夫打理餐馆。媳妇叫陈晓雪，腾讯产品经理P7。儿子叫刘小明",
+      "category": "single-session-user",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ssu_4",
+      "query": "用户的房产情况怎么样？",
+      "expected": "在深圳南山有一套120平的房子，月供一万五。到北京后准备在朝阳再买一套，预算五百万左右，等媳妇调到北京后一起看房",
+      "category": "single-session-user",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ssu_5",
+      "query": "用户的直属leader都有谁？现在是谁？",
+      "expected": "在腾讯时直属leader叫张伟，P9级别。跳到字节后新leader叫赵磊，2-4级别，是Go语言社区知名贡献者。两位leader完全不同",
+      "category": "single-session-user",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "跨工作变更区分不同leader，不被噪声中其他公司leader混淆"
+      }
+    },
+    {
+      "id": "q_ssa_1",
+      "query": "助手之前建议过用户做什么准备来适应高海拔攀登？",
+      "expected": "助手建议用户提前做高原适应训练（针对四姑娘山二峰5276米的攀登），因为需要注意高反",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_2",
+      "query": "助手对用户从腾讯跳到字节这件事是怎么回应的？",
+      "expected": "助手询问了跳槽原因，关注了薪资翻倍的吸引力，询问了技术栈差异，关心了从深圳搬到北京的家庭安排（家人暂留深圳先两地跑），表达了关心和鼓励",
+      "category": "single-session-assistant",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ssa_3",
+      "query": "助手对Phoenix项目的评价和反馈是什么？",
+      "expected": "助手评价项目代号Phoenix「涅槃重生」的含义不错，对三个月200万的项目规模表示需要做好规划。后来项目提前交付TPS提升4倍时，助手给予了肯定",
+      "category": "single-session-assistant",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ssa_4",
+      "query": "助手关于Falcon项目目标的最新反馈是什么？",
+      "expected": "助手评价用户Falcon项目第一阶段将延迟从50ms降到28ms已经优化了44%，指出剩下的8ms可能是最难的部分",
+      "category": "single-session-assistant",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分用户工作的Falcon（推荐引擎）和GitHub上的Falcon（LLM推理优化）"
+      }
+    },
+    {
+      "id": "q_ssa_5",
+      "query": "助手对用户从个人贡献者到带团队的转变有什么说法？",
+      "expected": "张伟让用户带5人小团队做新Gateway项目时，助手说「从个人贡献者到团队负责人是很大的角色转变」。到字节后团队扩大到12人，助手说「12人团队管理上会更复杂一些」",
+      "category": "single-session-assistant",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_1",
+      "query": "用户有什么运动爱好？现在的运动习惯和以前有什么不同？",
+      "expected": "爱好爬山和打羽毛球。在深圳时每周三在南山体育馆打羽毛球，周末爬梧桐山。到北京后改为每周四在朝阳体育馆打羽毛球，搭档是字节前端李明。周末爬百花山和灵山",
+      "category": "single-session-preference",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "跨城市变更追踪运动习惯的迁移"
+      }
+    },
+    {
+      "id": "q_pref_2",
+      "query": "用户对娱乐方面有什么偏好？",
+      "expected": "喜欢看悬疑片（如消失的她），看B站技术视频，买了PS5 Pro想玩GTA6",
+      "category": "single-session-preference",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_pref_3",
+      "query": "用户的职业发展偏好是什么？更看重什么？",
+      "expected": "从用户的选择来看：他接受了字节翻倍薪资（年包150万 vs 85万），跳到更高级别（P2-3 vs P8），从管5人到管12人。说明看重薪酬回报和职级提升，愿意为此接受两地分居",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_4",
+      "query": "用户对登山目标的偏好是怎样的？有什么pattern？",
+      "expected": "呈现阶梯式挑战偏好：梧桐山943m→四姑娘山二峰5276m→哈巴雪山5396m→目标EBC。每次登顶后立即设定更高目标。参加了深圳野行者户外俱乐部",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_5",
+      "query": "用户新年愿望是什么？现在进展如何？",
+      "expected": "三个愿望：1.Falcon做完（已从50ms降到28ms，还差8ms到20ms目标） 2.全家搬到北京（媳妇计划2026年3月调到字节北京，准备在朝阳买房预算500万） 3.走EBC路线",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_1",
+      "query": "用户现在在哪家公司？级别多少？",
+      "expected": "现在在字节跳动P2-3（2025年9月跳槽）。之前在腾讯P8（6月晋升，之前P7）。注意：不是同事老李的字节2-2，也不是朋友老赵的阿里P7",
+      "category": "knowledge-update",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分用户自身的工作变更和噪声中他人的"
+      }
+    },
+    {
+      "id": "q_ku_2",
+      "query": "用户现在的薪资是多少？经历过哪些变化？",
+      "expected": "当前年包150万（字节）。变化：腾讯P7时60万→P8涨到85万→字节150万。注意：脉脉看到的P8年包90万、2-3年包130万是他人数据",
+      "category": "knowledge-update",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分用户薪资和噪声中脉脉的薪资信息"
+      }
+    },
+    {
+      "id": "q_ku_3",
+      "query": "用户的技术栈发生了什么变化？",
+      "expected": "在腾讯时主要用Java（Spring Cloud全家桶），也写Go中间件。到字节后全面切到Go和Python，Java已经不怎么写了",
+      "category": "knowledge-update",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ku_4",
+      "query": "用户负责的项目有变化吗？现在做什么项目？",
+      "expected": "腾讯做Phoenix（支付网关重构，已上线TPS 2000→8000）→晋升后带5人做Gateway→字节做Falcon（推荐引擎，目标50ms→20ms，团队12人）。GitHub上的Falcon是LLM推理项目，不同",
+      "category": "knowledge-update",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "追踪三个项目变更链，区分GitHub同名项目"
+      }
+    },
+    {
+      "id": "q_ku_5",
+      "query": "用户的儿子现在情况怎样？上的什么学校？",
+      "expected": "刘小明，2025年底4岁了，上的是深圳启明星幼儿园大班（之前3岁时在金苹果幼儿园中班）。幼儿园换了。注意同事老陈的女儿6岁在读小学，是另一个人",
+      "category": "knowledge-update",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "追踪幼儿园变更+区分他人子女信息"
+      }
+    },
+    {
+      "id": "q_tr_1",
+      "query": "用户是什么时候去四姑娘山的？什么时候登的哈巴雪山？两次间隔多久？",
+      "expected": "2025年5月去四姑娘山二峰（5276米），2025年10月国庆去哈巴雪山（5396米），间隔约5个月",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_2",
+      "query": "用户在腾讯P8只待了多久就跳槽了？",
+      "expected": "2025年6月晋升P8→9月离开去字节，只待了约3个月就跳槽了",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_3",
+      "query": "Phoenix项目从启动到完成用了多久？比原计划快多少？",
+      "expected": "2025年2月提出计划三个月Q2上线，最终提前两周上线。从2月到约5月中旬约2.5个月，比3个月计划快了约两周",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_4",
+      "query": "从用户决定跳槽到全家都到北京，预计总共需要多长时间？",
+      "expected": "2025年9月去字节北京→2026年3月媳妇调北京，约6个月。两地分居半年",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_5",
+      "query": "按时间顺序排列用户2025年的几个重要事件",
+      "expected": "2月腾讯做Phoenix→3月爱好登山→4月家庭→5月四姑娘山+Phoenix上线→6月P8晋升85万→9月跳字节150万→10月哈巴雪山+北京新搭档→11月Falcon项目→12月长沙看爸妈+儿子换幼儿园→1月年终总结",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_1",
+      "query": "用户打羽毛球的习惯从深圳到北京发生了什么变化？",
+      "expected": "深圳时每周三在南山体育馆打，到北京后改为每周四在朝阳体育馆打，搭档是字节前端李明，经常双打",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_2",
+      "query": "综合所有信息，用户的完整登山经历是什么？",
+      "expected": "梧桐山943m（常规活动3.5小时）→四姑娘山二峰5276m（2025.5，4500m以上高反坚持住，日出登顶）→哈巴雪山5396m（2025.10）→下一目标EBC。不含表弟的武功山和稻城亚丁",
+      "category": "multi-session",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "不混入表弟的登山记录"
+      }
+    },
+    {
+      "id": "q_ms_3",
+      "query": "用户和媳妇的工作关系是怎么变化的？",
+      "expected": "最初都在腾讯深圳→用户跳字节北京后两地分居→计划2026年3月媳妇调字节北京→在朝阳看房（500万）",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_4",
+      "query": "用户爸爸的餐馆发展怎样？",
+      "expected": "58岁在长沙开小餐馆，妈妈帮忙打理（2025.4）→年底生意好打算明年开第二家分店（2025.12）。注意同事老陈爸爸在长沙开的是早餐店，不是用户爸爸的",
+      "category": "multi-session",
+      "difficulty": "hard",
+      "metadata": {
+        "tests": "区分两个长沙餐饮业信息"
+      }
+    },
+    {
+      "id": "q_ms_5",
+      "query": "总结用户2025年的人生轨迹和重大决策",
+      "expected": "腾讯P7→P8→字节P2-3，薪资60→85→150万。深圳搬北京。登顶两座5000m+雪山。Phoenix成功→带团队→Falcon。儿子从金苹果转启明星。年底准备全家团聚北京",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ssu_31",
+      "query": "用户在腾讯做了几年后端？",
+      "expected": "三年后端开发",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_32",
+      "query": "用户在腾讯的具体技术栈是什么？",
+      "expected": "Java为主（Spring Cloud全家桶），也写Go中间件",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_33",
+      "query": "张伟（用户leader）是什么级别？",
+      "expected": "P9级别，是用户在腾讯的直属leader",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_34",
+      "query": "用户在腾讯的办公地点具体在哪？",
+      "expected": "深圳南山科技园的腾讯大厦",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_35",
+      "query": "Phoenix项目的预算是多少？",
+      "expected": "大概200万，计划三个月Q2上线",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_36",
+      "query": "用户在字节的工作地点在哪栋楼？",
+      "expected": "北京字节方舟大厦",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_37",
+      "query": "赵磊在Go社区有什么身份？",
+      "expected": "Go语言社区的知名贡献者，用户在字节的leader，2-4级别",
+      "category": "single-session-user",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ssu_38",
+      "query": "Falcon项目的团队有多少人？",
+      "expected": "12个人，比腾讯的5人团队大多了",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_39",
+      "query": "用户儿子叫什么？几岁了？",
+      "expected": "刘小明，2025年底4岁",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_40",
+      "query": "用户在南山的房子多大？月供多少？",
+      "expected": "120平，月供一万五",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_41",
+      "query": "用户的爸爸在长沙做什么生意？",
+      "expected": "开了个小餐馆，2025年生意好要开第二家分店",
+      "category": "single-session-user",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ssu_42",
+      "query": "用户妈妈退休前是做什么的？",
+      "expected": "中学语文老师",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_43",
+      "query": "Falcon项目第一阶段优化了多少？",
+      "expected": "推荐延迟从50ms降到28ms，还差8ms到20ms目标",
+      "category": "single-session-user",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ssu_44",
+      "query": "用户媳妇叫什么名字？在哪工作？",
+      "expected": "陈晓雪，在腾讯做产品经理P7",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_45",
+      "query": "用户在梧桐山登顶用了多长时间？",
+      "expected": "3个半小时登顶943米",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_46",
+      "query": "四姑娘山二峰海拔多少？用户有高反吗？",
+      "expected": "5276米，4500米以上开始头疼但靠意志力坚持住了",
+      "category": "single-session-user",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ssu_47",
+      "query": "用户在北京周末去哪爬山？",
+      "expected": "百花山和灵山，海拔两千多",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_48",
+      "query": "用户加入了什么户外俱乐部？",
+      "expected": "深圳野行者，五月出发去四姑娘山",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_49",
+      "query": "哈巴雪山海拔多少？什么时候去的？",
+      "expected": "5396米，2025年10月国庆",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssu_50",
+      "query": "用户在字节用什么编程语言？",
+      "expected": "全面切到Go和Python，Java已经不怎么写了",
+      "category": "single-session-user",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_31",
+      "query": "助手对四姑娘山登顶成功是怎么回应的？",
+      "expected": "恭喜登顶5276米，询问感受，评价高反能扛住说明体能准备不错",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_32",
+      "query": "助手怎么评价梧桐山的？",
+      "expected": "说梧桐山是深圳最高的山，景色不错",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_33",
+      "query": "助手对120平房子月供一万五是怎么说的？",
+      "expected": "说南山区房价不低，120平月供一万五在深圳算合理",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_34",
+      "query": "助手对用户晋升P8的反应？",
+      "expected": "恭喜晋升P8说这是很重要的里程碑，还问涨薪了吧",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_35",
+      "query": "助手对字节P2-3年包150万怎么评价的？",
+      "expected": "说翻倍年包很有吸引力，问了技术栈差异大不大",
+      "category": "single-session-assistant",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ssa_36",
+      "query": "助手对两地分居是什么态度？",
+      "expected": "说两地跑确实辛苦，希望能早日团聚",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_37",
+      "query": "助手对赵磊（字节leader）的评价？",
+      "expected": "说有技术大牛带应该能学到很多",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_38",
+      "query": "助手对EBC的评价？",
+      "expected": "说EBC是很多登山者的朝圣之路",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_39",
+      "query": "助手对字节快节奏有什么反馈？",
+      "expected": "说字节快节奏是出名的，问适应得怎么样",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_40",
+      "query": "助手怎么评判50ms降到20ms这个目标？",
+      "expected": "说50ms到20ms是个很有挑战的优化目标",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_41",
+      "query": "助手对12人团队管理怎么说的？",
+      "expected": "说12人团队管理上会更复杂一些",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_42",
+      "query": "助手对爸爸餐馆开分店怎么回应的？",
+      "expected": "说生意好是好事，扩张要控制好节奏",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_43",
+      "query": "助手对小明转幼儿园的回应？",
+      "expected": "说大班就开始准备幼小衔接了",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_44",
+      "query": "助手对媳妇调到北京的反应？",
+      "expected": "太好了，一家人终于能团聚了",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_45",
+      "query": "助手对朝阳500万购房预算怎么说？",
+      "expected": "说朝阳500万应该能找到不错的二居室",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_46",
+      "query": "助手对深圳野行者俱乐部的看法？",
+      "expected": "说有俱乐部组织更安全",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_47",
+      "query": "助手对2025年年终总结的评价？",
+      "expected": "评价变化很大，从腾讯到字节从深圳到北京",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_48",
+      "query": "助手对三个新年愿望的反馈？",
+      "expected": "说三个目标都很具体可执行，希望明年都能实现",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_49",
+      "query": "助手对队友老王（52岁登顶）的评价？",
+      "expected": "说52岁登顶5276米确实厉害",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ssa_50",
+      "query": "助手对用户全面切Go的评价？",
+      "expected": "说全栈切换也是一种成长",
+      "category": "single-session-assistant",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_pref_31",
+      "query": "用户周末的运动方式是什么？",
+      "expected": "爬山为主。在深圳爬梧桐山，到北京爬百花山灵山",
+      "category": "single-session-preference",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_pref_32",
+      "query": "用户选择字节主要是被什么吸引？",
+      "expected": "薪资翻倍（85万→150万），更高级别（P2-3相当于腾讯P9），推荐系统方向",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_33",
+      "query": "用户对高海拔攀登的态度是什么？",
+      "expected": "积极挑战，阶梯式目标递增（943→5276→5396→EBC），坚持不退",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_34",
+      "query": "用户喜欢在什么时候运动？",
+      "expected": "周末爬山，工作日打羽毛球（深圳周三/北京周四晚上）",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_35",
+      "query": "用户是否愿意为事业牺牲家庭生活？",
+      "expected": "愿意接受半年两地分居换取更好的职业发展，但有明确的团聚计划",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_36",
+      "query": "用户是否更偏好大团队还是小团队？",
+      "expected": "从5人小团队到12人大团队，接受了更大的管理挑战",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_37",
+      "query": "用户对技术方向有什么偏好？",
+      "expected": "从Java为主到全面切Go+Python，说明对技术栈不固化，愿意随公司转换",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_38",
+      "query": "用户对买房的偏好是什么？",
+      "expected": "已有深圳南山120平，计划在北京朝阳买第二套（500万），看重家人生活便利",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_39",
+      "query": "用户在登山中展现的性格特点？",
+      "expected": "不畏惧高反（4500m以上头疼坚持），目标导向（每次登顶立刻设更高目标），团队协作（参加俱乐部）",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_40",
+      "query": "用户对职级提升的态度？",
+      "expected": "看重职级：P7→P8在腾讯是里程碑，跳到字节直接P2-3（相当于P9），可能冲2-5",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_41",
+      "query": "用户2025年做过哪些重大消费决策？",
+      "expected": "买了波司登羽绒服两千多、HHKB键盘、PS5 Pro、跑鞋，准备在朝阳买500万的房",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_42",
+      "query": "用户在北京的新羽毛球搭档是谁？",
+      "expected": "李明，字节做前端的，经常双打",
+      "category": "single-session-preference",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_pref_43",
+      "query": "用户的购物渠道偏好？",
+      "expected": "618和双十一大促购物（买键盘跑鞋和PS5 Pro）",
+      "category": "single-session-preference",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_pref_44",
+      "query": "用户的阅读偏好？",
+      "expected": "看电影喜欢悬疑片如消失的她，刷B站技术视频",
+      "category": "single-session-preference",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_pref_45",
+      "query": "用户对待工作跳槽的决策模式？",
+      "expected": "P8升职仅3个月就接受字节offer，行动力强，不纠结",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_46",
+      "query": "用户和媳妇在生活安排上是怎么协商的？",
+      "expected": "媳妇先留深圳等调到北京再团聚，说明两人沟通好，有计划",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_47",
+      "query": "用户的爱好和社交方式？",
+      "expected": "爬山、羽毛球、看悬疑片、玩PS5。通过户外俱乐部和球友社交",
+      "category": "single-session-preference",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_pref_48",
+      "query": "用户的三个新年愿望反映什么优先级？",
+      "expected": "工作第一（Falcon）、家庭第二（全家北京）、个人探索第三（EBC）",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_pref_49",
+      "query": "用户对子女教育的态度？",
+      "expected": "儿子从金苹果转到启明星幼儿园（大班），关注幼小衔接",
+      "category": "single-session-preference",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_pref_50",
+      "query": "用户在注重什么居住条件？",
+      "expected": "南山房子离幼儿园走路五分钟，在北京计划朝阳买房也会考虑便利性",
+      "category": "single-session-preference",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_31",
+      "query": "用户的办公城市从哪变到哪？",
+      "expected": "从深圳（腾讯南山科技园）变到北京（字节方舟大厦）",
+      "category": "knowledge-update",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ku_32",
+      "query": "Gateway项目是用户在哪家公司做的？",
+      "expected": "腾讯，P8升职后张伟让他带5人团队做Gateway。不是字节的项目",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_33",
+      "query": "用户的羽毛球打球日期变了吗？",
+      "expected": "变了。深圳时每周三，北京后改为每周四",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_34",
+      "query": "用户现在的leader叫什么？是什么特长？",
+      "expected": "赵磊，2-4级别，Go语言社区知名贡献者。之前leader是张伟P9",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_35",
+      "query": "用户的运动场馆从哪换到了哪？",
+      "expected": "南山体育馆→朝阳体育馆",
+      "category": "knowledge-update",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ku_36",
+      "query": "Phoenix项目完成后用户做了什么项目？",
+      "expected": "Gateway（腾讯），然后跳槽到字节做Falcon",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_37",
+      "query": "小明现在在哪个幼儿园？是什么班？",
+      "expected": "启明星幼儿园大班（之前是金苹果幼儿园中班）",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_38",
+      "query": "用户媳妇现在在什么公司？",
+      "expected": "仍在腾讯（截至2025年底），计划2026年3月调到字节北京",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_39",
+      "query": "爸爸的餐馆生意最新动态？",
+      "expected": "2025年生意特别好打算开第二家分店，之前只是开了个小餐馆",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_40",
+      "query": "用户的周末爬山地点变了吗？",
+      "expected": "变了。深圳爬梧桐山→北京爬百花山和灵山",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_41",
+      "query": "Falcon项目延迟优化到什么程度了？",
+      "expected": "从50ms降到28ms（降了44%），还差8ms到20ms目标",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_42",
+      "query": "用户的团队从几人变成几人？",
+      "expected": "从腾讯的5人团队到字节的12人团队",
+      "category": "knowledge-update",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ku_43",
+      "query": "用户现在住在哪个城市？",
+      "expected": "北京。2025年9月从深圳搬过来的",
+      "category": "knowledge-update",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ku_44",
+      "query": "用户现在编程用什么语言最多？",
+      "expected": "Go和Python为主，Java已经不怎么写了（在腾讯时Java+Go）",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_45",
+      "query": "腾讯的Phoenix项目结果怎么样？",
+      "expected": "提前两周上线，TPS从2000提到8000，leader评审会表扬",
+      "category": "knowledge-update",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ku_46",
+      "query": "字节的Falcon和GitHub的Falcon什么关系？",
+      "expected": "没有关系。用户做的是推荐引擎Falcon（字节内部项目），GitHub上Falcon是LLM推理优化开源项目（CUDA kernel优化延迟15ms）",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_47",
+      "query": "用户的登山级别最新进展？",
+      "expected": "已登顶四姑娘山二峰5276m和哈巴雪山5396m，下一目标EBC",
+      "category": "knowledge-update",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ku_48",
+      "query": "用户的球友是谁？怎么认识的？",
+      "expected": "李明，字节前端开发，在北京新认识的，经常双打",
+      "category": "knowledge-update",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_ku_49",
+      "query": "用户2-4+到2-5的晋升条件是什么？",
+      "expected": "赵磊说如果Falcon做好了，明年可以评2-4+接近2-5",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ku_50",
+      "query": "用户的新年规划是什么？进展如何？",
+      "expected": "三个：Falcon完成（进度44%）、全家北京（媳妇3月调过来）、走EBC。部分在进行中",
+      "category": "knowledge-update",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_31",
+      "query": "用户从加入腾讯到最终离开一共多长时间？",
+      "expected": "三年零几个月（三年后端开发经验+几个月的P8时期，2025年9月离开）",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_32",
+      "query": "Phoenix项目Q2上线意味着最迟什么时候？",
+      "expected": "Q2是4-6月，计划三个月从2月开始，最迟6月底。实际提前两周约5月中上线",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_33",
+      "query": "用户升P8和被字节挖走之间间隔多久？",
+      "expected": "6月升P8→9月跳字节，仅约3个月",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_34",
+      "query": "从四姑娘山到哈巴雪山的攀登间隔？",
+      "expected": "5月四姑娘山→10月哈巴，约5个月",
+      "category": "temporal-reasoning",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_tr_35",
+      "query": "用户的爸爸到2025年底多大年纪了？",
+      "expected": "2025年4月说58岁，到年底仍58或59岁",
+      "category": "temporal-reasoning",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_tr_36",
+      "query": "陈晓雪从留深圳到计划来北京隔了多久？",
+      "expected": "9月用户跳字节→12月说明年3月调北京，计划间隔6个月",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_37",
+      "query": "2025年1-3月用户在做什么？",
+      "expected": "在腾讯做Phoenix项目（P7），周末爬梧桐山打羽毛球",
+      "category": "temporal-reasoning",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_tr_38",
+      "query": "2025年7-8月用户在做什么？",
+      "expected": "已升P8，带5人团队做Gateway项目，准备国庆去哈巴雪山",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_39",
+      "query": "2025年最后一个季度用户的主要变化？",
+      "expected": "10月哈巴登顶+到北京换运动习惯，11月字节Falcon项目正式启动，12月回长沙看家人",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_40",
+      "query": "小明几岁进的金苹果？几岁转的启明星？",
+      "expected": "3岁上金苹果中班（2025年4月提到），4岁转启明星大班（2025年12月提到）",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_41",
+      "query": "用户薪资变化的时间线是什么？",
+      "expected": "60万（腾讯P7,~2025年初）→85万（P8,2025年6月）→150万（字节,2025年9月）",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_42",
+      "query": "从买深圳房子到计划买北京房子间隔多久？",
+      "expected": "2024年买的深圳120平→2025年12月计划买朝阳,约1年",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_43",
+      "query": "做完Phoenix到开始做Falcon之间做过什么？",
+      "expected": "5月Phoenix上线→6月升P8带Gateway项目→9月跳字节→11月Falcon正式推进",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_44",
+      "query": "用户全年在几个城市待过？分别多久？",
+      "expected": "深圳约8个月（1-8月）→9月起北京约4个月。中间5月曾去四川四姑娘山",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_45",
+      "query": "如果从2025年2月算起到年底，用户经历了几次重大变动？",
+      "expected": "至少5次：Phoenix上线→P8晋升→Gateway团队→跳槽字节→Falcon项目。另外还有两座雪山登顶和儿子换幼儿园",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_46",
+      "query": "用户接收字节offer到正式入职的时间？",
+      "expected": "9月1日说下周离职，即9月上旬。到10月已经哈巴雪山回来+换了羽毛球场馆，所以9月中旬左右入职",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_47",
+      "query": "野行者俱乐部的四姑娘山计划是几月？",
+      "expected": "5月出发（3月报名时说下个月想去→实际5月18日回来）",
+      "category": "temporal-reasoning",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_tr_48",
+      "query": "2025年哪些月份用户提到了登山？",
+      "expected": "3月（梧桐山常规）、5月（四姑娘山登顶）、10月（哈巴登顶+北京周末山）、1月（年终总结提到EBC计划）",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_tr_49",
+      "query": "用户在字节工作了多久到年底？",
+      "expected": "9月入职→12月底，约3-4个月",
+      "category": "temporal-reasoning",
+      "difficulty": "standard"
+    },
+    {
+      "id": "q_tr_50",
+      "query": "从第一次爬梧桐山到计划EBC，用户的登山生涯跨度多长？",
+      "expected": "至少2025年3月到2026年（EBC计划），约1年的进阶历程",
+      "category": "temporal-reasoning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_31",
+      "query": "用户在几个会话里提到过薪资？具体数字分别是什么？",
+      "expected": "至少3次：60万（腾讯P7）、85万（P8升职后）、150万（字节）。脉脉上的90万和130万不是用户的",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_32",
+      "query": "用户提到过几个项目代号？分别是什么？",
+      "expected": "Phoenix（腾讯支付网关重构）、Gateway（腾讯5人团队新项目）、Falcon（字节推荐引擎）。GitHub的Falcon不是用户的",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_33",
+      "query": "用户在不同会话里提到过几次leader？",
+      "expected": "张伟（腾讯P9，最早提和升职时各一次）、赵磊（字节2-4，跳槽和Falcon会话各一次）",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_34",
+      "query": "用户的所有城市变化在哪些会话中体现？",
+      "expected": "深圳南山：work_v1/hobby_v1/family/promotion。北京：jobchange/hobby_v2/work_v4/family_v2/yearend",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_35",
+      "query": "横跨多个会话，用户知道几座山的具体海拔？",
+      "expected": "梧桐山943m、四姑娘山二峰5276m、哈巴雪山5396m、百花山和灵山约两千多。不含表弟的武功山1918m和稻城亚丁5958m",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_36",
+      "query": "用户在整个时间线中提到过几个幼儿园名字？",
+      "expected": "两个：金苹果（3岁中班,2025.4）和启明星（4岁大班,2025.12）",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_37",
+      "query": "综合所有信息，Falcon项目的完整状态？",
+      "expected": "字节推荐引擎，目标50ms→20ms，团队12人，阶段一已到28ms还差8ms。做好了可评2-4+",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_38",
+      "query": "用户和几个人一起做过户外运动？各是谁？",
+      "expected": "深圳野行者俱乐部（四姑娘山）、队友老王（52岁登顶5276m）、羽毛球搭档李明（字节前端）",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_39",
+      "query": "综合所有会话，用户爸妈的完整画像是什么？",
+      "expected": "爸58岁长沙小餐馆（2025年要开第二家分店），妈退休前中学语文老师退休后帮打理餐馆。2025圣诞节用户带家人回去看望",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_40",
+      "query": "综合用户的所有消费记录？",
+      "expected": "波司登羽绒服（2千多,1月）、HHKB键盘（618）、跑鞋（618）、PS5 Pro（双十一）、深圳120平房（去年）、计划朝阳500万",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_41",
+      "query": "用户在多个会话中提到过媳妇陈晓雪几次？状态有什么变化？",
+      "expected": "family（腾讯P7产品经理）→jobchange（先留深圳）→family_v2（明年3月调字节北京+一起看朝阳房子）",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_42",
+      "query": "综合来看，用户的职业发展路径？",
+      "expected": "腾讯P7(60w)做三年→Phoenix成功→P8(85w)带Gateway团队→字节P2-3(150w)做Falcon→目标2-5",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_43",
+      "query": "总共有多少个叫Falcon的项目出现在对话中？分别是什么？",
+      "expected": "两个：用户的字节推荐引擎Falcon（50ms→20ms目标）和GitHub开源LLM推理Falcon（CUDA优化15ms），完全不同",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_44",
+      "query": "用户在对话中提到过几个同事/朋友？能列出来吗？",
+      "expected": "leader张伟(P9)、leader赵磊(2-4)、球友李明(字节前端)、队友老王(52岁)。噪声中还有老赵(阿里)、老李(收到字节offer)、表弟(武功山)、老陈(长沙早餐店)等",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_45",
+      "query": "用户的运动场地完整变化链？",
+      "expected": "南山体育馆(周三)→朝阳体育馆(周四)。登山：梧桐山→四姑娘→哈巴→北京百花山灵山→计划EBC",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_46",
+      "query": "2025年用户有哪些「第一次」的体验？",
+      "expected": "第一次登5000m+(四姑娘山)、第一次换工作(腾→字节)、第一次搬城市(深→京)、第一次带12人团队",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_47",
+      "query": "综合所有家庭成员的位置信息？",
+      "expected": "用户：北京。媳妇陈晓雪：深圳（即将调北京）。儿子刘小明：深圳（启明星幼儿园）。爸妈：长沙（餐馆）",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_48",
+      "query": "用户提到过几次关于买房的话题？",
+      "expected": "两次：深圳南山120平月供1.5万（2024年买），计划朝阳500万（2025.12，等媳妇来一起看）",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_49",
+      "query": "综合来看用户的性格画像？",
+      "expected": "自驱力强（连续挑战高山）、事业心重（3个月就跳槽追求更高级别）、有家庭责任感（有团聚计划）、适应力强（城市/技术栈/团队都能快速切换）",
+      "category": "multi-session",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_ms_50",
+      "query": "如果有新对话出现用户说在做Java开发，是否正确？",
+      "expected": "不正确。用户已全面切到Go+Python，Java不怎么写了。如果系统返回Java是过期信息",
+      "category": "multi-session",
+      "difficulty": "hard"
+    }
+  ]
+}

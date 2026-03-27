@@ -1,0 +1,219 @@
+{
+  "name": "qmemory-chinese",
+  "description": "QMemory-Chinese v2.0 — 4维度×24题×12会话（6核心+6针对性噪声）× 中文特有挑战",
+  "version": "2.0",
+  "source": "QMemory Team (custom dataset)",
+  "design_notes": "v2.0全面升级：新增6个【针对性噪声会话】制造中文特有混淆（近义时间词、同音同形人名、相似成语语境、矛盾画像信息）。每维度从3题扩展至6题，覆盖easy→hard梯度。场景：互联网产品经理的半年工作生活，测试中文记忆系统在数据积累后的精准度。",
+  "sessions": [
+    {
+      "id": "sess_zh_time",
+      "metadata": {"timestamp": "2025-06-10T10:00:00Z", "type": "core", "topic": "time-expressions"},
+      "messages": [
+        {"role": "user", "content": "上个月我去上海出差了一周，见了好几个客户"},
+        {"role": "assistant", "content": "出差一周还挺辛苦的，上海的客户多吗？"},
+        {"role": "user", "content": "前年我在广州工作的时候也经常出差，不过那时候主要跑华南"},
+        {"role": "assistant", "content": "从广州到上海，出差范围扩大了不少。"},
+        {"role": "user", "content": "大前天刚从杭州回来，阿里那边有个合作项目"},
+        {"role": "assistant", "content": "杭州也是互联网重镇。和阿里的合作顺利吗？"},
+        {"role": "user", "content": "下礼拜二要飞成都，约了腾讯云的人谈合作"},
+        {"role": "assistant", "content": "成都也有很多科技公司，腾讯云的合作可以好好谈。"},
+        {"role": "user", "content": "后天是我妈生日，六十大寿"},
+        {"role": "assistant", "content": "六十大寿是大日子，好好庆祝一下。"}
+      ]
+    },
+    {
+      "id": "sess_zh_time_v2",
+      "metadata": {"timestamp": "2025-09-05T14:00:00Z", "type": "core", "topic": "time-expressions-update"},
+      "messages": [
+        {"role": "user", "content": "上上周去了趟深圳，见了老东家的同事"},
+        {"role": "assistant", "content": "回深圳看看老朋友挺好的。"},
+        {"role": "user", "content": "前天收到通知，下个月初有个行业峰会要参加"},
+        {"role": "assistant", "content": "什么主题的峰会？"},
+        {"role": "user", "content": "AI产品创新峰会，在北京国际会议中心，十月八号"},
+        {"role": "assistant", "content": "十月初的峰会，可以提前准备下。"},
+        {"role": "user", "content": "年底前还得交一份年度产品规划，截止日期是腊月十五之前"},
+        {"role": "assistant", "content": "腊月十五，大约在2026年1月底或2月初。"},
+        {"role": "user", "content": "对，反正就是春节前一周"},
+        {"role": "assistant", "content": "时间还算充裕，现在开始准备不会太赶。"}
+      ]
+    },
+    {
+      "id": "sess_zh_idiom",
+      "metadata": {"timestamp": "2025-07-01T14:00:00Z", "type": "core", "topic": "idiom-context"},
+      "messages": [
+        {"role": "user", "content": "我们老板说这个项目要破釜沉舟，背水一战"},
+        {"role": "assistant", "content": "看来老板下了很大决心。"},
+        {"role": "user", "content": "确实，不成功便成仁，Q3必须拿下这个大客户"},
+        {"role": "assistant", "content": "这个季度的压力确实大。"},
+        {"role": "user", "content": "算了不说工作了，我最近在追一部剧叫繁花，好好看"},
+        {"role": "assistant", "content": "繁花确实很火，王家卫导的嘛。"},
+        {"role": "user", "content": "对，我觉得胡歌演得出神入化，简直封神"},
+        {"role": "assistant", "content": "胡歌的演技确实越来越好了。"},
+        {"role": "user", "content": "我媳妇儿说我就是个十足的追剧党，一追就到半夜"},
+        {"role": "assistant", "content": "注意休息，别太晚了。"},
+        {"role": "user", "content": "这个客户叫华远科技，签了的话合同额3000万，是公司今年的定海神针"},
+        {"role": "assistant", "content": "3000万的合同确实是大项目，怪不得老板这么重视。"}
+      ]
+    },
+    {
+      "id": "sess_zh_idiom_v2",
+      "metadata": {"timestamp": "2025-10-20T09:00:00Z", "type": "core", "topic": "idiom-context-update"},
+      "messages": [
+        {"role": "user", "content": "华远科技的合同终于签了！老板说我们是力挽狂澜"},
+        {"role": "assistant", "content": "恭喜！3000万的合同拿下了。"},
+        {"role": "user", "content": "不过竞标过程真是一波三折，差点煮熟的鸭子飞了"},
+        {"role": "assistant", "content": "中间出了什么波折？"},
+        {"role": "user", "content": "对方差点选了竞对公司启景智能，后来我们临门一脚加了个AI审查模块才扳回来"},
+        {"role": "assistant", "content": "关键时刻的差异化功能确实能决定胜负。"},
+        {"role": "user", "content": "老板给项目组发了奖金，还说这是抛砖引玉，明年要冲一个亿"},
+        {"role": "assistant", "content": "从3000万到一个亿，野心不小。"},
+        {"role": "user", "content": "我觉得他就是画饼，不过无所谓了，先把到手的做好再说"},
+        {"role": "assistant", "content": "脚踏实地最重要。"}
+      ]
+    },
+    {
+      "id": "sess_zh_names",
+      "metadata": {"timestamp": "2025-08-15T09:00:00Z", "type": "core", "topic": "name-disambiguation"},
+      "messages": [
+        {"role": "user", "content": "我们组有两个叫张伟的，一个做前端一个做后端"},
+        {"role": "assistant", "content": "同名确实容易搞混，平时怎么区分？"},
+        {"role": "user", "content": "前端张伟是安徽的，我们叫他大伟，后端张伟是四川的，叫小伟"},
+        {"role": "assistant", "content": "用昵称区分挺方便的。"},
+        {"role": "user", "content": "还有个实习生也叫张伟，不过他下周就走了"},
+        {"role": "assistant", "content": "实习结束要回学校了？"},
+        {"role": "user", "content": "大伟最近在谈女朋友，是市场部的李娜"},
+        {"role": "assistant", "content": "跨部门恋爱挺常见的。"},
+        {"role": "user", "content": "小伟上周刚通过了AWS架构师认证，很厉害"},
+        {"role": "assistant", "content": "AWS架构师认证含金量不低。"},
+        {"role": "user", "content": "对了，我们部门还有个李娜是做测试的，和市场部的李娜不是同一个人"},
+        {"role": "assistant", "content": "又是同名，你们部门同名的不少。"},
+        {"role": "user", "content": "测试李娜是东北的，市场部李娜是湖北的，性格完全不一样"},
+        {"role": "assistant", "content": "了解了，东北的做测试，湖北的做市场。"}
+      ]
+    },
+    {
+      "id": "sess_zh_profile",
+      "metadata": {"timestamp": "2025-08-25T16:00:00Z", "type": "core", "topic": "profile-colloquial"},
+      "messages": [
+        {"role": "user", "content": "我这人吧，吃的方面比较挑，火锅只吃海底捞，重庆火锅太辣受不了"},
+        {"role": "assistant", "content": "海底捞的服务确实好，喜欢什么锅底？"},
+        {"role": "user", "content": "番茄锅底，不沾辣。我媳妇是湖南人，她倒是无辣不欢"},
+        {"role": "assistant", "content": "口味差异挺大的。"},
+        {"role": "user", "content": "早起的话我一般喝美式咖啡，瑞幸的生椰拿铁也行"},
+        {"role": "assistant", "content": "美式和生椰拿铁都不错。"},
+        {"role": "user", "content": "不过下午犯困的时候就来杯星巴克的浓缩特调，双份espresso那种"},
+        {"role": "assistant", "content": "双份浓缩确实够提神。"},
+        {"role": "user", "content": "穿衣风格的话，上班穿商务休闲，周末就是卫衣加运动裤，懒得搭配"},
+        {"role": "assistant", "content": "实用主义穿搭。"},
+        {"role": "user", "content": "最近开始看《人类简史》，之前看完了《三体》全集，硬核科幻yyds"},
+        {"role": "assistant", "content": "三体确实是硬核科幻的经典。yyds这个评价很到位。"},
+        {"role": "user", "content": "听歌的话周杰伦的歌我能倒背如流，从小听到大"},
+        {"role": "assistant", "content": "周杰伦是一代人的记忆。"},
+        {"role": "user", "content": "我还是强迫症，桌面一点乱都不行，代码必须格式化"},
+        {"role": "assistant", "content": "整洁有序的习惯在开发中其实是优点。"}
+      ]
+    },
+
+    {
+      "id": "sess_noise_zh_time_confuse",
+      "metadata": {"timestamp": "2025-06-20T11:00:00Z", "type": "noise", "topic": "time-confuse"},
+      "messages": [
+        {"role": "user", "content": "我同事老周上周去上海出差了，见了个大客户"},
+        {"role": "assistant", "content": "最近去上海出差的人不少。"},
+        {"role": "user", "content": "他说下个月还要再去一趟杭州，和网易谈合作"},
+        {"role": "assistant", "content": "杭州的互联网公司也不少。"},
+        {"role": "user", "content": "老周还说大后天要去广州，客户催得急"},
+        {"role": "assistant", "content": "出差安排挺密集的。"}
+      ]
+    },
+    {
+      "id": "sess_noise_zh_idiom_confuse",
+      "metadata": {"timestamp": "2025-07-15T14:00:00Z", "type": "noise", "topic": "idiom-confuse"},
+      "messages": [
+        {"role": "user", "content": "朋友的公司也在竞标一个大合同，他说要孤注一掷"},
+        {"role": "assistant", "content": "听起来压力也不小。"},
+        {"role": "user", "content": "他们竞标的客户叫华远集团，不过是做地产的那个华远，不是科技公司"},
+        {"role": "assistant", "content": "华远这个名字确实容易混淆。"},
+        {"role": "user", "content": "最后黄了，竹篮打水一场空"},
+        {"role": "assistant", "content": "可惜了，不过失败也是经验。"}
+      ]
+    },
+    {
+      "id": "sess_noise_zh_names_confuse",
+      "metadata": {"timestamp": "2025-09-01T10:00:00Z", "type": "noise", "topic": "name-confuse"},
+      "messages": [
+        {"role": "user", "content": "隔壁部门也有个张伟，做数据分析的，是河南的"},
+        {"role": "assistant", "content": "张伟确实是中国最常见的名字。"},
+        {"role": "user", "content": "那个张伟上个月刚考了PMP认证"},
+        {"role": "assistant", "content": "PMP项目管理认证也很有用。"},
+        {"role": "user", "content": "他女朋友也叫李娜，在销售部的"},
+        {"role": "assistant", "content": "又一对同名的。"},
+        {"role": "user", "content": "对，他们下周要请大家吃喜糖了，订婚了"},
+        {"role": "assistant", "content": "恭喜他们。"}
+      ]
+    },
+    {
+      "id": "sess_noise_zh_profile_confuse",
+      "metadata": {"timestamp": "2025-09-10T16:00:00Z", "type": "noise", "topic": "profile-confuse"},
+      "messages": [
+        {"role": "user", "content": "我同事小李特别能吃辣，每天中午必须吃重庆火锅或者湖南菜"},
+        {"role": "assistant", "content": "能吃辣的人伙食选择多。"},
+        {"role": "user", "content": "他不喝咖啡，只喝茶，每天泡一壶龙井"},
+        {"role": "assistant", "content": "喝茶也很健康。"},
+        {"role": "user", "content": "穿衣服倒是特别讲究，每天都是正装皮鞋"},
+        {"role": "assistant", "content": "职场穿正装显得专业。"},
+        {"role": "user", "content": "听歌只听古典音乐，说流行乐太吵"},
+        {"role": "assistant", "content": "每个人音乐品味不同。"}
+      ]
+    },
+    {
+      "id": "sess_noise_zh_daily_1",
+      "metadata": {"timestamp": "2025-07-25T09:00:00Z", "type": "noise"},
+      "messages": [
+        {"role": "user", "content": "今天好热啊，不想上班"},
+        {"role": "assistant", "content": "夏天确实难熬。"},
+        {"role": "user", "content": "外卖点了个轻食沙拉，减肥中"},
+        {"role": "assistant", "content": "注意营养均衡。"}
+      ]
+    },
+    {
+      "id": "sess_noise_zh_daily_2",
+      "metadata": {"timestamp": "2025-11-15T20:00:00Z", "type": "noise"},
+      "messages": [
+        {"role": "user", "content": "双十一剁手了好多东西，钱包空了"},
+        {"role": "assistant", "content": "双十一确实容易冲动消费。"},
+        {"role": "user", "content": "买了个投影仪，以后在家看电影方便"},
+        {"role": "assistant", "content": "投影仪看大屏很爽。"}
+      ]
+    }
+  ],
+  "questions": [
+    {"id": "q_tzh_1", "query": "用户什么时候去上海出差的？去了多久？", "expected": "2025年6月10日说「上个月」去上海出差了「一周」，所以是2025年5月去的上海，待了一周。注意：同事老周也去了上海出差，但那是不同的人", "category": "temporal-zh", "difficulty": "standard"},
+    {"id": "q_tzh_2", "query": "用户妈妈生日是哪天？多大了？", "expected": "2025年6月10日说「后天是我妈生日」，所以是2025年6月12日。六十大寿，即60岁", "category": "temporal-zh", "difficulty": "hard", "metadata": {"tests": "从相对时间表达计算精确日期"}},
+    {"id": "q_tzh_3", "query": "用户曾在哪个城市工作过？是什么时候的事？", "expected": "「前年」在广州工作（2025年6月说的，所以是大约2023年），主要跑华南出差。现在已经不在广州了", "category": "temporal-zh", "difficulty": "hard"},
+    {"id": "q_tzh_4", "query": "用户什么时候从杭州回来的？去杭州干什么？", "expected": "2025年6月10日说「大前天」从杭州回来，即6月7日。去杭州是因为和阿里有合作项目", "category": "temporal-zh", "difficulty": "hard", "metadata": {"tests": "大前天=三天前，精确推算日期"}},
+    {"id": "q_tzh_5", "query": "AI产品创新峰会是什么时间？在哪里举办？", "expected": "2025年10月8日，北京国际会议中心。用户在2025年9月5日说「下个月初有个行业峰会」", "category": "temporal-zh", "difficulty": "hard"},
+    {"id": "q_tzh_6", "query": "年度产品规划的截止时间大概是什么时候？", "expected": "「腊月十五之前」，也就是「春节前一周」，大约在2026年1月底或2月初", "category": "temporal-zh", "difficulty": "hard", "metadata": {"tests": "中国农历时间表达转换为公历"}},
+
+    {"id": "q_idm_1", "query": "老板对Q3这个项目的态度是什么？用了什么表达？", "expected": "老板说要「破釜沉舟」「背水一战」，对项目下了很大决心。目标客户是华远科技（不是华远集团），合同额3000万，是公司今年的「定海神针」", "category": "idiom-zh", "difficulty": "hard", "metadata": {"tests": "区分华远科技（自己公司的客户）和华远集团（朋友公司竞标的地产客户）"}},
+    {"id": "q_idm_2", "query": "用户评价胡歌的演技用了什么词？", "expected": "「出神入化」「简直封神」。说的是胡歌在《繁花》中的表演（王家卫导演的剧）", "category": "idiom-zh", "difficulty": "standard"},
+    {"id": "q_idm_3", "query": "华远科技的合同竞标过程怎么样？", "expected": "「一波三折」「差点煮熟的鸭子飞了」——对方差点选了竞对启景智能，最终用户团队「临门一脚」加了AI审查模块才「力挽狂澜」扳回来。合同额3000万签了", "category": "idiom-zh", "difficulty": "hard"},
+    {"id": "q_idm_4", "query": "老板发完奖金后还说了什么？用户怎么看的？", "expected": "老板说奖金是「抛砖引玉」，明年要冲一个亿。用户觉得老板「就是画饼」，但表示先把手头的做好", "category": "idiom-zh", "difficulty": "hard"},
+    {"id": "q_idm_5", "query": "用户媳妇说用户有什么习惯？", "expected": "媳妇说用户是「十足的追剧党，一追就到半夜」。当时在追的剧是《繁花》", "category": "idiom-zh", "difficulty": "standard"},
+    {"id": "q_idm_6", "query": "用户朋友公司竞标华远的结果怎样？", "expected": "朋友公司竞标的是华远集团（做地产的，不是用户的客户华远科技），最后「竹篮打水一场空」黄了。这是两个完全不同的华远", "category": "idiom-zh", "difficulty": "hard", "metadata": {"tests": "区分两个名字相同但不同的公司：华远科技 vs 华远集团"}},
+
+    {"id": "q_nd_1", "query": "前端张伟（大伟）最近有什么个人动态？", "expected": "前端张伟（大伟），安徽人，最近在和市场部的李娜（湖北人）谈女朋友。注意：隔壁部门也有个张伟（河南的，做数据分析），他女朋友也叫李娜（销售部的），他们要订婚了——这是完全不同的两对人", "category": "name-disambig", "difficulty": "hard", "metadata": {"tests": "三个张伟、三个李娜的精确关联"}},
+    {"id": "q_nd_2", "query": "后端张伟（小伟）最近取得了什么成就？", "expected": "后端张伟（小伟），四川人，通过了AWS架构师认证。不是PMP认证——PMP是隔壁部门做数据分析的张伟（河南的）考的", "category": "name-disambig", "difficulty": "hard", "metadata": {"tests": "区分AWS认证（小伟）和PMP认证（河南张伟）"}},
+    {"id": "q_nd_3", "query": "公司里有几个叫张伟的？分别是谁？", "expected": "至少四个：1.前端大伟（安徽）2.后端小伟（四川）3.实习生张伟（已离开）4.隔壁部门数据分析张伟（河南）。大伟和小伟是用户同组的，实习生已走", "category": "name-disambig", "difficulty": "hard"},
+    {"id": "q_nd_4", "query": "公司里有几个叫李娜的？分别做什么的？", "expected": "至少三个：1.市场部李娜（湖北人，大伟的女朋友）2.测试部李娜（东北人，和市场部李娜不是同一人）3.销售部李娜（隔壁部门张伟的女朋友，要订婚了）", "category": "name-disambig", "difficulty": "hard"},
+    {"id": "q_nd_5", "query": "哪个张伟要订婚了？他女朋友是哪个李娜？", "expected": "隔壁部门做数据分析的张伟（河南的）要订婚了，女朋友是销售部的李娜。不是前端大伟——大伟和市场部李娜（湖北的）还在谈", "category": "name-disambig", "difficulty": "hard", "metadata": {"tests": "从多对同名人中精确定位订婚的那对"}},
+    {"id": "q_nd_6", "query": "用户组里那个实习生现在还在吗？", "expected": "不在了，实习生张伟「下周就走了」（2025年8月15日说的），要回学校了", "category": "name-disambig", "difficulty": "standard"},
+
+    {"id": "q_pzh_1", "query": "用户的饮食偏好是什么？和同事小李有什么不同？", "expected": "用户不吃辣（火锅只吃海底捞番茄锅底，重庆火锅太辣受不了），媳妇湖南人无辣不欢。注意同事小李正好相反：特别能吃辣，必须吃重庆火锅或湖南菜", "category": "profile-zh", "difficulty": "hard", "metadata": {"tests": "区分用户画像和同事画像，口味完全相反"}},
+    {"id": "q_pzh_2", "query": "用户平时喝什么饮品？", "expected": "早上喝美式咖啡或瑞幸生椰拿铁，下午犯困喝星巴克浓缩特调（双份espresso）。注意同事小李不喝咖啡只喝茶（龙井），不能搞混", "category": "profile-zh", "difficulty": "hard", "metadata": {"tests": "区分用户的咖啡偏好和同事的茶偏好"}},
+    {"id": "q_pzh_3", "query": "用户的穿衣风格是什么样的？", "expected": "上班穿商务休闲，周末卫衣加运动裤「懒得搭配」，是实用主义穿搭。注意同事小李是正装皮鞋每天很讲究——两人风格相反", "category": "profile-zh", "difficulty": "hard"},
+    {"id": "q_pzh_4", "query": "用户在看什么书？听什么歌？", "expected": "正在看《人类简史》，之前看完了《三体》全集（评价'硬核科幻yyds'）。听歌喜欢周杰伦（从小听到大，能倒背如流）。同事小李只听古典音乐——不能混淆", "category": "profile-zh", "difficulty": "hard"},
+    {"id": "q_pzh_5", "query": "用户有什么性格特点或习惯？", "expected": "有强迫症：桌面不能乱，代码必须格式化。追剧党（一追到半夜）。吃东西挑（不吃辣）", "category": "profile-zh", "difficulty": "standard"},
+    {"id": "q_pzh_6", "query": "用户媳妇是哪里人？口味怎样？", "expected": "湖南人，无辣不欢。和用户口味完全相反（用户不吃辣只吃番茄锅底）", "category": "profile-zh", "difficulty": "standard"}
+  ]
+}

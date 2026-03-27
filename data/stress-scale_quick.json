@@ -1,0 +1,334 @@
+{
+  "name": "stress-scale",
+  "description": "压力测试 v1.0 — 大规模记忆检索延迟与准确率（3维度×30题×30会话）",
+  "version": "1.0",
+  "source": "custom",
+  "design_notes": "模拟大量日常对话数据堆积后的检索能力。场景：一位运营经理（陈乐）一年内的350+条日常工作和生活对话。核心测试：在大量数据积累后系统是否仍能精准定位特定信息。20条核心会话含高密度事实+10条噪声，30题分别在10K/50K/100K记忆量级下测试。注：实际运行时runner会根据系统实际记忆量标注tier。",
+
+  "sessions": [
+    {
+      "id": "sess_core_01",
+      "metadata": {"timestamp": "2024-09-01T09:00:00Z", "type": "core", "topic": "intro"},
+      "messages": [
+        {"role": "user", "content": "我叫陈乐，在上海做电商运营经理，带12人团队负责某母婴品牌的全渠道运营"},
+        {"role": "assistant", "content": "母婴品牌运营工作内容多。12人团队规模不小。"},
+        {"role": "user", "content": "品牌叫「小象优选」，主打0-3岁的纸尿裤和辅食，天猫+京东+抖音三个渠道"},
+        {"role": "assistant", "content": "三渠道全覆盖，运营复杂度高。"},
+        {"role": "user", "content": "去年GMV做到了2.8亿，今年目标4亿"},
+        {"role": "assistant", "content": "从2.8亿到4亿增长43%，挑战不小。"}
+      ]
+    },
+    {
+      "id": "sess_core_02",
+      "metadata": {"timestamp": "2024-09-15T14:00:00Z", "type": "core", "topic": "team"},
+      "messages": [
+        {"role": "user", "content": "团队分工：天猫4人(组长小周)、京东3人(组长阿杰)、抖音5人(组长小美)"},
+        {"role": "assistant", "content": "抖音5人最多，说明在加大抖音投入。"},
+        {"role": "user", "content": "对，今年抖音预算占比要从30%提到45%"},
+        {"role": "assistant", "content": "抖音预算接近一半，是主要增长引擎。"},
+        {"role": "user", "content": "天猫和京东维持现有投入，不增不减"},
+        {"role": "assistant", "content": "存量渠道保持稳定，增量靠抖音拉动。"}
+      ]
+    },
+    {
+      "id": "sess_core_03",
+      "metadata": {"timestamp": "2024-10-01T10:00:00Z", "type": "core", "topic": "campaign-1"},
+      "messages": [
+        {"role": "user", "content": "国庆活动数据出来了：天猫810万，京东420万，抖音650万，总共1880万"},
+        {"role": "assistant", "content": "1880万不错。抖音占比34.5%还不到45%的目标。"},
+        {"role": "user", "content": "纸尿裤销量15万包，辅食卖了8万盒"},
+        {"role": "assistant", "content": "纸尿裤是大头品类。"},
+        {"role": "user", "content": "ROI天猫3.2，京东2.8，抖音1.6。抖音还需要优化"},
+        {"role": "assistant", "content": "抖音ROI偏低，投放效率有提升空间。"}
+      ]
+    },
+    {
+      "id": "sess_core_04",
+      "metadata": {"timestamp": "2024-10-20T16:00:00Z", "type": "core", "topic": "competitor"},
+      "messages": [
+        {"role": "user", "content": "竞品分析：主要竞对是「贝贝萌」和「棉花时代」"},
+        {"role": "assistant", "content": "两个都是知名母婴品牌。"},
+        {"role": "user", "content": "贝贝萌在抖音做得比我们好，他们请了头部达人贾乃亮做专场，单场GMV 800万"},
+        {"role": "assistant", "content": "800万单场确实厉害。达人合作是抖音的关键。"},
+        {"role": "user", "content": "棉花时代主攻私域，企微积累了50万会员"},
+        {"role": "assistant", "content": "50万私域会员是很大的复购池。"}
+      ]
+    },
+    {
+      "id": "sess_core_05",
+      "metadata": {"timestamp": "2024-11-01T09:30:00Z", "type": "core", "topic": "double-11-prep"},
+      "messages": [
+        {"role": "user", "content": "双11备货量：纸尿裤备了60万包，辅食30万盒，加了新品有机米粉"},
+        {"role": "assistant", "content": "备货量是国庆的4倍，准备得很充分。"},
+        {"role": "user", "content": "预算投入：天猫150万，京东80万，抖音200万，总投入430万"},
+        {"role": "assistant", "content": "430万投入，如果按国庆的ROI估算，能产出约1000万。"},
+        {"role": "user", "content": "目标GMV是4500万，去年双11是3200万"},
+        {"role": "assistant", "content": "3200到4500增长40%，和全年目标对齐。"}
+      ]
+    },
+    {
+      "id": "sess_core_06",
+      "metadata": {"timestamp": "2024-11-12T22:00:00Z", "type": "core", "topic": "double-11-result"},
+      "messages": [
+        {"role": "user", "content": "双11成绩单！总GMV 5300万！超额完成18%"},
+        {"role": "assistant", "content": "5300万比4500万目标多800万！"},
+        {"role": "user", "content": "天猫2100万，京东1050万，抖音2150万。抖音首次超过天猫了！"},
+        {"role": "assistant", "content": "抖音2150万占比40.6%，接近45%目标了，而且超过天猫是里程碑。"},
+        {"role": "user", "content": "纸尿裤卖了58万包，辅食25万盒，有机米粉新品5万盒"},
+        {"role": "assistant", "content": "备货60万包纸尿裤几乎卖完，辅食还有余量。有机米粉新品表现不错。"},
+        {"role": "user", "content": "抖音ROI提到了2.1，比国庆的1.6好多了"},
+        {"role": "assistant", "content": "ROI从1.6到2.1提升31%，投放效率优化明显。"}
+      ]
+    },
+    {
+      "id": "sess_core_07",
+      "metadata": {"timestamp": "2024-12-01T10:00:00Z", "type": "core", "topic": "year-plan"},
+      "messages": [
+        {"role": "user", "content": "全年GMV预估能到3.95亿，差4亿目标一点点"},
+        {"role": "assistant", "content": "3.95亿完成率98.75%，非常接近了。12月还有圣诞+年货节。"},
+        {"role": "user", "content": "老板说如果12月再冲500万就能破4亿，给整个team加年终"},
+        {"role": "assistant", "content": "500万不算难，全员冲刺。"},
+        {"role": "user", "content": "计划做一场母婴年度盛典直播，预算50万，请3个中腰部达人"},
+        {"role": "assistant", "content": "50万请3个中腰部达人，性价比比头部达人好。"}
+      ]
+    },
+    {
+      "id": "sess_core_08",
+      "metadata": {"timestamp": "2024-12-20T15:00:00Z", "type": "core", "topic": "year-end"},
+      "messages": [
+        {"role": "user", "content": "12月最终做了680万，全年GMV 4.18亿！破4亿了！"},
+        {"role": "assistant", "content": "恭喜！4.18亿比4亿目标多4.5%，超额完成。"},
+        {"role": "user", "content": "那场年度盛典直播单场做了320万，效果比预期好"},
+        {"role": "assistant", "content": "320万相对50万预算，ROI 6.4，非常高。"},
+        {"role": "user", "content": "全年抖音渠道GMV从去年的8400万增长到1.7亿，翻倍了"},
+        {"role": "assistant", "content": "抖音从28亿中的8400万到4.18亿中的1.7亿，占比从30%→40.7%。"},
+        {"role": "user", "content": "公司给team发了12万的额外奖金池"},
+        {"role": "assistant", "content": "12万÷12人，平均每人1万额外奖金。"}
+      ]
+    },
+    {
+      "id": "sess_core_09",
+      "metadata": {"timestamp": "2025-01-10T09:00:00Z", "type": "core", "topic": "new-year-plan"},
+      "messages": [
+        {"role": "user", "content": "2025年计划：GMV目标6亿，新增小红书渠道"},
+        {"role": "assistant", "content": "从4.18亿到6亿增长43%。加小红书是四渠道运营了。"},
+        {"role": "user", "content": "团队要扩到16人，新招4个人：小红书2个+数据分析1个+视觉设计1个"},
+        {"role": "assistant", "content": "从12到16人扩编33%，数据和设计是资源补强。"},
+        {"role": "user", "content": "我也升了总监，salary从35万涨到50万，终于破50了"},
+        {"role": "assistant", "content": "恭喜！从经理到总监是管理层级的提升。50万是市场水平。"}
+      ]
+    },
+    {
+      "id": "sess_core_10",
+      "metadata": {"timestamp": "2025-01-20T11:00:00Z", "type": "core", "topic": "personal"},
+      "messages": [
+        {"role": "user", "content": "过年打算回武汉老家，父母都在武汉，爸在一家中学教数学，妈是护士已退休"},
+        {"role": "assistant", "content": "回武汉过年很好。上海到武汉高铁也就4-5小时。"},
+        {"role": "user", "content": "我在上海和女朋友小琳住一起，她在一家4A广告公司做策划，打算今年结婚"},
+        {"role": "assistant", "content": "恭喜！今年有喜事。"},
+        {"role": "user", "content": "在浦东租的两居室，月租6500，离公司地铁三站"},
+        {"role": "assistant", "content": "浦东6500的两居室还行，通勤也方便。"}
+      ]
+    },
+    {
+      "id": "sess_core_11",
+      "metadata": {"timestamp": "2025-02-15T14:00:00Z", "type": "core", "topic": "q1-progress"},
+      "messages": [
+        {"role": "user", "content": "Q1数据不太好，1月+2月只做了7500万，去年同期8200万"},
+        {"role": "assistant", "content": "同比下滑8.5%，有什么原因吗？"},
+        {"role": "user", "content": "主要是抖音流量算法调了，自然流量掉了30%"},
+        {"role": "assistant", "content": "平台规则变化影响大。需要调整投放策略。"},
+        {"role": "user", "content": "而且小红书渠道刚开始搭建，还没出量"},
+        {"role": "assistant", "content": "新渠道冷启动需要时间，Q2应该会好转。"}
+      ]
+    },
+    {
+      "id": "sess_core_12",
+      "metadata": {"timestamp": "2025-03-01T10:00:00Z", "type": "core", "topic": "product-launch"},
+      "messages": [
+        {"role": "user", "content": "新品上线：有机辅食系列（6款），定价比常规辅食高30%"},
+        {"role": "assistant", "content": "有机定位走高端路线。定价高30%利润率更好。"},
+        {"role": "user", "content": "首月目标卖1万盒，主力在天猫和小红书"},
+        {"role": "assistant", "content": "小红书种草+天猫成交，是经典的打法。"},
+        {"role": "user", "content": "小红书达人合作签了20个500-5000粉的妈妈KOC，总预算2万"},
+        {"role": "assistant", "content": "2万签20个KOC，平均1000/人，成本控制很好。"}
+      ]
+    },
+    {
+      "id": "sess_core_13",
+      "metadata": {"timestamp": "2025-03-20T16:00:00Z", "type": "core", "topic": "wedding"},
+      "messages": [
+        {"role": "user", "content": "婚礼定了10月1号，在武汉洪山宾馆，大概25桌"},
+        {"role": "assistant", "content": "国庆当天在武汉办，双方家人方便。25桌约250人规模。"},
+        {"role": "user", "content": "小琳想要户外草坪婚礼，洪山宾馆刚好有个花园区"},
+        {"role": "assistant", "content": "户外草坪婚礼浪漫，10月武汉天气也合适。"},
+        {"role": "user", "content": "预算15万左右，摄影摄像团队加婚庆公司"},
+        {"role": "assistant", "content": "15万在武汉办25桌含婚庆，预算紧凑但够用。"}
+      ]
+    },
+    {
+      "id": "sess_core_14",
+      "metadata": {"timestamp": "2025-04-10T09:00:00Z", "type": "core", "topic": "organic-result"},
+      "messages": [
+        {"role": "user", "content": "有机辅食首月卖了1.5万盒！超目标50%"},
+        {"role": "assistant", "content": "首月超额完成说明市场需求好。"},
+        {"role": "user", "content": "小红书的KOC种草效果出乎意料，转化率2.5%，比平均的0.8%高三倍"},
+        {"role": "assistant", "content": "2.5%转化率非常好，说明KOC的真实感受种草比大号有效。"},
+        {"role": "user", "content": "天猫的有机辅食复购率8%，比普通辅食的5%高"},
+        {"role": "assistant", "content": "高价产品反而复购更高，说明品质能留住人。"}
+      ]
+    },
+    {
+      "id": "sess_core_15",
+      "metadata": {"timestamp": "2025-05-01T10:00:00Z", "type": "core", "topic": "618-prep"},
+      "messages": [
+        {"role": "user", "content": "618备战：总投入600万，目标GMV 6500万"},
+        {"role": "assistant", "content": "600万投入目标6500万，目标ROI约10.8。"},
+        {"role": "user", "content": "今年618把小红书也纳入了主战场，预算100万"},
+        {"role": "assistant", "content": "小红书100万占总预算17%，投入力度不小。"},
+        {"role": "user", "content": "抖音预算280万，天猫150万，京东70万"},
+        {"role": "assistant", "content": "抖音还是大头，四渠道预算分配合理。"}
+      ]
+    },
+    {
+      "id": "sess_core_16",
+      "metadata": {"timestamp": "2025-05-20T14:00:00Z", "type": "core", "topic": "team-update"},
+      "messages": [
+        {"role": "user", "content": "团队变动：阿杰离职了去了竞品贝贝萌，京东组由老张接手"},
+        {"role": "assistant", "content": "核心人员流失到竞品，影响不小。老张经验够吗？"},
+        {"role": "user", "content": "老张从天猫调过来的，经验是够的。但天猫组少了一个人要补"},
+        {"role": "assistant", "content": "天猫组从4缺1，需要尽快补上。"},
+        {"role": "user", "content": "小红书组两个新人磨合差不多了，其中小陈表现特别好"},
+        {"role": "assistant", "content": "新人快速成长是好事。"}
+      ]
+    },
+    {
+      "id": "sess_core_17",
+      "metadata": {"timestamp": "2025-06-20T22:00:00Z", "type": "core", "topic": "618-result"},
+      "messages": [
+        {"role": "user", "content": "618成绩单：总GMV 7200万！比去年双11的5300万还多！"},
+        {"role": "assistant", "content": "7200万是历史最好成绩！比目标6500万多700万。"},
+        {"role": "user", "content": "渠道分布：抖音3100万，天猫2200万，京东900万，小红书1000万"},
+        {"role": "assistant", "content": "小红书首次参加大促就贡献了1000万，占比13.9%。抖音3100万占43%。"},
+        {"role": "user", "content": "有机辅食系列成了爆款，618就卖了8万盒"},
+        {"role": "assistant", "content": "从首月1.5万到618 8万盒，增长势头很好。"},
+        {"role": "user", "content": "总体ROI 12.0，比去年双11的ROI好多了"},
+        {"role": "assistant", "content": "ROI 12.0非常健康。"}
+      ]
+    },
+    {
+      "id": "sess_core_18",
+      "metadata": {"timestamp": "2025-07-10T10:00:00Z", "type": "core", "topic": "half-year"},
+      "messages": [
+        {"role": "user", "content": "半年数据：总GMV 2.35亿（Q1 1.05亿+Q2 1.30亿）"},
+        {"role": "assistant", "content": "半年2.35亿，全年6亿目标需要下半年3.65亿。"},
+        {"role": "user", "content": "按下半年有双11的大促节奏，3.65亿可行但有挑战"},
+        {"role": "assistant", "content": "下半年有金九银十+双11+年货节，节奏密集。"},
+        {"role": "user", "content": "渠道占比演变：抖音42%、天猫28%、京东15%、小红书15%"},
+        {"role": "assistant", "content": "小红书半年就追平京东了。四渠道格局形成。"}
+      ]
+    },
+    {
+      "id": "sess_core_19",
+      "metadata": {"timestamp": "2025-08-01T15:00:00Z", "type": "core", "topic": "private-domain"},
+      "messages": [
+        {"role": "user", "content": "终于开始做私域了！企微现在有8万会员，目标年底20万"},
+        {"role": "assistant", "content": "8万起步，年底20万需要月增2.4万。"},
+        {"role": "user", "content": "参考棉花时代的50万会员模式，我们做的是精细化母婴社群"},
+        {"role": "assistant", "content": "精细化运营比单纯追求数量更重要。"},
+        {"role": "user", "content": "现在私域复购率15%，比公域的5%高三倍"},
+        {"role": "assistant", "content": "私域复购率高说明用户粘性好。"}
+      ]
+    },
+    {
+      "id": "sess_core_20",
+      "metadata": {"timestamp": "2025-08-20T11:00:00Z", "type": "core", "topic": "promotion-update"},
+      "messages": [
+        {"role": "user", "content": "公司刚收到A+融资意向了，估值8亿！"},
+        {"role": "assistant", "content": "8亿估值对于一个4亿+GMV的母婴品牌来说合理。"},
+        {"role": "user", "content": "如果融资成功可能拿到1.5亿，团队会扩到25人"},
+        {"role": "assistant", "content": "25人团队规模翻倍，管理挑战更大。"},
+        {"role": "user", "content": "我作为运营总监可能会升VP，期权也会更多"},
+        {"role": "assistant", "content": "随着公司成长个人发展空间也更大。"}
+      ]
+    },
+
+    {"id": "sess_noise_01", "metadata": {"timestamp": "2024-09-10T12:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "今天中午吃了个黄焖鸡米饭"},
+      {"role": "assistant", "content": "黄焖鸡是快餐经典。"}
+    ]},
+    {"id": "sess_noise_02", "metadata": {"timestamp": "2024-10-05T15:00:00Z", "type": "noise", "topic": "data-confuse"}, "messages": [
+      {"role": "user", "content": "看到行业报告说母婴电商市场今年3000亿"},
+      {"role": "assistant", "content": "3000亿的市场规模确实大。"},
+      {"role": "user", "content": "另外看到贝贝萌说他们今年GMV破5亿了"},
+      {"role": "assistant", "content": "5亿比你们高不少。"}
+    ]},
+    {"id": "sess_noise_03", "metadata": {"timestamp": "2024-11-05T10:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "同事推荐了个健身房在世纪公园附近"},
+      {"role": "assistant", "content": "世纪公园附近交通方便。"}
+    ]},
+    {"id": "sess_noise_04", "metadata": {"timestamp": "2024-12-10T14:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "给女朋友小琳买了个生日礼物，YSL的包"},
+      {"role": "assistant", "content": "YSL包是好礼物。"}
+    ]},
+    {"id": "sess_noise_05", "metadata": {"timestamp": "2025-01-05T09:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "今天上海下雪了，难得"},
+      {"role": "assistant", "content": "上海下雪确实少见。"}
+    ]},
+    {"id": "sess_noise_06", "metadata": {"timestamp": "2025-02-20T16:00:00Z", "type": "noise", "topic": "salary-confuse"}, "messages": [
+      {"role": "user", "content": "同行朋友说他在杭州做电商运营经理年薪40万"},
+      {"role": "assistant", "content": "杭州运营经理市场价不低。"}
+    ]},
+    {"id": "sess_noise_07", "metadata": {"timestamp": "2025-04-01T11:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "刚追完一部日剧《半泽直树》太好看了"},
+      {"role": "assistant", "content": "半泽直树确实经典职场剧。"}
+    ]},
+    {"id": "sess_noise_08", "metadata": {"timestamp": "2025-05-15T14:00:00Z", "type": "noise", "topic": "brand-confuse"}, "messages": [
+      {"role": "user", "content": "隔壁team做的童装品牌「小兔快跑」618目标3000万"},
+      {"role": "assistant", "content": "童装品牌和你们母婴品牌客群有重叠。"}
+    ]},
+    {"id": "sess_noise_09", "metadata": {"timestamp": "2025-06-01T10:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "周末去了迪士尼，排队两小时玩了三个项目"},
+      {"role": "assistant", "content": "上海迪士尼周末人确实多。"}
+    ]},
+    {"id": "sess_noise_10", "metadata": {"timestamp": "2025-07-20T15:00:00Z", "type": "noise"}, "messages": [
+      {"role": "user", "content": "台风天在家办公，外卖都不送了"},
+      {"role": "assistant", "content": "安全第一。"}
+    ]}
+  ],
+
+  "questions": [
+    {"id": "q_10k_01", "query": "小象优选的品牌定位是什么？主要品类？", "expected": "0-3岁母婴品牌，主打纸尿裤和辅食（后加有机辅食系列）", "category": "10k-latency", "difficulty": "standard"},
+    {"id": "q_10k_02", "query": "陈乐的团队组长分别是谁？负责什么渠道？", "expected": "小周→天猫，阿杰→京东(后离职去贝贝萌，老张接手)，小美→抖音，小红书组新人有小陈", "category": "10k-latency", "difficulty": "hard"},
+    {"id": "q_10k_03", "query": "2024年双11的三渠道GMV分别是多少？", "expected": "天猫2100万，京东1050万，抖音2150万，总5300万", "category": "10k-latency", "difficulty": "standard"},
+    {"id": "q_10k_04", "query": "陈乐的个人基本信息？", "expected": "上海，电商运营总监(从经理升的)，年薪50万，女朋友小琳(4A广告策划)，住浦东两居室月租6500，老家武汉", "category": "10k-latency", "difficulty": "standard"},
+    {"id": "q_10k_05", "query": "有机辅食系列的表现如何？", "expected": "首月1.5万盒(超目标50%)，618卖了8万盒成爆款。天猫复购率8%>普通辅食5%", "category": "10k-latency", "difficulty": "standard"},
+    {"id": "q_10k_06", "query": "小红书渠道的具体数据？", "expected": "KOC合作20个(500-5000粉妈妈，预算2万)→种草转化率2.5%(3倍平均)→618贡献1000万(占13.9%)→半年占比15%追平京东", "category": "10k-latency", "difficulty": "hard"},
+    {"id": "q_10k_07", "query": "陈乐的婚礼计划？", "expected": "10月1日，武汉洪山宾馆花园区户外草坪，25桌约250人，预算15万", "category": "10k-latency", "difficulty": "standard"},
+    {"id": "q_10k_08", "query": "公司最新的融资情况？", "expected": "收到A+融资意向，估值8亿，可能融1.5亿。团队可能扩到25人，陈乐可能升VP", "category": "10k-latency", "difficulty": "standard"},
+    {"id": "q_10k_09", "query": "抖音ROI的变化趋势？", "expected": "国庆1.6→双11 2.1(+31%)→618后综合ROI 12.0。持续优化改善", "category": "10k-latency", "difficulty": "hard"},
+    {"id": "q_10k_10", "query": "团队从2024Q4到2025有什么变化？", "expected": "12→16人(+4新招)→阿杰离职去贝贝萌→老张从天猫调京东→天猫缺1人→可能扩到25人(融资后)", "category": "10k-latency", "difficulty": "hard"},
+
+    {"id": "q_50k_01", "query": "全年GMV的完整季度数据？", "expected": "2024: Q4含国庆1880万+双11 5300万+12月680万≈全年4.18亿。2025H1: Q1 1.05亿+Q2 1.30亿=2.35亿", "category": "50k-latency", "difficulty": "hard"},
+    {"id": "q_50k_02", "query": "陈乐的薪资变化？", "expected": "经理35万→升总监后50万(2025年1月)", "category": "50k-latency", "difficulty": "standard"},
+    {"id": "q_50k_03", "query": "618和双11的数据对比？", "expected": "双11: 5300万(天猫2100+京东1050+抖音2150)。618: 7200万(抖音3100+天猫2200+京东900+小红书1000)。618比双11多36%因多了小红书渠道", "category": "50k-latency", "difficulty": "hard"},
+    {"id": "q_50k_04", "query": "从国庆到618，抖音渠道GMV变化？", "expected": "国庆650万→双11 2150万(+230%)→618 3100万(+44%)", "category": "50k-latency", "difficulty": "hard"},
+    {"id": "q_50k_05", "query": "四渠道预算分配在618是怎样的？", "expected": "总600万：抖音280万(47%)、天猫150万(25%)、小红书100万(17%)、京东70万(12%)", "category": "50k-latency", "difficulty": "standard"},
+    {"id": "q_50k_06", "query": "私域运营的关键数据？", "expected": "企微8万会员(8月),目标年底20万,复购率15%(公域5%的3倍),参考棉花时代50万会员模式", "category": "50k-latency", "difficulty": "hard"},
+    {"id": "q_50k_07", "query": "竞品信息汇总？", "expected": "贝贝萌: 抖音强(贾乃亮单场800万,年GMV 5亿), 阿杰跳槽去了那。棉花时代: 私域50万会员。小兔快跑: 隔壁team的童装品牌(噪声)", "category": "50k-latency", "difficulty": "hard"},
+    {"id": "q_50k_08", "query": "纸尿裤的销售数据变化？", "expected": "国庆15万包→双11 58万包(备货60万)→有完整数据。是核心品类", "category": "50k-latency", "difficulty": "standard"},
+    {"id": "q_50k_09", "query": "渠道占比的演变趋势？", "expected": "2024年抖音预算30%→目标45%→双11抖音40.6%→2025H1抖音42%天猫28%京东15%小红书15%", "category": "50k-latency", "difficulty": "hard"},
+    {"id": "q_50k_10", "query": "双11备货和实际销售对比？", "expected": "纸尿裤备60万包卖58万(96.7%)，辅食备30万盒卖25万(83.3%)，米粉新品5万盒。纸尿裤几乎卖光", "category": "50k-latency", "difficulty": "hard"},
+
+    {"id": "q_100k_01", "query": "如果系统说陈乐年薪35万管12人做经理，有几处过期？", "expected": "三处过期：35万→50万，12人→16人(可能25)，经理→总监", "category": "100k-accuracy", "difficulty": "hard"},
+    {"id": "q_100k_02", "query": "贝贝萌GMV 5亿是陈乐公司的数据吗？", "expected": "不是。贝贝萌5亿是竞品(噪声)，陈乐的小象优选2024年4.18亿", "category": "100k-accuracy", "difficulty": "hard"},
+    {"id": "q_100k_03", "query": "京东组长现在是谁？", "expected": "老张（从天猫调过来），不是阿杰（已离职去贝贝萌）", "category": "100k-accuracy", "difficulty": "standard"},
+    {"id": "q_100k_04", "query": "同行朋友的40万年薪和陈乐的50万有什么关系？", "expected": "没有关系。40万是噪声(杭州同行朋友的信息)，陈乐自己50万", "category": "100k-accuracy", "difficulty": "hard"},
+    {"id": "q_100k_05", "query": "如果搜索「3000万」会匹配到什么？应该匹配什么？", "expected": "可能匹配：小兔快跑618目标3000万(噪声)+母婴市场3000亿(噪声)。不应该匹配到小象优选的数据上", "category": "100k-accuracy", "difficulty": "hard"},
+    {"id": "q_100k_06", "query": "全年GMV从2.8亿到4.18亿到6亿目标的年增长率？", "expected": "2023→2024: 2.8→4.18亿(+49%)。2025目标: 4.18→6亿(+43.5%)", "category": "100k-accuracy", "difficulty": "hard"},
+    {"id": "q_100k_07", "query": "团队架构最新状态？", "expected": "总监陈乐→天猫(小周,缺1人)→京东(老张,3人)→抖音(小美,5人)→小红书(小陈+1,2人)→数据分析1→设计1=约15-16人", "category": "100k-accuracy", "difficulty": "hard"},
+    {"id": "q_100k_08", "query": "陈乐的个人生活信息准确汇总？", "expected": "上海浦东两居室6500/月，女朋友小琳(4A策划)，10月1日武汉结婚(洪山宾馆草坪25桌15万)，爸教数学妈护士退休", "category": "100k-accuracy", "difficulty": "standard"},
+    {"id": "q_100k_09", "query": "在大量数据中区分小象优选和其他品牌的数据？", "expected": "小象优选: 4.18亿→6亿目标。贝贝萌5亿(竞品)。棉花时代50万会员(竞品)。小兔快跑3000万(同事品牌)。不能混淆", "category": "100k-accuracy", "difficulty": "hard"},
+    {"id": "q_100k_10", "query": "年度盛典直播的ROI和618的ROI对比？", "expected": "年度盛典: 320万/50万预算=ROI 6.4。618整体: 7200万/600万=ROI 12.0。618整体效率更高", "category": "100k-accuracy", "difficulty": "hard"}
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "name": "stress-latency",
+  "description": "并发压力与延迟测试 — 评测高负载下检索延迟、批量吞吐、并发安全",
+  "version": "1.0",
+  "source": "custom",
+  "citation": "QMemory team — stress & latency evaluation v1.0",
+  "design_notes": "先注入大量会话构造高密度记忆库，再用并发搜索测延迟和一致性。含15条核心会话+15条噪声(构造>200条记忆)，20个搜索题含延迟基线和并发一致性。",
+  "sessions": [
+    {"id": "stress-s01", "messages": [
+      {"role": "user", "content": "我叫赵磊，在阿里巴巴做高级算法工程师。主要研究推荐系统和NLP方向。"},
+      {"role": "assistant", "content": "推荐系统是很有价值的方向，阿里在这方面积累很深。"},
+      {"role": "user", "content": "是的。我负责手淘的猜你喜欢推荐引擎，日均处理3亿次请求。"},
+      {"role": "assistant", "content": "3亿次请求量级很大，性能优化一定是核心挑战。"},
+      {"role": "user", "content": "对，最近在做模型蒸馏，把BERT压缩到能在50ms内返回结果。团队有8个人。"}
+    ], "metadata": {"timestamp": "2024-01-10T10:00:00", "type": "core"}},
+    {"id": "stress-s02", "messages": [
+      {"role": "user", "content": "上周在KDD上发了一篇论文，关于序列推荐的。"},
+      {"role": "assistant", "content": "KDD是顶会，恭喜！论文主题是什么？"},
+      {"role": "user", "content": "用Transformer做用户行为序列建模，加了时间衰减注意力机制。reviewers说创新点不错。"},
+      {"role": "assistant", "content": "时间衰减注意力确实是序列推荐的痛点之一。"},
+      {"role": "user", "content": "嗯，代码已经开源了，放在GitHub上。未来想把这个思路应用到长视频推荐里。"}
+    ], "metadata": {"timestamp": "2024-02-05T14:00:00", "type": "core"}},
+    {"id": "stress-s03", "messages": [
+      {"role": "user", "content": "最近在跟字节竞争一个广告推荐的benchmark。我们用的是双塔模型+向量检索。"},
+      {"role": "assistant", "content": "双塔模型在工业界确实是主流方案。效果怎么样？"},
+      {"role": "user", "content": "AUC比他们高2个点，但latency还差一些。他们用了量化推理，我们还没上。"},
+      {"role": "assistant", "content": "量化推理能显著降低延迟，值得投入。"},
+      {"role": "user", "content": "嗯，正在做INT8量化实验。老板给了两周时间搞定。"}
+    ], "metadata": {"timestamp": "2024-02-20T16:00:00", "type": "core"}},
+    {"id": "stress-s04", "messages": [
+      {"role": "user", "content": "今天跟组里的小王调了一天bug，模型在A/B测试中CTR反而降了。"},
+      {"role": "assistant", "content": "A/B测试CTR下降常见原因有特征泄漏、样本偏差等。"},
+      {"role": "user", "content": "最后发现是特征工程的时候用了未来数据。一个时间窗口搞错了。小王的锅。"},
+      {"role": "assistant", "content": "特征泄漏是推荐系统最经典的坑之一。"},
+      {"role": "user", "content": "是啊。对了我最近在学Rust，想用Rust重写推理服务的热路径。Python太慢了。"}
+    ], "metadata": {"timestamp": "2024-03-08T22:00:00", "type": "core"}},
+    {"id": "stress-s05", "messages": [
+      {"role": "user", "content": "拿到了晋升P8的提名！如果过了就是专家级别了。"},
+      {"role": "assistant", "content": "恭喜！P8在阿里是很高的技术级别。"},
+      {"role": "user", "content": "还没过呢，要做晋升答辩。我准备讲推荐引擎的架构升级和线上效果数据。"},
+      {"role": "assistant", "content": "线上效果数据是最有说服力的。"},
+      {"role": "user", "content": "对，CTR提升了8%，GMV提升了3.2%。希望能过。"}
+    ], "metadata": {"timestamp": "2024-03-25T09:00:00", "type": "core"}},
+    {"id": "stress-s06", "messages": [
+      {"role": "user", "content": "晋升答辩过了！P8专家了。"},
+      {"role": "assistant", "content": "恭喜！这是对你技术实力的认可。"},
+      {"role": "user", "content": "谢谢。涨薪幅度还行，base翻了差不多40%。"},
+      {"role": "assistant", "content": "P8的薪资确实是一个很大的跃升。"},
+      {"role": "user", "content": "嗯。不过责任也更大了，现在要负责整个推荐中台的技术方向。团队从8人扩到了15人。"}
+    ], "metadata": {"timestamp": "2024-04-15T10:00:00", "type": "core"}},
+    {"id": "stress-s07", "messages": [
+      {"role": "user", "content": "双11大促的备战开始了。今年推荐系统要支持10亿级商品库的实时推荐。"},
+      {"role": "assistant", "content": "10亿级商品库，索引和检索架构挑战很大。"},
+      {"role": "user", "content": "对，我们打算用HNSW+product quantization做近似最近邻检索。目标P99延迟20ms以内。"},
+      {"role": "assistant", "content": "HNSW+PQ是经典组合，P99 20ms很有挑战性。"},
+      {"role": "user", "content": "而且要在3000台GPU集群上部署。运维这块我不太擅长，在学K8s。"}
+    ], "metadata": {"timestamp": "2024-05-01T14:00:00", "type": "core"}},
+    {"id": "stress-s08", "messages": [
+      {"role": "user", "content": "老婆生二胎了！女儿，六斤八两，母女平安。"},
+      {"role": "assistant", "content": "恭喜恭喜！母女平安是最好的消息。"},
+      {"role": "user", "content": "是啊。大宝今年上幼儿园大班了。两个孩子经济压力不小，好在刚涨了薪。"},
+      {"role": "assistant", "content": "有了P8的薪资，经济上应该能覆盖。"},
+      {"role": "user", "content": "嗯还行。就是老婆坐月子期间我得多干活，连晋升庆祝都没来得及办。"}
+    ], "metadata": {"timestamp": "2024-05-15T08:00:00", "type": "core"}},
+    {"id": "stress-n01", "messages": [
+      {"role": "user", "content": "今天杭州下大雨，堵车了。"},
+      {"role": "assistant", "content": "杭州的交通在雨天确实容易堵。"},
+      {"role": "user", "content": "差点迟到了。下午的会议推迟了半小时。"}
+    ], "metadata": {"timestamp": "2024-01-15T09:00:00", "type": "noise"}},
+    {"id": "stress-n02", "messages": [
+      {"role": "user", "content": "推荐一个好用的机械键盘，预算500以内。"},
+      {"role": "assistant", "content": "可以看看IKBC C87或者Keychron K2。"},
+      {"role": "user", "content": "Keychron不错，支持Mac和Windows双模。下单了。"}
+    ], "metadata": {"timestamp": "2024-02-10T12:00:00", "type": "noise"}},
+    {"id": "stress-n03", "messages": [
+      {"role": "user", "content": "中午吃了一碗兰州拉面，太辣了。"},
+      {"role": "assistant", "content": "嗯下次可以少放辣。"},
+      {"role": "user", "content": "是，明天换家店吃。最近西溪那边开了一家新的粤菜馆，想试试。"}
+    ], "metadata": {"timestamp": "2024-03-01T13:00:00", "type": "noise"}},
+    {"id": "stress-n04", "messages": [
+      {"role": "user", "content": "帮我查一下北京到杭州的高铁时刻表。"},
+      {"role": "assistant", "content": "你可以在12306APP上查，通常2.5-4.5小时不等。"},
+      {"role": "user", "content": "好，我下周五回去一趟，见个老同学。"}
+    ], "metadata": {"timestamp": "2024-03-20T10:00:00", "type": "noise"}},
+    {"id": "stress-n05", "messages": [
+      {"role": "user", "content": "新买的显卡4090到了，装机花了两个小时。"},
+      {"role": "assistant", "content": "4090性能很强，用来做什么？"},
+      {"role": "user", "content": "在家跑一些小实验，不用排组里的GPU队列了。顺便打打游戏。"}
+    ], "metadata": {"timestamp": "2024-04-05T20:00:00", "type": "noise"}},
+    {"id": "stress-n06", "messages": [
+      {"role": "user", "content": "今天在GitHub上看到一个很有趣的项目，用LLM做代码审查。"},
+      {"role": "assistant", "content": "LLM在代码审查方面确实有潜力。"},
+      {"role": "user", "content": "对，我fork了一份回来研究，看看能不能用在我们的CI/CD里。"}
+    ], "metadata": {"timestamp": "2024-04-20T19:00:00", "type": "noise"}},
+    {"id": "stress-n07", "messages": [
+      {"role": "user", "content": "小区物业又涨价了，每月多200。"},
+      {"role": "assistant", "content": "物业费涨价可以看看业主群有没有人反对。"},
+      {"role": "user", "content": "算了，也不多。换个话题，今天太热了，37度。"}
+    ], "metadata": {"timestamp": "2024-05-20T18:00:00", "type": "noise"}},
+    {"id": "stress-s09", "messages": [
+      {"role": "user", "content": "双11备战进入冲刺阶段了。上周做了一次全链路压测，QPS扛到了45万。"},
+      {"role": "assistant", "content": "45万QPS已经很高了，目标是多少？"},
+      {"role": "user", "content": "目标60万。瓶颈在特征服务那块，用的是Redis集群。打算换成自研的FPGA加速。"},
+      {"role": "assistant", "content": "FPGA加速特征服务是很前沿的方案。"},
+      {"role": "user", "content": "是的，硬件团队已经做了原型，P99延迟从12ms降到了3ms。"}
+    ], "metadata": {"timestamp": "2024-06-01T16:00:00", "type": "core"}},
+    {"id": "stress-s10", "messages": [
+      {"role": "user", "content": "跟你说个好消息，收到字节的橄榄枝，开了P2-3的价，package比现在高60%。"},
+      {"role": "assistant", "content": "字节的offer确实有竞争力。你打算走吗？"},
+      {"role": "user", "content": "还在考虑。阿里这边刚升P8，走了有点可惜。而且双11马上到了。"},
+      {"role": "assistant", "content": "确实是个纠结的时间点。"},
+      {"role": "user", "content": "嗯，先不急。老婆也说先把双11搞完再说。二宝刚满月，不适合折腾。"}
+    ], "metadata": {"timestamp": "2024-06-10T21:00:00", "type": "core"}}
+  ],
+  "questions": [
+    {"id": "sl-q01", "query": "赵磊在阿里是什么级别？负责什么？", "expected": "P8专家级别，负责推荐中台技术方向，团队15人。主要做猜你喜欢推荐引擎。", "category": "stress-recall", "difficulty": "easy"},
+    {"id": "sl-q02", "query": "赵磊发表过什么论文？", "expected": "在KDD发了论文，用Transformer做用户行为序列建模，加了时间衰减注意力机制。代码开源在GitHub。", "category": "stress-recall", "difficulty": "standard"},
+    {"id": "sl-q03", "query": "赵磊的推荐引擎QPS目标是多少？", "expected": "目标60万QPS。全链路压测扛到了45万。瓶颈在Redis特征服务，打算换FPGA加速。", "category": "stress-recall", "difficulty": "standard"},
+    {"id": "sl-q04", "query": "赵磊有几个孩子？", "expected": "两个。大宝上幼儿园大班，二胎是女儿(六斤八两)。", "category": "stress-recall", "difficulty": "easy"},
+    {"id": "sl-q05", "query": "赵磊晋升P8的核心成果是什么？", "expected": "推荐引擎架构升级，CTR提升8%，GMV提升3.2%。", "category": "stress-precision", "difficulty": "standard"},
+    {"id": "sl-q06", "query": "赵磊的团队规模变化？", "expected": "从8人扩到15人(晋升P8后)。", "category": "stress-precision", "difficulty": "easy"},
+    {"id": "sl-q07", "query": "赵磊在学什么新技术？", "expected": "Rust(重写推理服务热路径)和K8s(运维GPU集群)。", "category": "stress-precision", "difficulty": "standard"},
+    {"id": "sl-q08", "query": "FPGA加速的P99延迟降到了多少？", "expected": "从12ms降到了3ms。", "category": "stress-precision", "difficulty": "standard"},
+    {"id": "sl-q09", "query": "赵磊用什么做近似最近邻检索？", "expected": "HNSW+product quantization。目标P99延迟20ms以内，10亿级商品库。", "category": "stress-recall", "difficulty": "standard"},
+    {"id": "sl-q10", "query": "赵磊和字节的关系？", "expected": "收到字节的P2-3 offer，package比阿里高60%。还在考虑，先把双11搞完再决定。", "category": "stress-recall", "difficulty": "standard"},
+    {"id": "sl-q11", "query": "赵磊买了什么显卡？", "expected": "4090。在家跑小实验和打游戏用。", "category": "noise-resist", "difficulty": "easy"},
+    {"id": "sl-q12", "query": "赵磊用什么检索方案和字节竞争？", "expected": "双塔模型+向量检索，AUC比字节高2个点，在做INT8量化实验降latency。", "category": "stress-precision", "difficulty": "hard"},
+    {"id": "sl-q13", "query": "A/B测试CTR下降的原因是什么？", "expected": "特征工程用了未来数据，时间窗口搞错了。是小王的锅。", "category": "stress-recall", "difficulty": "standard"},
+    {"id": "sl-q14", "query": "赵磊住在哪个城市？", "expected": "杭州（提到杭州下大雨/西溪/物业等）。", "category": "stress-recall", "difficulty": "easy"},
+    {"id": "sl-q15", "query": "赵磊在阿里是从P7晋升到P8的吗？", "expected": "从上下文推断是P7晋升P8。晋升后涨薪40%，团队扩大。", "category": "stress-precision", "difficulty": "standard"},
+    {"id": "sl-q16", "query": "赵磊主要做前端开发对吗？", "expected": "不对。他是算法工程师，做推荐系统和NLP，不是前端。", "category": "adversarial", "difficulty": "easy"},
+    {"id": "sl-q17", "query": "赵磊的二胎是男孩对吗？", "expected": "不对，二胎是女儿。", "category": "adversarial", "difficulty": "easy"},
+    {"id": "sl-q18", "query": "赵磊已经跳槽去字节了吗？", "expected": "没有。他收到了offer但还在考虑，先把双11搞完再说。", "category": "adversarial", "difficulty": "easy"},
+    {"id": "sl-q19", "query": "赵磊的老婆做什么工作的？", "expected": "数据中没有提到赵磊妻子的具体职业。只提到老婆坐月子。", "category": "noise-resist", "difficulty": "medium"},
+    {"id": "sl-q20", "query": "赵磊的KDD论文是关于广告系统的吗？", "expected": "不是。是关于序列推荐的，用Transformer做用户行为序列建模+时间衰减注意力。", "category": "adversarial", "difficulty": "medium"}
+  ]
+}
