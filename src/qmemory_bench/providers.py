@@ -88,7 +88,7 @@ class LLMJudge:
         self.base_url = (base_url or info.base_url).rstrip("/")
         self.model = model or info.default_model
         self.api_key = api_key
-        self._client = httpx.AsyncClient(timeout=timeout, proxy=None)
+        self._client = httpx.AsyncClient(timeout=timeout, proxy=None, trust_env=False)
 
     async def complete(
         self,

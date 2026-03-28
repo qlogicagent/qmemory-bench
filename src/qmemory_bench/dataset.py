@@ -178,6 +178,16 @@ AVAILABLE_DATASETS: dict[str, dict[str, Any]] = {
         "source": "KimmoZZZ/locomo @ HuggingFace",
         "source_note": "盲区修复: 不是真LoCoMo → 从HuggingFace拉取真实locomo10.json, 自动转为bench格式, 第一次加载会下载约5MB",
     },
+    "longmemeval-real": {
+        "description": "真实LongMemEval数据集 (THU-KEG/LongMemEval) — 自动下载转换",
+        "question_count": 20,
+        "tier": "supporting",
+        "authority": "public",
+        "categories": ["single-session-user", "single-session-assistant", "single-session-preference",
+                        "knowledge-update", "temporal-reasoning", "multi-session"],
+        "source": "THU-KEG/LongMemEval @ HuggingFace",
+        "source_note": "6维长期记忆评测 (arXiv:2410.10813), 首次加载自动下载",
+    },
 }
 
 DATASET_GROUP_LABELS: dict[str, str] = {
@@ -202,7 +212,7 @@ DATASET_PRESET_LABELS: dict[str, str] = {
 
 DATASET_PRESETS: dict[str, list[str]] = {
     "public-main": ["locomo-real", "locomo"],
-    "supporting": ["longmemeval-s", "qmemory-chinese", "multimodal"],
+    "supporting": ["longmemeval-s", "longmemeval-real", "qmemory-chinese", "multimodal"],
     "release-full": [
         "locomo-real",
         "locomo",
@@ -289,9 +299,11 @@ def load_dataset(name: str, scale: str = "quick") -> Dataset:
     - standard: ~50 questions (10 min)
     - full: all questions (30 min)
     """
-    # Special: locomo-real requires HuggingFace download & conversion
+    # Special: locomo-real / longmemeval-real require HuggingFace download & conversion
     if name == "locomo-real":
         return _load_locomo_real(scale)
+    if name == "longmemeval-real":
+        return _load_longmemeval_real(scale)
 
     # Try built-in data first, with graceful degradation:
     # full → standard → quick (never silently skip to smallest)
@@ -511,6 +523,43 @@ def _load_locomo_real(scale: str) -> Dataset:
     )
 
     return _parse_dataset(converted, "locomo-real", scale)
+
+
+def _load_longmemeval_real(scale: str) -> Dataset:
+    """Download real LongMemEval from HuggingFace, convert, cache, and return."""
+    cache_path = _cache_dir() / "longmemeval-real" / f"{scale}.json"
+    if cache_path.exists():
+        raw = json.loads(cache_path.read_text(encoding="utf-8"))
+        return _parse_dataset(raw, "longmemeval-real", scale)
+
+    # Download files synchronously
+    from qmemory_bench.public_datasets import DATASET_SOURCES, parse_longmemeval
+
+    source = DATASET_SOURCES["longmemeval"]
+    dl_dir = _cache_dir() / "longmemeval"
+    dl_dir.mkdir(parents=True, exist_ok=True)
+
+    import httpx
+    for filename in source["files"]:
+        local_path = dl_dir / filename
+        if local_path.exists():
+            continue
+        url = f"{source['url']}/{filename}"
+        logger.info(f"Downloading LongMemEval: {url}")
+        resp = httpx.get(url, timeout=120.0, follow_redirects=True)
+        resp.raise_for_status()
+        local_path.write_bytes(resp.content)
+
+    converted = parse_longmemeval(dl_dir, scale=scale)
+    converted["name"] = "longmemeval-real"
+
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    cache_path.write_text(
+        json.dumps(converted, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    return _parse_dataset(converted, "longmemeval-real", scale)
 
 
 def _download_locomo() -> list[dict]:

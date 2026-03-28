@@ -191,7 +191,8 @@ async def run_benchmark(
     client = httpx.AsyncClient(
         base_url=config.target_url,
         timeout=120.0,
-        proxy=None,  # Bypass system proxy for localhost
+        proxy=None,
+        trust_env=False,
     )
     llm = LLMJudge(
         provider=config.provider,
@@ -335,31 +336,38 @@ async def _run_single_dataset(
     total_sessions = len(ds.sessions)
     total_questions = len(ds.questions)
 
-    # Phase 1: Inject sessions (注入对话历史 → QMemory 提取原子事实)
+    # Phase 1: Inject sessions — parallel with semaphore
     inject_start = time.time()
-    for i, session in enumerate(ds.sessions):
-        _update_progress(
-            progress, stage="injecting",
-            pct=base_pct + (i / max(total_sessions, 1)) * pct_range * 0.35,
-            detail=f"注入会话 {i+1}/{total_sessions} ({ds.name})",
-            session_i=i + 1, session_n=total_sessions,
-        )
-        try:
-            body: dict = {
-                "messages": session.messages,
-                "user_id": eval_user,
-                "session_id": session.id,
-            }
-            # Passthrough LLM config so QMemory uses real extraction
-            if llm_config:
-                body["llm_config"] = llm_config
-            # Pass session timestamp as created_at for real time-span injection
-            ts = session.metadata.get("timestamp")
-            if ts:
-                body["created_at"] = ts
-            await client.post("/v1/memories/", json=body, timeout=300.0)
-        except Exception as e:
-            logger.warning(f"Failed to inject session {session.id}: {e}")
+    inject_sem = asyncio.Semaphore(3)  # limit concurrent injections
+    inject_done = 0
+
+    async def _inject_one(i: int, session: Session) -> None:
+        nonlocal inject_done
+        async with inject_sem:
+            _update_progress(
+                progress, stage="injecting",
+                pct=base_pct + (inject_done / max(total_sessions, 1)) * pct_range * 0.35,
+                detail=f"注入会话 {inject_done+1}/{total_sessions} ({ds.name})",
+                session_i=inject_done + 1, session_n=total_sessions,
+            )
+            try:
+                body: dict = {
+                    "messages": session.messages,
+                    "user_id": eval_user,
+                    "session_id": session.id,
+                }
+                if llm_config:
+                    body["llm_config"] = llm_config
+                ts = session.metadata.get("timestamp")
+                if ts:
+                    body["created_at"] = ts
+                await client.post("/v1/memories/", json=body, timeout=300.0)
+            except Exception as e:
+                logger.warning(f"Failed to inject session {session.id}: {type(e).__name__}: {e}")
+            finally:
+                inject_done += 1
+
+    await asyncio.gather(*[_inject_one(i, s) for i, s in enumerate(ds.sessions)])
     inject_time = time.time() - inject_start
 
     # Phase 1.5: Verify injection — check how many memories were created
@@ -377,43 +385,50 @@ async def _run_single_dataset(
     )
     logger.info(f"Injection done: {total_sessions} sessions → {mem_count} memories")
 
-    # Phase 2: Evaluate questions
+    # Phase 2: Evaluate questions — parallel search + judge
     eval_start = time.time()
-    results: list[JudgeResult] = []
+    eval_sem = asyncio.Semaphore(5)  # limit concurrent search + judge calls
+    eval_done = 0
 
-    for i, q in enumerate(ds.questions):
-        _update_progress(
-            progress, stage="evaluating",
-            pct=base_pct + pct_range * 0.4 + (i / max(total_questions, 1)) * pct_range * 0.6,
-            detail=f"评测 {i+1}/{total_questions} ({ds.name})",
-            question_i=i + 1, question_n=total_questions,
-        )
-        try:
-            resp = await client.get("/v1/memories/search/", params={
-                "q": q.query,
-                "user_id": eval_user,
-                "limit": 10,
-                "hierarchy": "true",
-            })
-            recall = resp.json()
-        except Exception as e:
-            logger.warning(f"Search failed for {q.id}: {e}")
-            recall = {"memories": [], "context": ""}
+    async def _eval_one(q: Question) -> tuple[JudgeResult, dict]:
+        nonlocal eval_done
+        async with eval_sem:
+            _update_progress(
+                progress, stage="evaluating",
+                pct=base_pct + pct_range * 0.4 + (eval_done / max(total_questions, 1)) * pct_range * 0.6,
+                detail=f"评测 {eval_done+1}/{total_questions} ({ds.name})",
+                question_i=eval_done + 1, question_n=total_questions,
+            )
+            try:
+                resp = await client.get("/v1/memories/search/", params={
+                    "q": q.query,
+                    "user_id": eval_user,
+                    "limit": 10,
+                    "hierarchy": "true",
+                })
+                recall = resp.json()
+            except Exception as e:
+                logger.warning(f"Search failed for {q.id}: {type(e).__name__}: {e}")
+                recall = {"memories": [], "context": ""}
 
-        result = await judge_single(
-            question_id=q.id,
-            query=q.query,
-            expected=q.expected,
-            category=q.category,
-            recall_result=recall,
-            llm=llm,
-        )
-        results.append(result)
-        logger.info(f"  {q.id}: {result.score}/10 P={result.precision:.2f} ({q.category})")
+            result = await judge_single(
+                question_id=q.id,
+                query=q.query,
+                expected=q.expected,
+                category=q.category,
+                recall_result=recall,
+                llm=llm,
+            )
+            logger.info(f"  {q.id}: {result.score}/10 P={result.precision:.2f} ({q.category})")
+            eval_done += 1
+            return result, recall
 
-        # Push Q&A entry to progress for live UI display
-        if progress is not None:
-            # Build a concise memory summary for the log
+    eval_outputs = await asyncio.gather(*[_eval_one(q) for q in ds.questions])
+    results: list[JudgeResult] = [r for r, _ in eval_outputs]
+
+    # Push Q&A entries to progress (maintain question order)
+    if progress is not None:
+        for (result, recall), q in zip(eval_outputs, ds.questions):
             mem_texts = [
                 f"[{m.get('category', '?')}] {m.get('text', '')[:100]}"
                 for m in recall.get("memories", [])[:5]
