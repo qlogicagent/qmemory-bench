@@ -40,8 +40,8 @@ TEXTS: dict[str, dict[str, str]] = {
     "llm_config":       {"zh": "LLM 配置（用于记忆提取 + 评分）", "en": "LLM Config (extraction + scoring)"},
     "api_key":          {"zh": "API Key", "en": "API Key"},
     "model_hint":       {"zh": "Model（留空使用默认）", "en": "Model (blank = default)"},
-    "embedding_note":   {"zh": "Embedding：本地 BAAI/bge-small-zh-v1.5（自动）",
-                         "en": "Embedding: Local BAAI/bge-small-zh-v1.5 (auto)"},
+    "embedding_note":   {"zh": "Embedding：本地 Alibaba-NLP/gte-multilingual-base（自动）",
+                         "en": "Embedding: Local Alibaba-NLP/gte-multilingual-base (auto)"},
 
     # ── Compare ──
     "compare_mode":     {"zh": "对比模式", "en": "Compare Mode"},

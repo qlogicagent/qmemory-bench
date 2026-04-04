@@ -5,6 +5,7 @@ Supports 6 national providers + OpenAI. All use OpenAI-compatible chat/completio
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 from dataclasses import dataclass
@@ -99,7 +100,7 @@ class LLMJudge:
         json_mode: bool = False,
         max_tokens: int = 1024,
     ) -> str:
-        """Call chat/completions endpoint."""
+        """Call chat/completions endpoint with retry + exponential backoff."""
         messages: list[dict[str, str]] = []
         if system:
             messages.append({"role": "system", "content": system})
@@ -119,24 +120,70 @@ class LLMJudge:
             "Content-Type": "application/json",
         }
 
-        try:
-            resp = await self._client.post(
-                f"{self.base_url}/chat/completions",
-                json=body,
-                headers=headers,
-            )
-            resp.raise_for_status()
-            data = resp.json()
-            return data["choices"][0]["message"]["content"]
-        except Exception as e:
-            logger.error(f"LLM call failed ({self.provider_name}): {e}")
-            raise
+        last_exc: Exception | None = None
+        for attempt in range(3):
+            try:
+                resp = await self._client.post(
+                    f"{self.base_url}/chat/completions",
+                    json=body,
+                    headers=headers,
+                )
+                resp.raise_for_status()
+                data = resp.json()
+                return data["choices"][0]["message"]["content"]
+            except Exception as e:
+                last_exc = e
+                if attempt < 2:
+                    delay = 2 ** attempt  # 1s, 2s
+                    logger.warning(
+                        f"LLM call failed ({self.provider_name}), attempt {attempt+1}/3, "
+                        f"retrying in {delay}s: {type(e).__name__}: {e}"
+                    )
+                    await asyncio.sleep(delay)
+
+        logger.error(f"LLM call failed after 3 attempts ({self.provider_name}): {last_exc}")
+        raise last_exc  # type: ignore[misc]
 
     async def close(self):
         await self._client.aclose()
 
     def __repr__(self) -> str:
         return f"LLMJudge({self.provider_name}, model={self.model})"
+
+
+class MultiKeyLLMJudge:
+    """Round-robin LLM judge across multiple API keys for higher throughput."""
+
+    def __init__(
+        self,
+        provider: str = "deepseek",
+        api_keys: list[str] | None = None,
+        model: str = "",
+        base_url: str = "",
+        timeout: float = 60.0,
+    ):
+        if not api_keys:
+            raise ValueError("At least one API key required")
+        self._judges = [
+            LLMJudge(provider=provider, api_key=key, model=model,
+                      base_url=base_url, timeout=timeout)
+            for key in api_keys
+        ]
+        self._index = 0
+        self.provider_name = self._judges[0].provider_name
+        self.model = self._judges[0].model
+
+    async def complete(self, prompt: str, **kwargs) -> str:
+        judge = self._judges[self._index % len(self._judges)]
+        self._index += 1
+        return await judge.complete(prompt, **kwargs)
+
+    async def close(self):
+        for j in self._judges:
+            await j.close()
+
+    def __repr__(self) -> str:
+        return f"MultiKeyLLMJudge({self.provider_name}, keys={len(self._judges)}, model={self.model})"
 
 
 def get_provider_info(provider: str) -> ProviderInfo:

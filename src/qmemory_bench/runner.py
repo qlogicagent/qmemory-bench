@@ -35,7 +35,7 @@ from qmemory_bench.dataset import (
     resolve_dataset_selection,
 )
 from qmemory_bench.judge import JudgeResult, aggregate_scores, judge_single
-from qmemory_bench.providers import LLMJudge
+from qmemory_bench.providers import LLMJudge, MultiKeyLLMJudge
 
 logger = logging.getLogger(__name__)
 
@@ -46,11 +46,16 @@ class BenchmarkConfig:
     target_url: str = "http://localhost:18800"
     provider: str = "deepseek"
     api_key: str = ""
+    api_keys: list[str] = field(default_factory=list)  # multiple keys for throughput
     model: str = ""
     scale: str = "quick"      # quick | standard | full
     dataset_names: list[str] = field(default_factory=list)
     dataset_preset: str = "public-main"
     output_path: str | None = None
+    skip_ingest: bool = False     # reuse existing DB, skip inject & cleanup
+    eval_user_base: str = ""      # fixed eval user prefix (for skip_ingest reuse)
+    no_cleanup: bool = False       # keep data after run (for creating golden DB)
+    max_per_category: int = 0      # cap questions per category (0=unlimited)
 
 
 @dataclass
@@ -95,6 +100,7 @@ class BenchmarkReport:
     dataset_names: list[str]
     duration: float           # total seconds
     target_url: str
+    eval_user_base: str = ""  # for --skip-ingest reuse
 
 
 # ── Targets from PLAN Appendix A ────────────────────────────────
@@ -194,12 +200,24 @@ async def run_benchmark(
         proxy=None,
         trust_env=False,
     )
-    llm = LLMJudge(
-        provider=config.provider,
-        api_key=config.api_key,
-        model=config.model,
-    )
-    eval_user = f"eval_{uuid4().hex[:8]}"
+    # Use multi-key judge when multiple API keys provided
+    all_keys = list(config.api_keys) if config.api_keys else []
+    if config.api_key and config.api_key not in all_keys:
+        all_keys.insert(0, config.api_key)
+    if len(all_keys) > 1:
+        llm = MultiKeyLLMJudge(
+            provider=config.provider,
+            api_keys=all_keys,
+            model=config.model,
+        )
+        logger.info(f"Using {len(all_keys)} API keys for judge throughput")
+    else:
+        llm = LLMJudge(
+            provider=config.provider,
+            api_key=all_keys[0] if all_keys else config.api_key,
+            model=config.model,
+        )
+    eval_user_base = config.eval_user_base or f"eval_{uuid4().hex[:8]}"
 
     # Get QMemory version
     try:
@@ -229,18 +247,36 @@ async def run_benchmark(
         _update_progress(progress, stage="error", pct=0, detail="没有可用的数据集")
         raise FileNotFoundError("No valid datasets found")
 
+    # Apply per-category cap if requested
+    if config.max_per_category > 0:
+        for _i, (ds_name, ds) in enumerate(valid_datasets):
+            from collections import defaultdict
+            cat_counts: dict[str, int] = defaultdict(int)
+            filtered: list = []
+            for q in ds.questions:
+                if cat_counts[q.category] < config.max_per_category:
+                    filtered.append(q)
+                    cat_counts[q.category] += 1
+            orig = len(ds.questions)
+            ds.questions = filtered
+            if orig != len(filtered):
+                logger.info(f"Capped {ds_name}: {orig} → {len(filtered)} questions (max {config.max_per_category}/cat)")
+
     total_datasets = len(valid_datasets)
     dataset_reports: dict[str, DatasetReport] = {}
 
-    # Pre-cleanup: ensure a clean slate for the eval user
-    _update_progress(progress, stage="cleanup", pct=0.04, detail="清空评测用户数据...")
-    try:
-        await client.request(
-            "DELETE", "/v1/memories/",
-            params={"user_id": eval_user, "confirm": "true"},
-        )
-    except Exception:
-        pass  # User didn't exist yet, that's fine
+    # Pre-cleanup: ensure a clean slate for all eval users
+    if not config.skip_ingest:
+        _update_progress(progress, stage="cleanup", pct=0.04, detail="清空评测用户数据...")
+        for _, (ds_name, _) in enumerate(valid_datasets):
+            ds_user = f"{eval_user_base}_{ds_name}"
+            try:
+                await client.request(
+                    "DELETE", "/v1/memories/",
+                    params={"user_id": ds_user, "confirm": "true"},
+                )
+            except Exception:
+                pass  # User didn't exist yet, that's fine
 
     # Build passthrough LLM config once
     llm_passthrough: dict | None = None
@@ -257,10 +293,13 @@ async def run_benchmark(
                          detail=f"数据集 {ds_name} ({ds_idx+1}/{total_datasets})",
                          dataset=ds_name)
 
-        # Clean memories before each dataset to avoid cross-contamination
-        if ds_idx > 0:
+        # Use per-dataset isolated user_id to prevent cross-contamination
+        eval_user = f"{eval_user_base}_{ds_name}"
+
+        # Clean memories before each dataset
+        if not config.skip_ingest:
             _update_progress(progress, stage="cleanup", pct=base_pct,
-                             detail=f"清理上一数据集记忆...")
+                             detail=f"清理数据集记忆 ({ds_name})...")
             try:
                 await client.request(
                     "DELETE", "/v1/memories/",
@@ -269,24 +308,50 @@ async def run_benchmark(
             except Exception:
                 pass
 
+            # Verify DELETE succeeded — no leftover memories
+            for _retry in range(3):
+                try:
+                    verify_resp = await client.get(
+                        "/v1/memories/",
+                        params={"user_id": eval_user, "page_size": 1},
+                    )
+                    remaining = verify_resp.json().get("total", 0)
+                    if remaining == 0:
+                        break
+                    logger.warning(
+                        "DELETE verification: %d memories remain for %s, retrying...",
+                        remaining, eval_user,
+                    )
+                    await client.request(
+                        "DELETE", "/v1/memories/",
+                        params={"user_id": eval_user, "confirm": "true"},
+                    )
+                    await asyncio.sleep(0.5)
+                except Exception:
+                    break
+
         report = await _run_single_dataset(
             ds, eval_user, client, llm,
             llm_config=llm_passthrough,
+            skip_ingest=config.skip_ingest,
             progress=progress,
             base_pct=base_pct,
             pct_range=0.90 / total_datasets,
         )
         dataset_reports[ds_name] = report
 
-    # Final cleanup
-    _update_progress(progress, stage="cleanup", pct=0.97, detail="清理评测数据...")
-    try:
-        await client.request(
-            "DELETE", "/v1/memories/",
-            params={"user_id": eval_user, "confirm": "true"},
-        )
-    except Exception as e:
-        logger.warning(f"Cleanup failed: {e}")
+    # Final cleanup — clean all per-dataset users
+    if not config.skip_ingest and not config.no_cleanup:
+        _update_progress(progress, stage="cleanup", pct=0.97, detail="清理评测数据...")
+        for _, (ds_name, _) in enumerate(valid_datasets):
+            ds_user = f"{eval_user_base}_{ds_name}"
+            try:
+                await client.request(
+                    "DELETE", "/v1/memories/",
+                    params={"user_id": ds_user, "confirm": "true"},
+                )
+            except Exception as e:
+                logger.warning(f"Cleanup failed for {ds_user}: {e}")
 
     await llm.close()
     await client.aclose()
@@ -308,6 +373,7 @@ async def run_benchmark(
         dataset_names=[name for name, _ in valid_datasets],
         duration=round(total_time, 1),
         target_url=config.target_url,
+        eval_user_base=eval_user_base,
     )
 
     _update_progress(progress, stage="done", pct=1.0,
@@ -327,6 +393,7 @@ async def _run_single_dataset(
     llm: LLMJudge,
     *,
     llm_config: dict | None = None,
+    skip_ingest: bool = False,
     progress: dict | None = None,
     base_pct: float = 0.0,
     pct_range: float = 1.0,
@@ -337,53 +404,79 @@ async def _run_single_dataset(
     total_questions = len(ds.questions)
 
     # Phase 1: Inject sessions — parallel with semaphore
-    inject_start = time.time()
-    inject_sem = asyncio.Semaphore(3)  # limit concurrent injections
-    inject_done = 0
-
-    async def _inject_one(i: int, session: Session) -> None:
-        nonlocal inject_done
-        async with inject_sem:
-            _update_progress(
-                progress, stage="injecting",
-                pct=base_pct + (inject_done / max(total_sessions, 1)) * pct_range * 0.35,
-                detail=f"注入会话 {inject_done+1}/{total_sessions} ({ds.name})",
-                session_i=inject_done + 1, session_n=total_sessions,
-            )
-            try:
-                body: dict = {
-                    "messages": session.messages,
-                    "user_id": eval_user,
-                    "session_id": session.id,
-                }
-                if llm_config:
-                    body["llm_config"] = llm_config
-                ts = session.metadata.get("timestamp")
-                if ts:
-                    body["created_at"] = ts
-                await client.post("/v1/memories/", json=body, timeout=300.0)
-            except Exception as e:
-                logger.warning(f"Failed to inject session {session.id}: {type(e).__name__}: {e}")
-            finally:
-                inject_done += 1
-
-    await asyncio.gather(*[_inject_one(i, s) for i, s in enumerate(ds.sessions)])
-    inject_time = time.time() - inject_start
-
-    # Phase 1.5: Verify injection — check how many memories were created
+    inject_time = 0.0
     mem_count = 0
-    try:
-        resp = await client.get("/v1/memories/",
-                                params={"user_id": eval_user, "page_size": 1})
-        mem_count = resp.json().get("total", 0)
-    except Exception:
-        pass
-    _update_progress(
-        progress, stage="injected",
-        pct=base_pct + pct_range * 0.38,
-        detail=f"注入完成: {total_sessions} 会话 → {mem_count} 条记忆 ({ds.name})",
-    )
-    logger.info(f"Injection done: {total_sessions} sessions → {mem_count} memories")
+    if skip_ingest:
+        # Reuse existing DB — just count current memories
+        try:
+            resp = await client.get("/v1/memories/",
+                                    params={"user_id": eval_user, "page_size": 1})
+            mem_count = resp.json().get("total", 0)
+        except Exception:
+            pass
+        _update_progress(
+            progress, stage="injected",
+            pct=base_pct + pct_range * 0.38,
+            detail=f"跳过注入，复用已有 {mem_count} 条记忆 ({ds.name})",
+        )
+        logger.info(f"Skip ingest: reusing {mem_count} existing memories for {ds.name}")
+    else:
+        inject_start = time.time()
+        inject_sem = asyncio.Semaphore(3)  # limit concurrent injections
+        inject_done = 0
+
+        async def _inject_one(i: int, session: Session) -> None:
+            nonlocal inject_done
+            async with inject_sem:
+                _update_progress(
+                    progress, stage="injecting",
+                    pct=base_pct + (inject_done / max(total_sessions, 1)) * pct_range * 0.35,
+                    detail=f"注入会话 {inject_done+1}/{total_sessions} ({ds.name})",
+                    session_i=inject_done + 1, session_n=total_sessions,
+                )
+                try:
+                    body: dict = {
+                        "messages": session.messages,
+                        "user_id": eval_user,
+                        "session_id": session.id,
+                    }
+                    if llm_config:
+                        body["llm_config"] = llm_config
+                    ts = session.metadata.get("timestamp")
+                    if ts:
+                        body["created_at"] = ts
+                    # Retry on timeout (B.2)
+                    for _attempt in range(2):
+                        try:
+                            await client.post("/v1/memories/", json=body, timeout=300.0)
+                            break
+                        except Exception as exc:
+                            if _attempt == 0:
+                                logger.warning(f"Inject session {session.id} failed (attempt 1), retrying: {type(exc).__name__}")
+                                await asyncio.sleep(3.0)
+                            else:
+                                raise
+                except Exception as e:
+                    logger.warning(f"Failed to inject session {session.id}: {type(e).__name__}: {e}")
+                finally:
+                    inject_done += 1
+
+        await asyncio.gather(*[_inject_one(i, s) for i, s in enumerate(ds.sessions)])
+        inject_time = time.time() - inject_start
+
+        # Phase 1.5: Verify injection — check how many memories were created
+        try:
+            resp = await client.get("/v1/memories/",
+                                    params={"user_id": eval_user, "page_size": 1})
+            mem_count = resp.json().get("total", 0)
+        except Exception:
+            pass
+        _update_progress(
+            progress, stage="injected",
+            pct=base_pct + pct_range * 0.38,
+            detail=f"注入完成: {total_sessions} 会话 → {mem_count} 条记忆 ({ds.name})",
+        )
+        logger.info(f"Injection done: {total_sessions} sessions → {mem_count} memories")
 
     # Phase 2: Evaluate questions — parallel search + judge
     eval_start = time.time()
@@ -399,17 +492,24 @@ async def _run_single_dataset(
                 detail=f"评测 {eval_done+1}/{total_questions} ({ds.name})",
                 question_i=eval_done + 1, question_n=total_questions,
             )
-            try:
-                resp = await client.get("/v1/memories/search/", params={
-                    "q": q.query,
-                    "user_id": eval_user,
-                    "limit": 10,
-                    "hierarchy": "true",
-                })
-                recall = resp.json()
-            except Exception as e:
-                logger.warning(f"Search failed for {q.id}: {type(e).__name__}: {e}")
-                recall = {"memories": [], "context": ""}
+            recall = {"memories": [], "context": ""}
+            # Retry on timeout/network errors (B.2)
+            for _attempt in range(2):
+                try:
+                    resp = await client.get("/v1/memories/search/", params={
+                        "q": q.query,
+                        "user_id": eval_user,
+                        "limit": 10,
+                        "hierarchy": "true",
+                    }, timeout=180.0)
+                    recall = resp.json()
+                    break
+                except Exception as e:
+                    if _attempt == 0:
+                        logger.warning(f"Search failed for {q.id} (attempt 1), retrying: {type(e).__name__}: {e}")
+                        await asyncio.sleep(2.0)
+                    else:
+                        logger.warning(f"Search failed for {q.id} (attempt 2, giving up): {type(e).__name__}: {e}")
 
             result = await judge_single(
                 question_id=q.id,
@@ -662,6 +762,8 @@ def _print_rich(report: BenchmarkReport) -> None:
     console.print(f"  QMemory: {report.qmemory_version} @ {report.target_url}")
     console.print(f"  Judge: {report.llm_provider} / {report.llm_model}")
     console.print(f"  Preset: {report.dataset_preset} | Scale: {report.scale} | Duration: {report.duration}s")
+    if report.eval_user_base:
+        console.print(f"  Eval User: {report.eval_user_base} (reuse with --skip-ingest --eval-user)")
     console.print()
 
     target_met = report.overall >= 85.0
@@ -697,6 +799,8 @@ def _print_plain(report: BenchmarkReport) -> None:
     print(f"  Preset: {report.dataset_preset}")
     print(f"  Overall: {report.overall:.1f}% (target >=85%)")
     print(f"  Duration: {report.duration}s")
+    if report.eval_user_base:
+        print(f"  Eval User: {report.eval_user_base} (reuse with --skip-ingest --eval-user)")
     for ds_name, ds_report in report.datasets.items():
         print(f"\n  Dataset: {ds_name}")
         for cat, info in ds_report.categories.items():

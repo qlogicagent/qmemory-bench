@@ -205,6 +205,7 @@ DATASET_AUTHORITY_LABELS: dict[str, str] = {
 DATASET_PRESET_LABELS: dict[str, str] = {
     "public-main": "对外主评测",
     "release-full": "对外完整评测",
+    "micro": "快速诊断 (20题)",
     "supporting": "辅助评测",
     "regression": "专项回归",
     "all": "全量评测",
@@ -214,6 +215,13 @@ DATASET_PRESETS: dict[str, list[str]] = {
     "public-main": ["locomo-real", "locomo"],
     "supporting": ["longmemeval-s", "longmemeval-real", "qmemory-chinese", "multimodal"],
     "release-full": [
+        "locomo-real",
+        "locomo",
+        "longmemeval-s",
+        "qmemory-chinese",
+        "multimodal",
+    ],
+    "micro": [
         "locomo-real",
         "locomo",
         "longmemeval-s",
@@ -295,6 +303,7 @@ def load_dataset(name: str, scale: str = "quick") -> Dataset:
     """Load a dataset by name and scale.
 
     Scale controls how many questions are selected:
+    - micro: ~4 diagnostic questions per dataset (fast iteration)
     - quick: ~12 questions (2 min)
     - standard: ~50 questions (10 min)
     - full: all questions (30 min)
@@ -307,6 +316,7 @@ def load_dataset(name: str, scale: str = "quick") -> Dataset:
 
     # Try built-in data first, with graceful degradation:
     # full → standard → quick (never silently skip to smallest)
+    # micro is exact — no fallback (pre-generated diagnostic subset)
     fallback_order = [scale]
     if scale == "full":
         fallback_order = ["full", "standard", "quick"]
@@ -416,11 +426,28 @@ def _load_locomo_real(scale: str) -> Dataset:
     """Download real LoCoMo from HuggingFace, convert, cache, and return.
 
     Uses sample_0 for 'quick', sample_0-2 for 'standard', all 10 for 'full'.
+    For 'micro', loads from quick and filters to diagnostic subset.
     """
     cache_path = _cache_dir() / "locomo-real" / f"{scale}.json"
     if cache_path.exists():
         raw = json.loads(cache_path.read_text(encoding="utf-8"))
         return _parse_dataset(raw, "locomo-real", scale)
+
+    # For micro scale, generate from quick
+    if scale == "micro":
+        quick_ds = _load_locomo_real("quick")
+        micro_qids = {"lc-real-049", "lc-real-111", "lc-real-007", "lc-real-169"}
+        filtered_q = [q for q in quick_ds.questions if q.id in micro_qids]
+        # Cache the micro version
+        raw = {
+            "name": "locomo-real",
+            "version": "1.0",
+            "sessions": [{"id": s.id, "messages": s.messages, "metadata": s.metadata} for s in quick_ds.sessions],
+            "questions": [{"id": q.id, "query": q.query, "expected": q.expected, "category": q.category, "difficulty": q.difficulty} for q in filtered_q],
+        }
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        cache_path.write_text(json.dumps(raw, ensure_ascii=False, indent=2), encoding="utf-8")
+        return _parse_dataset(raw, "locomo-real", "micro")
 
     # Download locomo10.json from HuggingFace
     raw_data = _download_locomo()

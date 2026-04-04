@@ -113,8 +113,8 @@ async def judge_single(
     prompt = JUDGE_PROMPT.format(
         query=query,
         expected=expected,
-        context=context[:2000] if context else "(no context)",
-        memories=mem_text[:2000],
+        context=context[:4000] if context else "(no context)",
+        memories=mem_text[:4000],
     )
 
     # Select judge system prompt based on category
